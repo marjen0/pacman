@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,7 +26,9 @@ namespace Pacman
         public Form1()
         {
             InitializeComponent();
+            
             SetupGame(1);
+
         }
 
         public void SetupGame(int Level)
@@ -78,8 +81,13 @@ namespace Pacman
                     formelements.Log.AppendText("\nPacman moving left");
                     break;
                 case Keys.R:
+                    // Restart game
                     //InitializeComponent();
                     //SetupGame(1);
+                    break;
+                case Keys.F1:
+                    formelements.Log.AppendText("\n Player Logged in");
+                    
                     break;
             }
         }
