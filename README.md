@@ -6,12 +6,6 @@
 * [Usage](#Usage)
 * [Screen Shots](#Shots)
 
-## <a name="Install">Installation</a>
-* To clone the repo
-```shell
-$ git clone https://github.com/adrianeyre/pacman
-$ cd pacman
-```
 
 ## Required NuGet Packages
 - NUnit
