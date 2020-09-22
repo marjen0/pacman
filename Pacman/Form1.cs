@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,9 @@ namespace Pacman
 {
     public partial class Form1 : Form
     {
+        public static HttpClient httpCient = new HttpClient();
+        public ICollection<Player> currentPlayers;
+
         public static GameBoard gameboard = new GameBoard();
         public static Food food = new Food();
         public static Pacman pacman = new Pacman();
@@ -26,9 +30,9 @@ namespace Pacman
         public Form1()
         {
             InitializeComponent();
-            
             SetupGame(1);
-
+            pacman.DisableTimer();
+            ghost.DisableTimer(); 
         }
 
         public void SetupGame(int Level)
@@ -80,14 +84,24 @@ namespace Pacman
                     pacman.nextDirection = 4; pacman.MovePacman(4);
                     formelements.Log.AppendText("\nPacman moving left");
                     break;
-                case Keys.R:
-                    // Restart game
-                    //InitializeComponent();
-                    //SetupGame(1);
+                case Keys.S:
+                    ghost.EnableTimer();
+                    pacman.EnableTImer();
+                    break;
+                case Keys.P:
+                    if(pacman.IsTimerEnabled() && ghost.IsTimerEnabled())
+                    {
+                        pacman.StopTimer();
+                        ghost.StopTimer();
+                    }
+                    else
+                    {
+                        pacman.StartTimer();
+                        ghost.StartTimer();
+                    }
                     break;
                 case Keys.F1:
                     formelements.Log.AppendText("\n Player Logged in");
-                    
                     break;
             }
         }

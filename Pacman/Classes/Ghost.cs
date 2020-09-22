@@ -309,5 +309,25 @@ namespace Pacman
                 }
             }
         }
+        public void DisableTimer()
+        {
+            timer.Enabled = false;
+        }
+        public void EnableTimer()
+        {
+            timer.Enabled = true;
+        }
+        public void StopTimer()
+        {
+            timer.Stop();
+        }
+        public void StartTimer()
+        {
+            timer.Start();
+        }
+        public bool IsTimerEnabled()
+        {
+            return timer.Enabled;
+        }
     }
 }

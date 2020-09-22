@@ -21,7 +21,7 @@ namespace Pacman
         public int nextDirection = 0;
         public PictureBox PacmanImage = new PictureBox();
         private ImageList PacmanImages = new ImageList(); 
-        private Timer timer = new Timer();
+        Timer timer = new Timer();
 
         private int imageOn = 0;
 
@@ -145,5 +145,26 @@ namespace Pacman
             yCoordinate = yStart;
             PacmanImage.Location = new Point(xStart * 16 - 3, yStart * 16 + 43);
         }
+        public void DisableTimer()
+        {
+            timer.Enabled = false;
+        }
+        public void EnableTImer()
+        {
+            timer.Enabled = true;
+        }
+        public void StopTimer()
+        {
+            timer.Stop();
+        }
+        public void StartTimer()
+        {
+            timer.Start();
+        }
+        public bool IsTimerEnabled()
+        {
+            return timer.Enabled;
+        }
+        
     }
 }
