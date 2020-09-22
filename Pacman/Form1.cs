@@ -10,13 +10,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Pacman
 {
     public partial class Form1 : Form
     {
         public static HttpClient httpCient = new HttpClient();
         public ICollection<Player> currentPlayers;
-
+        
         public static GameBoard gameboard = new GameBoard();
         public static Food food = new Food();
         public static Pacman pacman = new Pacman();
@@ -92,7 +93,7 @@ namespace Pacman
                     if(pacman.IsTimerEnabled() && ghost.IsTimerEnabled())
                     {
                         pacman.StopTimer();
-                        ghost.StopTimer();
+                        ghost.StopTimer();   
                     }
                     else
                     {

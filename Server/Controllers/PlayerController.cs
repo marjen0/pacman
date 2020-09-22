@@ -4,14 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Server.Models;
+//using DataAccessLayer;
+//using DataAccessLayer.Models;
+using DataAccessLayer;
+using DataAccessLayer.Models;
+
 
 namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
-    {
+    {  
         private readonly PacmanContext _context;
         public int Qty { get; set; } = 0;
 
@@ -37,7 +41,12 @@ namespace Server.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Player>> GetAll()
         {
-            return Ok(_context.Players.ToList());
+            List<Player> players = _context.Players.ToList();
+            if(players == null)
+            {
+                return NotFound(new { message = "no players found" });
+            }
+            return Ok(players);
         }
 
         // GET api/player/5
