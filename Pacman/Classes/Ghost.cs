@@ -12,8 +12,9 @@ namespace Pacman
 {
     public class Ghost
     {
-        private const int GhostAmount = 4;
+        //Player _player;
 
+        private const int GhostAmount = 4;
         public int Ghosts = GhostAmount;
         private ImageList GhostImages = new ImageList();
         public PictureBox[] GhostImage = new PictureBox[GhostAmount];
@@ -32,6 +33,7 @@ namespace Pacman
 
         public Ghost()
         {
+            //_player = player;
             GhostImages.Images.Add(Properties.Resources.Ghost_0_1);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_2);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_3);

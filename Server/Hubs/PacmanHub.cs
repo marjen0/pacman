@@ -9,13 +9,13 @@ namespace Server.Hubs
 {
     public class PacmanHub : Hub
     {
-        public async Task SendConnectedMessage(string username, int id)
+        public async Task SendConnectedMessage()
         {
-            await Clients.All.SendAsync("ReceiveConnectedMessage", username, id);
+            await Clients.All.SendAsync("ReceiveConnectedMessage", Context.ConnectionId);
         }
-        public async Task SendPacmanCoordinates(int xCoordinate, int yCoordinate, int pacmanId)
+        public async Task SendPacmanCoordinates(int xCoordinate, int yCoordinate,int direction, string pacmanId)
         {
-            await Clients.All.SendAsync("ReceivePacmanCoordinates", xCoordinate, yCoordinate, pacmanId);
+            await Clients.All.SendAsync("ReceivePacmanCoordinates", xCoordinate, yCoordinate, direction, pacmanId);
         }
     }
 }

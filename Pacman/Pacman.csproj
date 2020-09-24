@@ -179,8 +179,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\API.cs" />
-    <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FormElements.cs" />
     <Compile Include="Classes\GameBoard.cs" />

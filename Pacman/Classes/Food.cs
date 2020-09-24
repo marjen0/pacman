@@ -12,12 +12,16 @@ namespace Pacman
 {
     public class Food
     {
+        //private Player _player;
         public PictureBox[,] FoodImage = new PictureBox[30,27];
         public int Amount = 0;
 
         private const int FoodScore = 10;
         private const int SuperFoodScore = 50;
-
+        /*public Food(Player player)
+        {
+            _player = player;
+        }*/
         public void CreateFoodImages(Form formInstance)
         {
             for (int y = 0; y < 30; y++)

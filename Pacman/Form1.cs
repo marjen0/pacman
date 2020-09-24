@@ -27,11 +27,11 @@ namespace Pacman
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
-        //public static Audio audio = new Audio();
-        private static FormElements formelements = new FormElements();
-        
-        
 
+        private static FormElements formelements = new FormElements();
+
+        List<Player> players = new List<Player>(2);
+        List<Pacman> pacmans = new List<Pacman>(2);
         public Form1()
         {
             InitializeComponent();
@@ -43,27 +43,29 @@ namespace Pacman
                 await _hubConnection.StartAsync();
             };
             _signalR = new SignalR(_hubConnection);
-            pacman = new Pacman(_signalR,1);
-            SetupGame(1);
-            pacman.DisableTimer();
             ghost.DisableTimer(); 
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            _hubConnection.On<string,int>("ReceiveConnectedMessage", (username, id) =>
+            _hubConnection.On<string>("ReceiveConnectedMessage", (connnectionId) =>
             {
                 this.Invoke((Action)(() =>
                 {
-
-                    formelements.Log.AppendText($"\n{username} joined the game with player ID {id}");
+                    pacman = new Pacman(_signalR, connnectionId);
+                    SetupGame(1);
+                    Player newPlayer = new Player("Player-" + players.Count, _hubConnection.ConnectionId);
+                    players.Add(newPlayer);
+                    
+                    
+                    formelements.Log.AppendText($"\nplayer joined the game with connection id {connnectionId} | Total players {players.Count}");
                 }));
             });
-            _hubConnection.On<int, int, int>("ReceivePacmanCoordinates", (xCoordinate, yCordinate, id) =>
+            _hubConnection.On<int, int,int, string>("ReceivePacmanCoordinates", (xCoordinate, yCordinate,direction, id) =>
             {
                 this.Invoke((Action)(() =>
                 {
-                    pacman.xCoordinate = xCoordinate; pacman.yCoordinate = yCordinate;
+                    //pacman.xCoordinate = xCoordinate; pacman.yCoordinate = yCordinate;
                     formelements.Log.AppendText($"\nPacman id = {id} | x:{xCoordinate} y:{yCordinate}");
                 }));
             });
@@ -102,17 +104,24 @@ namespace Pacman
             switch (e.KeyCode)
             {
                 case Keys.Up: 
-                    pacman.nextDirection = 1; pacman.MovePacman(1);                
+                    pacman.nextDirection = 1;
+                    pacman.MovePacman(1);
+                    //_signalR.SendCoordinates(pacman);                
                     break;
                 case Keys.Right: 
-                    pacman.nextDirection = 2; pacman.MovePacman(2);
+                    pacman.nextDirection = 2;
+                    pacman.MovePacman(2);
+                    //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Down: 
-                    pacman.nextDirection = 3; pacman.MovePacman(3);
+                    pacman.nextDirection = 3;
+                    pacman.MovePacman(4);
+                    //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Left: 
-                    pacman.nextDirection = 4; pacman.MovePacman(4);
-
+                    pacman.nextDirection = 4;
+                    pacman.MovePacman(4);
+                    //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.S:
                     ghost.EnableTimer();
@@ -131,8 +140,8 @@ namespace Pacman
                     }
                     break;
                 case Keys.F1:
-                    Player p = new Player("Naujas",1);
-                    bool isOK =await _signalR.ConnectPlayer(p);
+                    //prisijungti prie zaidimo
+                    await _signalR.ConnectPlayer();  
                     break;
             }
         }

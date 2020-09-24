@@ -15,12 +15,12 @@ namespace Pacman.Services
         {
             _hubConnection = connection;
         }
-        public async Task<bool> ConnectPlayer(Player player)
+        public async Task<bool> ConnectPlayer()
         {
             try
             {
                 await _hubConnection.StartAsync();
-                await _hubConnection.InvokeAsync("SendConnectedMessage", player.Name, player.Id);
+                await _hubConnection.InvokeAsync("SendConnectedMessage");
                 return true;
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace Pacman.Services
         {
             try
             {
-                await _hubConnection.InvokeAsync("SendPacmanCoordinates", pacman.xCoordinate, pacman.yCoordinate, pacman.Id);
+                await _hubConnection.InvokeAsync("SendPacmanCoordinates", pacman.xCoordinate, pacman.yCoordinate, pacman.nextDirection, pacman.Id);
             }
             catch (Exception ex)
             {

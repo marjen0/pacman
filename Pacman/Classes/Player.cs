@@ -10,7 +10,7 @@ namespace Pacman
 {
     public class Player
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
 
         private const int MaxLives = 10;
@@ -21,7 +21,7 @@ namespace Pacman
         public PictureBox[] LifeImage = new PictureBox[MaxLives];
 
         public Player() { }
-        public Player(string name, int id)
+        public Player(string name, string id)
         {
             Id = id;
             Name = name;

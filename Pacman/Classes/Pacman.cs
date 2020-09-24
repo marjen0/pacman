@@ -13,7 +13,7 @@ namespace Pacman
 {
     public class Pacman
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         private SignalR _signalR;
         // Initialise variables
         public int xCoordinate = 0;
@@ -28,7 +28,7 @@ namespace Pacman
 
         private int imageOn = 0;
 
-        public Pacman(SignalR signalR, int id)
+        public Pacman(SignalR signalR, string id)
         {
             Id = id;
             _signalR = signalR;
@@ -89,9 +89,10 @@ namespace Pacman
                     case 4: PacmanImage.Left -= 16; xCoordinate--; break;
                 }
                 currentDirection = direction;
-                _signalR.SendCoordinates(this);
+
                 UpdatePacmanImage();
                 CheckPacmanPosition();
+                _signalR.SendCoordinates(this);
                 Form1.ghost.CheckForPacman();
             }
         }
