@@ -53,6 +53,7 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     pacman = new Pacman(_signalR, connnectionId);
+                    pacmans.Add(pacman);
                     SetupGame(1);
                     Player newPlayer = new Player("Player-" + players.Count, _hubConnection.ConnectionId);
                     players.Add(newPlayer);
@@ -95,7 +96,7 @@ namespace Pacman
             ghost.CreateGhostImage(this);
 
             // Create Pacman
-            pacman.CreatePacmanImage(this, PacmanStartCoordinates.Item1, PacmanStartCoordinates.Item2);
+            pacmans.Single(p => p.Id == _hubConnection.ConnectionId).CreatePacmanImage(this, PacmanStartCoordinates.Item1, PacmanStartCoordinates.Item2);
         }
 
         protected async override void OnKeyDown(KeyEventArgs e)
@@ -103,39 +104,39 @@ namespace Pacman
             base.OnKeyDown(e);
             switch (e.KeyCode)
             {
-                case Keys.Up: 
-                    pacman.nextDirection = 1;
-                    pacman.MovePacman(1);
+                case Keys.Up:
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
                     //_signalR.SendCoordinates(pacman);                
                     break;
-                case Keys.Right: 
-                    pacman.nextDirection = 2;
-                    pacman.MovePacman(2);
+                case Keys.Right:
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
                     //_signalR.SendCoordinates(pacman);
                     break;
-                case Keys.Down: 
-                    pacman.nextDirection = 3;
-                    pacman.MovePacman(4);
+                case Keys.Down:
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
-                case Keys.Left: 
-                    pacman.nextDirection = 4;
-                    pacman.MovePacman(4);
+                case Keys.Left:
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.S:
                     ghost.EnableTimer();
-                    pacman.EnableTImer();
+                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).EnableTImer();
                     break;
                 case Keys.P:
-                    if(pacman.IsTimerEnabled() && ghost.IsTimerEnabled())
+                    if(pacmans.Single(p => p.Id == _hubConnection.ConnectionId).IsTimerEnabled() && ghost.IsTimerEnabled())
                     {
-                        pacman.StopTimer();
+                        pacmans.Single(p => p.Id == _hubConnection.ConnectionId).StopTimer();
                         ghost.StopTimer();   
                     }
                     else
                     {
-                        pacman.StartTimer();
+                        pacmans.Single(p => p.Id == _hubConnection.ConnectionId).StartTimer();
                         ghost.StartTimer();
                     }
                     break;
