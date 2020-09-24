@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Pacman
+namespace DataAccessLayer
 {
     public class Player
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
         private const int MaxLives = 10;
-        
+        public string Name;
         public int Score = 0;
         public int Lives = 3;
         public Label ScoreText = new Label();
         public PictureBox[] LifeImage = new PictureBox[MaxLives];
 
         public Player() { }
-        public Player(string name, int id)
+        public Player(string name)
         {
-            Id = id;
             Name = name;
         }
         public void CreateLives(Form formInstance)

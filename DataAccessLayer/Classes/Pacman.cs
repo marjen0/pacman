@@ -1,5 +1,4 @@
-﻿using Pacman.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,12 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pacman
+namespace DataAccessLayer
 {
     public class Pacman
     {
-        public int Id { get; set; }
-        private SignalR _signalR;
         // Initialise variables
         public int xCoordinate = 0;
         public int yCoordinate = 0;
@@ -28,10 +25,8 @@ namespace Pacman
 
         private int imageOn = 0;
 
-        public Pacman(SignalR signalR, int id)
+        public Pacman()
         {
-            Id = id;
-            _signalR = signalR;
             timer.Interval = 100;
             timer.Enabled = true;
             timer.Tick += new EventHandler(timer_Tick);
@@ -89,7 +84,6 @@ namespace Pacman
                     case 4: PacmanImage.Left -= 16; xCoordinate--; break;
                 }
                 currentDirection = direction;
-                _signalR.SendCoordinates(this);
                 UpdatePacmanImage();
                 CheckPacmanPosition();
                 Form1.ghost.CheckForPacman();

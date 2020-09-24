@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using DataAccessLayer;
+using Server.Hubs;
 
 namespace Server
 {
@@ -31,7 +31,8 @@ namespace Server
                 Configuration.GetConnectionString("DefaultDBConnection");
 
             services.AddControllers();
-            services.AddDbContext<PacmanContext>(options => options.UseSqlServer(connectionString));
+            //services.AddDbContext<PacmanContext>(options => options.UseSqlServer(connectionString));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +51,7 @@ namespace Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PacmanHub>("/hub");
             });
         }
     }
