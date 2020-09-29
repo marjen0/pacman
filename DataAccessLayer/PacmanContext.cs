@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using DataAccessLayer.Models;
 
 namespace DataAccessLayer
 {
@@ -14,6 +15,6 @@ namespace DataAccessLayer
 
         }
         public DbSet<Player> Players { get; set; }
-        public DbSet<Ghost> Ghosts { get; set; }
+        public DbSet<Pacman> Pacmans { get; set; }
     }
 }

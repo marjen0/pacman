@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,7 +32,7 @@ namespace Server
                 Configuration.GetConnectionString("DefaultDBConnection");
 
             services.AddControllers();
-            //services.AddDbContext<PacmanContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<PacmanContext>(options => options.UseSqlServer(connectionString));
             services.AddSignalR();
         }
 

@@ -15,7 +15,7 @@ namespace Server.Hubs
         }
         public async Task SendPacmanCoordinates(int xCoordinate, int yCoordinate,int direction, string pacmanId)
         {
-            await Clients.All.SendAsync("ReceivePacmanCoordinates", xCoordinate, yCoordinate, direction, pacmanId);
+            await Clients.Others.SendAsync("ReceivePacmanCoordinates", xCoordinate, yCoordinate, direction, pacmanId);
         }
     }
 }

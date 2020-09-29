@@ -1,47 +1,44 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace data.Migrations
+namespace DataAccessLayer.Migrations
 {
     public partial class InitialCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Ghosts",
+                name: "Pacmans",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
                     xCoordinate = table.Column<int>(nullable: false),
-                    yCoordinate = table.Column<int>(nullable: false)
+                    yCoordinate = table.Column<int>(nullable: false),
+                    currentDirection = table.Column<int>(nullable: false),
+                    nextDirection = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ghosts", x => x.ID);
+                    table.PrimaryKey("PK_Pacmans", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Players",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: false),
                     Score = table.Column<int>(nullable: false),
-                    Lives = table.Column<int>(nullable: false),
-                    xCoordinate = table.Column<int>(nullable: false),
-                    yCoordinate = table.Column<int>(nullable: false)
+                    Lives = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.ID);
+                    table.PrimaryKey("PK_Players", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Ghosts");
+                name: "Pacmans");
 
             migrationBuilder.DropTable(
                 name: "Players");

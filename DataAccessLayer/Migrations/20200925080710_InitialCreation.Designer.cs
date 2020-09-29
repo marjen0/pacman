@@ -3,14 +3,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace data.Migrations
+namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(PacmanContext))]
-    partial class PacmanContextModelSnapshot : ModelSnapshot
+    [Migration("20200925080710_InitialCreation")]
+    partial class InitialCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,12 +20,16 @@ namespace data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DataAccessLayer.Models.Ghost", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Pacman", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("currentDirection")
+                        .HasColumnType("int");
+
+                    b.Property<int>("nextDirection")
+                        .HasColumnType("int");
 
                     b.Property<int>("xCoordinate")
                         .HasColumnType("int");
@@ -31,34 +37,23 @@ namespace data.Migrations
                     b.Property<int>("yCoordinate")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Ghosts");
+                    b.ToTable("Pacmans");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Player", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Lives")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("xCoordinate")
-                        .HasColumnType("int");
-
-                    b.Property<int>("yCoordinate")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Players");
                 });

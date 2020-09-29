@@ -18,6 +18,7 @@ namespace Pacman
     {
         private HubConnection _hubConnection;
         private static SignalR _signalR;
+        private static API _api;
         //public static HttpClient httpCient = new HttpClient();
         public List<Player> currentPlayers = new List<Player>(2);
         
@@ -43,6 +44,7 @@ namespace Pacman
                 await _hubConnection.StartAsync();
             };
             _signalR = new SignalR(_hubConnection);
+            _api = new API();
             ghost.DisableTimer(); 
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -56,6 +58,7 @@ namespace Pacman
                     pacmans.Add(pacman);
                     SetupGame(1);
                     Player newPlayer = new Player("Player-" + players.Count, _hubConnection.ConnectionId);
+                    _api.CreatePlayer(newPlayer);
                     players.Add(newPlayer);
                     
                     
@@ -66,6 +69,7 @@ namespace Pacman
             {
                 this.Invoke((Action)(() =>
                 {
+                    //pacmans.First(p => p.Id != id).MovePacman(direction);
                     //pacman.xCoordinate = xCoordinate; pacman.yCoordinate = yCordinate;
                     formelements.Log.AppendText($"\nPacman id = {id} | x:{xCoordinate} y:{yCordinate}");
                 }));
