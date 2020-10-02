@@ -20,7 +20,7 @@ namespace Server.Controllers
         {
             _pacmanContext = context;
         }
-        // GET: api/<PlayersController>
+        // GET: api/players
         [HttpGet]
         public ActionResult<IEnumerable<Player>> Get()
         {
@@ -32,7 +32,7 @@ namespace Server.Controllers
             return Ok(players);
         }
 
-        // GET api/<PlayersController>/5
+        // GET api/players/5
         [HttpGet("{id}")]
         public ActionResult<Player> Get(string id)
         {
@@ -48,7 +48,7 @@ namespace Server.Controllers
 
         }
 
-        // POST api/<PlayersController>
+        // POST api/players>
         [HttpPost]
         public ActionResult Post([FromBody] Player p)
         {
@@ -56,13 +56,13 @@ namespace Server.Controllers
             return Ok();
         }
 
-        // PUT api/<PlayersController>/5
+        // PUT api/players>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<PlayersController>/5
+        // DELETE api/players>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
