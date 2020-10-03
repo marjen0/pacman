@@ -1,60 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pacman
+namespace Pacman.Classes
 {
-    public abstract class Food
+    class SuperFood : Food
     {
-        public abstract int Amount { get; set; }
-        public abstract int FoodScore { get; set; }
-        public abstract int SuperFoodScore { get; set; }
-        public abstract string Type { get; set; }
-        public abstract void CreateFoodImages(Form formInstance);
-        public abstract void EatFood(int x, int y);
-        public abstract void EatSuperFood(int x, int y);
-        public abstract PictureBox[,] FoodImage { get; set; }// = new PictureBox[30,27];
-        /*public int Amount = 0;
+        private string _type;
+        private int _amount;
+        private int _foodScore;
+        private int _superFoodScore;
+        private PictureBox[,] _foodImage;
+        public override PictureBox[,] FoodImage { get => _foodImage; set => _foodImage = value; }
+        public override int Amount { get => _amount; set => _amount = value; }
+        public override int FoodScore { get => _foodScore; set => _foodScore = value; }
+        public override string Type { get => _type; set => _type = value; }
+        public override int SuperFoodScore { get => _superFoodScore; set => _superFoodScore = value; }
 
-        private const int FoodScore = 10;
-        private const int SuperFoodScore = 50;
-    
-        public void CreateFoodImages(Form formInstance)
+        public SuperFood()
+        {
+            _type = "SuperFood";
+            _foodImage = new PictureBox[30, 27];
+        }
+        public override void CreateFoodImages(Form formInstance)
         {
             for (int y = 0; y < 30; y++)
             {
                 for (int x = 0; x < 27; x++)
                 {
-                    if (Form1.gameboard.Matrix[y,x] == 1 || Form1.gameboard.Matrix[y, x] == 2)
+                    if (Form1.gameboard.Matrix[y, x] == 1 || Form1.gameboard.Matrix[y, x] == 2)
                     {
                         FoodImage[y, x] = new PictureBox();
                         FoodImage[y, x].Name = "FoodImage" + Amount.ToString();
                         FoodImage[y, x].SizeMode = PictureBoxSizeMode.AutoSize;
                         FoodImage[y, x].Location = new Point(x * 16 - 1, y * 16 + 47);
-                        if (Form1.gameboard.Matrix[y,x] == 1)
+                        if (Form1.gameboard.Matrix[y, x] == 1)
                         {
-                            FoodImage[y, x].Image = Properties.Resources.Block_1;
+                            FoodImage[y, x].Image = Properties.Resources.Block_2;
                             Amount++;
                         }
                         else
                         {
-                            FoodImage[y, x].Image = Properties.Resources.Block_2;
+                            FoodImage[y, x].Image = Properties.Resources.Block_1;
                         }
                         formInstance.Controls.Add(FoodImage[y, x]);
                         FoodImage[y, x].BringToFront();
-                        
+
                     }
                 }
             }
         }
 
-        public void EatFood(int x, int y)
+        public override void EatFood(int x, int y)
         {
             // Eat food
             FoodImage[x, y].Visible = false;
@@ -65,13 +66,13 @@ namespace Pacman
             //Form1.audio.Play(1);
         }
 
-        public void EatSuperFood(int x, int y)
+        public override void EatSuperFood(int x, int y)
         {
             // Eat food
             FoodImage[x, y].Visible = false;
             Form1.gameboard.Matrix[x, y] = 0;
             Form1.player.UpdateScore(SuperFoodScore);
             Form1.ghost.ChangeGhostState();
-        }*/
+        }
     }
 }
