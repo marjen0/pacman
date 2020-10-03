@@ -197,7 +197,6 @@ namespace Pacman
                 {
                     CanMove = check_direction(Direction[x], x);
                     if (!CanMove) { Change_Direction(Direction[x], x); }
-
                 }
 
                 if (CanMove)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Pacman.Services
         {
             DataAccessLayer.Models.Player player = new DataAccessLayer.Models.Player();
             player.Id = p.Id;
+            player.Name = p.Name;
             player.Lives = p.Lives;
             player.Score = p.Score;
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync(API_BASE + "/players", player);

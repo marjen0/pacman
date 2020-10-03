@@ -73,7 +73,6 @@ namespace Pacman
 
         public void MovePacman(int direction)
         {
-            
             // Move Pacman
             bool CanMove = check_direction(nextDirection);
             if (!CanMove) { CanMove = check_direction(currentDirection); direction = currentDirection; } else { direction = nextDirection; }
