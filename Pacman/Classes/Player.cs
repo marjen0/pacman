@@ -21,7 +21,7 @@ namespace Pacman
         public PictureBox[] LifeImage = new PictureBox[MaxLives];
 
         public Player() { }
-        public Player(string name, string id)
+        public Player(string id, string name)
         {
             Id = id;
             Name = name;

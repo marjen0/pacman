@@ -5,12 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
-using Pacman.Classes;
 using Pacman.Services;
 
 namespace Pacman
@@ -20,14 +21,11 @@ namespace Pacman
         private HubConnection _hubConnection;
         private static SignalR _signalR;
         private static API _api;
-        //public static HttpClient httpCient = new HttpClient();
         public List<Player> currentPlayers = new List<Player>(2);
+        
         public static GameBoard gameboard = new GameBoard();
-        // Factory method
-        public static FoodCreator foodCreator = new MegaFoodCreator();
-        public static Food food = foodCreator.CreateFood();
-
-        public static Pacman pacman;
+        public static Food food = new Food();
+        public static Pacman pacman, opponent;
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
@@ -36,6 +34,7 @@ namespace Pacman
 
         List<Player> players = new List<Player>(2);
         List<Pacman> pacmans = new List<Pacman>(2);
+
         public Form1()
         {
             InitializeComponent();
@@ -48,33 +47,59 @@ namespace Pacman
             };
             _signalR = new SignalR(_hubConnection);
             _api = new API();
-            ghost.DisableTimer(); 
+            ghost.DisableTimer();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            _signalR.RegisterPlayer();
+
+            // Create Board Matrix
+            Tuple<int, int> PacmanStartCoordinates = gameboard.InitialiseBoardMatrix(1);
+            SetupGame(1);
+
+            _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
+            {
+                formelements.Log.AppendText($"\nPress F1 to join the game!");
+            });
+
             _hubConnection.On<string>("ReceiveConnectedMessage", (connnectionId) =>
             {
                 this.Invoke((Action)(() =>
                 {
-                    pacman = new Pacman(_signalR, connnectionId);
-                    pacmans.Add(pacman);
-                    SetupGame(1);
-                    Player newPlayer = new Player("Player-" + players.Count, _hubConnection.ConnectionId);
+                    Player newPlayer = new Player(connnectionId, "Player" + (players.Count + 1));
                     _api.CreatePlayer(newPlayer);
                     players.Add(newPlayer);
-                    
-                    
-                    formelements.Log.AppendText($"\nplayer joined the game with connection id {connnectionId} | Total players {players.Count}");
+
+                    if (players.Count == 2)
+                    {
+                        pacman = new Pacman(_signalR, players.First().Id);
+                        pacmans.Add(pacman);
+
+                        opponent = new Pacman(_signalR, players.Last().Id);
+                        pacmans.Add(opponent);
+
+                        ghost.EnableTimer();
+
+                        foreach (var p in pacmans)
+                        {
+                            p.CreatePacmanImage(this, PacmanStartCoordinates.Item1, PacmanStartCoordinates.Item2);
+                            p.EnableTImer();
+                        }
+                    }
+
+                    formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
+                        $"\nTotal players: {players.Count}");
                 }));
             });
-            _hubConnection.On<int, int,int, string>("ReceivePacmanCoordinates", (xCoordinate, yCordinate,direction, id) =>
+
+            _hubConnection.On<int, int, int, string>("ReceivePacmanCoordinates", (xCoordinate, yCoordinate, direction, id) =>
             {
                 this.Invoke((Action)(() =>
                 {
-                    //pacmans.First(p => p.Id != id).MovePacman(direction);
-                    //pacman.xCoordinate = xCoordinate; pacman.yCoordinate = yCordinate;
-                    formelements.Log.AppendText($"\nPacman id = {id} | x:{xCoordinate} y:{yCordinate}");
+                    // Logging movement
+                    //formelements.Log.AppendText($"\nPacman id = {id} | x:{xCoordinate} y:{yCoordinate}");
+                    pacmans.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });
         }
@@ -82,9 +107,6 @@ namespace Pacman
         {
             // Create Game Board
             gameboard.CreateBoardImage(this, Level);
-
-            // Create Board Matrix
-            Tuple<int, int> PacmanStartCoordinates = gameboard.InitialiseBoardMatrix(Level);
 
             // Create Player
             player.CreatePlayerDetails(this);
@@ -101,9 +123,6 @@ namespace Pacman
 
             // Create Ghosts
             ghost.CreateGhostImage(this);
-
-            // Create Pacman
-            pacmans.Single(p => p.Id == _hubConnection.ConnectionId).CreatePacmanImage(this, PacmanStartCoordinates.Item1, PacmanStartCoordinates.Item2);
         }
 
         protected async override void OnKeyDown(KeyEventArgs e)
@@ -113,22 +132,22 @@ namespace Pacman
             {
                 case Keys.Up:
                     pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
-                    //_signalR.SendCoordinates(pacman);                
+                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
+                    //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Right:
                     pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
+                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Down:
                     pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
+                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Left:
                     pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
+                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.S:
@@ -148,11 +167,11 @@ namespace Pacman
                     }
                     break;
                 case Keys.F1:
-                    //prisijungti prie zaidimo
-                    await _signalR.ConnectPlayer();  
+                    // Join the game
+                    if (players.Count < 2)
+                        await _signalR.ConnectPlayer();
                     break;
             }
         }
-        
     }
 }
