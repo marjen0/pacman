@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
+using Pacman.Classes;
 using Pacman.Services;
 
 namespace Pacman
@@ -24,7 +25,8 @@ namespace Pacman
         public List<Player> currentPlayers = new List<Player>(2);
         
         public static GameBoard gameboard = new GameBoard();
-        public static Food food = new Food();
+        public static FoodCreator foodCreator = new MegaFoodCreator();
+        public static Food food = foodCreator.CreateFood();
         public static Pacman pacman, opponent;
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
