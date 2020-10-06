@@ -40,12 +40,12 @@ namespace Pacman.Classes
                         FoodImage[y, x].Location = new Point(x * 16 - 1, y * 16 + 47);
                         if (Form1.gameboard.Matrix[y, x] == 1)
                         {
-                            FoodImage[y, x].Image = Properties.Resources.Block_2;
+                            FoodImage[y, x].Image = Properties.Resources.Block_1;
                             Amount++;
                         }
                         else
                         {
-                            FoodImage[y, x].Image = Properties.Resources.Block_1;
+                            FoodImage[y, x].Image = Properties.Resources.Block_2;
                         }
                         formInstance.Controls.Add(FoodImage[y, x]);
                         FoodImage[y, x].BringToFront();
