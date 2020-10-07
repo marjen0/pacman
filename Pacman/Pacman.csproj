@@ -182,13 +182,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AbstractFactory.cs" />
-    <Compile Include="Classes\RedGhost.cs" />
-    <Compile Include="Classes\RedFactory.cs" />
-    <Compile Include="Classes\BlueFactory.cs" />
-    <Compile Include="Classes\BlueGhost.cs" />
-    <Compile Include="Classes\RedPacman.cs" />
-    <Compile Include="Classes\BluePacman.cs" />
+    <Compile Include="Classes\AbstractFactory\AbstractFactory.cs" />
+    <Compile Include="Classes\AbstractFactory\RedGhost.cs" />
+    <Compile Include="Classes\AbstractFactory\RedFactory.cs" />
+    <Compile Include="Classes\AbstractFactory\BlueFactory.cs" />
+    <Compile Include="Classes\AbstractFactory\BlueGhost.cs" />
+    <Compile Include="Classes\AbstractFactory\RedPacman.cs" />
+    <Compile Include="Classes\AbstractFactory\BluePacman.cs" />
     <Compile Include="Classes\Character.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FoodCreator.cs" />

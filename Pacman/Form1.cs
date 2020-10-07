@@ -35,10 +35,9 @@ namespace Pacman
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
 
-        private static FormElements formelements = new FormElements();
-
-        List<Player> players = new List<Player>(2);
-        List<Pacman> pacmans = new List<Pacman>(2);
+        private static readonly FormElements formelements = new FormElements();
+        readonly List<Player> players = new List<Player>(2);
+        readonly List<Pacman> pacmans = new List<Pacman>(2);
 
         public Form1()
         {

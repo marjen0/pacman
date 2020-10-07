@@ -32,7 +32,7 @@ namespace Pacman
             Log.Width = 345;
             Log.Top = 5;
             Log.Left = 475;
-            Log.ReadOnly = true;
+            Log.Enabled = false;
             formInstance.Controls.Add(Log);
         }
     }
