@@ -168,6 +168,7 @@ namespace Pacman
             }
             GhostOn = !GhostOn;
             CheckForPacman();
+            CheckForOpponent();
         }
 
         private void killabletimer_Tick(object sender, EventArgs e)
@@ -309,6 +310,30 @@ namespace Pacman
                 }
             }
         }
+
+        public void CheckForOpponent()
+        {
+            // Check to see if a ghost is on the same block as Pacman
+            for (int x = 0; x < GhostAmount; x++)
+            {
+                if (xCoordinate[x] == Form1.opponent.xCoordinate && yCoordinate[x] == Form1.opponent.yCoordinate)
+                {
+                    switch (State[x])
+                    {
+                        case 0: Form1.player.LoseLife(); break;
+                        case 1:
+                            State[x] = 2;
+                            hometimer.Enabled = true;
+                            GhostImage[x].Image = Properties.Resources.eyes;
+                            Form1.player.UpdateScore(300);
+                            break;
+                    }
+                }
+            }
+        }
+
+
+
         public void DisableTimer()
         {
             timer.Enabled = false;

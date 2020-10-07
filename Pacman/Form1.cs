@@ -25,7 +25,7 @@ namespace Pacman
         public List<Player> currentPlayers = new List<Player>(2);
         
         public static GameBoard gameboard = new GameBoard();
-        public static FoodCreator foodCreator = new MegaFoodCreator();
+        public static FoodCreator foodCreator = new RegularFoodCreator();
         public static Food food = foodCreator.CreateFood();
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
@@ -36,8 +36,8 @@ namespace Pacman
         public static HighScore highscore = new HighScore();
 
         private static readonly FormElements formelements = new FormElements();
-        readonly List<Player> players = new List<Player>(2);
-        readonly List<Pacman> pacmans = new List<Pacman>(2);
+        public static List<Player> players = new List<Player>(2);
+        public static List<Pacman> pacmans = new List<Pacman>(2);
 
         public Form1()
         {
