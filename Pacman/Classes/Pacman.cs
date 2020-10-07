@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Pacman
 {
-    public abstract class Pacman : Character
+    public abstract class Pacman
     {
         public string Id { get; set; }
         protected SignalR _signalR;

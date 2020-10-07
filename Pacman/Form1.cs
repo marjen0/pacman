@@ -25,8 +25,12 @@ namespace Pacman
         public List<Player> currentPlayers = new List<Player>(2);
         
         public static GameBoard gameboard = new GameBoard();
+
+        // Factory pattern for food objects
         public static FoodCreator foodCreator = new RegularFoodCreator();
         public static Food food = foodCreator.CreateFood();
+
+        // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
 

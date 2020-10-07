@@ -189,7 +189,6 @@
     <Compile Include="Classes\AbstractFactory\BlueGhost.cs" />
     <Compile Include="Classes\AbstractFactory\RedPacman.cs" />
     <Compile Include="Classes\AbstractFactory\BluePacman.cs" />
-    <Compile Include="Classes\Character.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FoodCreator.cs" />
     <Compile Include="Classes\FormElements.cs" />

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Pacman
 {
-    public class Ghost : Character
+    public class Ghost
     {
         private const int GhostAmount = 4;
         public int Ghosts = GhostAmount;
