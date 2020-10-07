@@ -218,7 +218,6 @@ namespace Pacman
                     }
                 }
             }
-            
         }
 
         private bool check_direction(int direction, int ghost)
@@ -331,8 +330,6 @@ namespace Pacman
                 }
             }
         }
-
-
 
         public void DisableTimer()
         {

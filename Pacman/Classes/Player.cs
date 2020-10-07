@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using Pacman.Classes.Observer;
 
 namespace Pacman
 {
-    public class Player
+    public class Player : IObserver
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -60,7 +61,10 @@ namespace Pacman
             // Update score value and text
             Score += amount;
             ScoreText.Text = Score.ToString();
-            if (Score > Form1.highscore.Score) { Form1.highscore.UpdateHighScore(Score); }
+            if (Score > Form1.highscore.Score) {
+                //Form1.highscore.UpdateHighScore(Score);
+                Form1.highscore.UpdateScore(Score);
+            }
         }
 
         public void SetLives()
@@ -79,7 +83,8 @@ namespace Pacman
         public void LoseLife()
         {
             // Lose a life
-            Lives--;
+            Form1.subject.EditLives(Lives - 1);
+
             if (Lives > 0)
             {
                 Form1.pacman.Set_Pacman();
@@ -88,13 +93,28 @@ namespace Pacman
             }
             else
             {
-                Application.Exit();
+                //Application.Exit();
+
+                // FOR TESTING
+                Lives = 3;
+                SetLives();
+                // FOR TESTING
             }
         }
 
         public void LevelComplete()
         {
             Application.Exit();
+        }
+
+        public void UpdateLives(int lives)
+        {
+            Lives = lives;
+        }
+
+        public void UpdateHighScore(int amount)
+        {
+            UpdateScore(amount);
         }
     }
 }

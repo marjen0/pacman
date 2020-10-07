@@ -42,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +52,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Pacman.ico</ApplicationIcon>
@@ -197,6 +199,9 @@
     <Compile Include="Classes\HighScore.cs" />
     <Compile Include="Classes\MegaFood.cs" />
     <Compile Include="Classes\MegaFoodCreator.cs" />
+    <Compile Include="Classes\Observer\IObserver.cs" />
+    <Compile Include="Classes\Observer\ISubject.cs" />
+    <Compile Include="Classes\Observer\Subject.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\RegularFood.cs" />
     <Compile Include="Classes\RegularFoodCreator.cs" />

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Pacman.Classes;
+using Pacman.Classes.Observer;
 using Pacman.Services;
 
 namespace Pacman
@@ -33,6 +34,9 @@ namespace Pacman
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
+
+        // Observer pattern
+        public static Subject subject = new Subject();
 
         public static Pacman pacman, opponent;
         public static Ghost ghost = new Ghost();
@@ -66,10 +70,14 @@ namespace Pacman
             Tuple<int, int> PacmanStartCoordinates = gameboard.InitialiseBoardMatrix(1);
             SetupGame(1);
 
+            subject.RegisterObserver(player);
+            subject.RegisterObserver(highscore);
+
             _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
             {
                 formelements.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
                     $"Player1 plays with blue pacman, Player2 plays with red.\n");
+                formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
             });
 
             _hubConnection.On<string>("ReceiveConnectedMessage", (connnectionId) =>
@@ -94,6 +102,9 @@ namespace Pacman
                             p.CreatePacmanImage(this, PacmanStartCoordinates.Item1, PacmanStartCoordinates.Item2);
                             p.EnableTImer();
                         }
+
+                        subject.EditLives(5);
+                        formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
                     }
 
                     formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
