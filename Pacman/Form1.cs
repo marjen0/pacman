@@ -27,6 +27,9 @@ namespace Pacman
         public static GameBoard gameboard = new GameBoard();
         public static FoodCreator foodCreator = new MegaFoodCreator();
         public static Food food = foodCreator.CreateFood();
+        public static BlueFactory blueFactory = new BlueFactory();
+        public static RedFactory redFactory = new RedFactory();
+
         public static Pacman pacman, opponent;
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
@@ -75,10 +78,9 @@ namespace Pacman
 
                     if (players.Count == 2)
                     {
-                        pacman = new Pacman(_signalR, players.First().Id);
+                        pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
                         pacmans.Add(pacman);
-
-                        opponent = new Pacman(_signalR, players.Last().Id);
+                        opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         pacmans.Add(opponent);
 
                         ghost.EnableTimer();

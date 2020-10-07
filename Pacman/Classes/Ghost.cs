@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pacman.Classes;
+using Pacman.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,10 +12,8 @@ using System.Windows.Forms;
 
 namespace Pacman
 {
-    public class Ghost
+    public class Ghost : Character
     {
-        //Player _player;
-
         private const int GhostAmount = 4;
         public int Ghosts = GhostAmount;
         private ImageList GhostImages = new ImageList();
@@ -33,7 +33,6 @@ namespace Pacman
 
         public Ghost()
         {
-            //_player = player;
             GhostImages.Images.Add(Properties.Resources.Ghost_0_1);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_2);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_3);
