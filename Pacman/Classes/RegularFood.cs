@@ -63,7 +63,7 @@ namespace Pacman.Classes
             FoodImage[x, y].Visible = false;
             Form1.gameboard.Matrix[x, y] = 0;
             //Form1.player.UpdateScore(FoodScore);
-            Form1.subject.EditHighScore(100);
+            Form1.playerData.EditHighScore(100);
             Amount--;
             if (Amount < 1) { Form1.player.LevelComplete(); }
             //Form1.audio.Play(1);
@@ -75,7 +75,7 @@ namespace Pacman.Classes
             FoodImage[x, y].Visible = false;
             Form1.gameboard.Matrix[x, y] = 0;
             //Form1.player.UpdateScore(SuperFoodScore);
-            Form1.subject.EditHighScore(300);
+            Form1.playerData.EditHighScore(300);
             Form1.ghost.ChangeGhostState();
         }
     }

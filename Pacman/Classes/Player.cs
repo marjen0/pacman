@@ -83,7 +83,7 @@ namespace Pacman
         public void LoseLife()
         {
             // Lose a life
-            Form1.subject.EditLives(Lives - 1);
+            Form1.playerData.EditLives(Lives - 1);
 
             if (Lives > 0)
             {

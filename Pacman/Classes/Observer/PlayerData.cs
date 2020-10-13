@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes.Observer
 {
-    public class Subject : ISubject
+    public sealed class PlayerData : ISubject
     {
-        public List<IObserver> observers;
+        private static readonly PlayerData instance = new PlayerData();
+        public List<IObserver> observers = new List<IObserver>();
         private int Lives;
         private int Amount;
 
-        public Subject()
+        /*public PlayerData()
         {
             observers = new List<IObserver>();
+        }*/
+
+        private PlayerData()
+        { }
+
+        public static PlayerData GetInstance()
+        {
+            return instance;
         }
 
         public void NotifyObservers()

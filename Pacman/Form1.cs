@@ -36,7 +36,7 @@ namespace Pacman
         public static RedFactory redFactory = new RedFactory();
 
         // Observer pattern
-        public static Subject subject = new Subject();
+        public static PlayerData playerData = PlayerData.GetInstance();
 
         public static Pacman pacman, opponent;
         public static Ghost ghost = new Ghost();
@@ -70,8 +70,8 @@ namespace Pacman
             Tuple<int, int> PacmanStartCoordinates = gameboard.InitialiseBoardMatrix(1);
             SetupGame(1);
 
-            subject.RegisterObserver(player);
-            subject.RegisterObserver(highscore);
+            playerData.RegisterObserver(player);
+            playerData.RegisterObserver(highscore);
 
             _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
             {
@@ -103,7 +103,7 @@ namespace Pacman
                             p.EnableTImer();
                         }
 
-                        subject.EditLives(5);
+                        playerData.EditLives(5);
                         formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
                     }
 
