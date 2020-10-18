@@ -6,24 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pacman.Classes
+namespace Pacman.Classes.FactoryMethod
 {
-    class SuperFood : Food
+    class MegaFood : Food
     {
-        private string _type;
+        private PictureBox[,] _foodImage;
         private int _amount;
         private int _foodScore;
         private int _superFoodScore;
-        private PictureBox[,] _foodImage;
+        private string _type;
         public override PictureBox[,] FoodImage { get => _foodImage; set => _foodImage = value; }
         public override int Amount { get => _amount; set => _amount = value; }
         public override int FoodScore { get => _foodScore; set => _foodScore = value; }
         public override string Type { get => _type; set => _type = value; }
         public override int SuperFoodScore { get => _superFoodScore; set => _superFoodScore = value; }
 
-        public SuperFood()
+        public MegaFood()
         {
-            _type = "SuperFood";
+            _type = "MegaFood";
             _foodImage = new PictureBox[30, 27];
         }
         public override void CreateFoodImages(Form formInstance)

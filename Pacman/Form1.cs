@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Pacman.Classes;
 using Pacman.Classes.Observer;
+using Pacman.Classes.FactoryMethod;
 using Pacman.Services;
 
 namespace Pacman

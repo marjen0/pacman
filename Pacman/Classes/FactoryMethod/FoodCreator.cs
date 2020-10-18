@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pacman.Classes
+namespace Pacman.Classes.FactoryMethod
 {
     public abstract class FoodCreator
     {

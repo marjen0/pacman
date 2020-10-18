@@ -192,21 +192,21 @@
     <Compile Include="Classes\AbstractFactory\RedPacman.cs" />
     <Compile Include="Classes\AbstractFactory\BluePacman.cs" />
     <Compile Include="Classes\Food.cs" />
-    <Compile Include="Classes\FoodCreator.cs" />
+    <Compile Include="Classes\FactoryMethod\FoodCreator.cs" />
     <Compile Include="Classes\FormElements.cs" />
     <Compile Include="Classes\GameBoard.cs" />
     <Compile Include="Classes\Ghost.cs" />
     <Compile Include="Classes\HighScore.cs" />
-    <Compile Include="Classes\MegaFood.cs" />
-    <Compile Include="Classes\MegaFoodCreator.cs" />
+    <Compile Include="Classes\FactoryMethod\MegaFood.cs" />
+    <Compile Include="Classes\FactoryMethod\MegaFoodCreator.cs" />
     <Compile Include="Classes\Observer\IObserver.cs" />
     <Compile Include="Classes\Observer\ISubject.cs" />
     <Compile Include="Classes\Observer\PlayerData.cs" />
     <Compile Include="Classes\Player.cs" />
-    <Compile Include="Classes\RegularFood.cs" />
-    <Compile Include="Classes\RegularFoodCreator.cs" />
-    <Compile Include="Classes\SuperFood.cs" />
-    <Compile Include="Classes\SuperFoodCreator.cs" />
+    <Compile Include="Classes\FactoryMethod\RegularFood.cs" />
+    <Compile Include="Classes\FactoryMethod\RegularFoodCreator.cs" />
+    <Compile Include="Classes\FactoryMethod\SuperFood.cs" />
+    <Compile Include="Classes\FactoryMethod\SuperFoodCreator.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
