@@ -241,4 +241,112 @@
   <data name="audio1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\audio1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="BluePacmanLife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacmanLife.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_1_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 1 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 1 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_1_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 1 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_1_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 1 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_2_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 2 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_2_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 2 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_2_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 2 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_2_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 2 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_3_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 3 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_3_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 3 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_3_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 3 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_3_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 3 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_4_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 4 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_4_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 4 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_4_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 4 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BluePacman_4_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BluePacman 4 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacmanLife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacmanLife.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_1_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 1 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 1 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_1_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 1 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_1_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 1 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_2_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 2 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_2_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 2 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_2_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 2 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_2_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 2 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_3_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 3 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_3_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 3 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_3_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 3 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_3_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 3 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_4_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 4 0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_4_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 4 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_4_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 4 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPacman_4_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedPacman 4 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

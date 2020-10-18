@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pacman.Classes;
+using Pacman.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +14,6 @@ namespace Pacman
 {
     public class Ghost
     {
-        //Player _player;
-
         private const int GhostAmount = 4;
         public int Ghosts = GhostAmount;
         private ImageList GhostImages = new ImageList();
@@ -33,7 +33,6 @@ namespace Pacman
 
         public Ghost()
         {
-            //_player = player;
             GhostImages.Images.Add(Properties.Resources.Ghost_0_1);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_2);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_3);
@@ -169,6 +168,7 @@ namespace Pacman
             }
             GhostOn = !GhostOn;
             CheckForPacman();
+            CheckForOpponent();
         }
 
         private void killabletimer_Tick(object sender, EventArgs e)
@@ -218,7 +218,6 @@ namespace Pacman
                     }
                 }
             }
-            
         }
 
         private bool check_direction(int direction, int ghost)
@@ -310,6 +309,28 @@ namespace Pacman
                 }
             }
         }
+
+        public void CheckForOpponent()
+        {
+            // Check to see if a ghost is on the same block as Pacman
+            for (int x = 0; x < GhostAmount; x++)
+            {
+                if (xCoordinate[x] == Form1.opponent.xCoordinate && yCoordinate[x] == Form1.opponent.yCoordinate)
+                {
+                    switch (State[x])
+                    {
+                        case 0: Form1.player.LoseLife(); break;
+                        case 1:
+                            State[x] = 2;
+                            hometimer.Enabled = true;
+                            GhostImage[x].Image = Properties.Resources.eyes;
+                            Form1.player.UpdateScore(300);
+                            break;
+                    }
+                }
+            }
+        }
+
         public void DisableTimer()
         {
             timer.Enabled = false;

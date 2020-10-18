@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using Pacman.Classes.Observer;
 
 namespace Pacman
 {
-    public class HighScore
+    public class HighScore : IObserver
     {
         public const int InitalScore = 100;
         public Label HighScoreText = new Label();
@@ -25,14 +26,21 @@ namespace Pacman
             HighScoreText.Width = 100;
             formInstance.Controls.Add(HighScoreText);
             HighScoreText.BringToFront();
-            UpdateHighScore();
+            UpdateScore();
         }
 
-        public void UpdateHighScore(int value = InitalScore)
+        public void UpdateScore(int value = InitalScore)
         {
             Score = value;
             HighScoreText.Text = Score.ToString();
         }
 
+        public void UpdateLives(int lives)
+        { }
+
+        public void UpdateHighScore(int amount)
+        {
+            
+        }
     }
 }
