@@ -16,6 +16,7 @@ using Pacman.Classes;
 using Pacman.Classes.Observer;
 using Pacman.Classes.FactoryMethod;
 using Pacman.Services;
+using Pacman.Classes.Adapter;
 
 namespace Pacman
 {
@@ -32,6 +33,8 @@ namespace Pacman
         public static FoodCreator foodCreator = new RegularFoodCreator();
         public static Food food = foodCreator.CreateFood();
 
+        
+
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
@@ -43,6 +46,10 @@ namespace Pacman
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
+
+        // Adapter pattern for Player and Pacman data logging
+        private static List<ILogAdapter> _playerLogAdapters = new List<ILogAdapter>();
+        private static List<ILogAdapter> _pacmanLogAdapters = new List<ILogAdapter>();
 
         private static readonly FormElements formelements = new FormElements();
         public static List<Player> players = new List<Player>(2);
@@ -86,6 +93,7 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     Player newPlayer = new Player(connnectionId, "Player" + (players.Count + 1));
+                    _playerLogAdapters.Add(new PlayerLogAdapter(newPlayer));
                     _api.CreatePlayer(newPlayer);
                     players.Add(newPlayer);
 
@@ -95,6 +103,8 @@ namespace Pacman
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         pacmans.Add(pacman);
                         pacmans.Add(opponent);
+                        _pacmanLogAdapters.Add(new PacmanLogAdapter(pacman));
+                        _pacmanLogAdapters.Add(new PacmanLogAdapter(opponent));
 
                         ghost.EnableTimer();
 
@@ -118,7 +128,8 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     // Logging movement
-                    //formelements.Log.AppendText($"\nPacman id = {id} | x:{xCoordinate} y:{yCoordinate}");
+                    formelements.Log.AppendText(_pacmanLogAdapters[0].LogData());
+                    formelements.Log.AppendText(_playerLogAdapters[0].LogData());
                     pacmans.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });

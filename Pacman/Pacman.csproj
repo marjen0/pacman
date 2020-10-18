@@ -191,6 +191,9 @@
     <Compile Include="Classes\AbstractFactory\BlueGhost.cs" />
     <Compile Include="Classes\AbstractFactory\RedPacman.cs" />
     <Compile Include="Classes\AbstractFactory\BluePacman.cs" />
+    <Compile Include="Classes\Adapter\ILogAdapter.cs" />
+    <Compile Include="Classes\Adapter\PacmanLogAdapter.cs" />
+    <Compile Include="Classes\Adapter\PlayerLogAdapter.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FactoryMethod\FoodCreator.cs" />
     <Compile Include="Classes\FormElements.cs" />
@@ -352,6 +355,7 @@
       <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets" Condition="Exists('..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

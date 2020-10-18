@@ -210,6 +210,10 @@ namespace Pacman
         {
             return timer.Enabled;
         }
-        
+        public override string ToString()
+        {
+            return $"Pacman: Id:{Id} | xCoordinate:{xCoordinate} | yCoordinate:{yCoordinate} | direction:{currentDirection}\n";
+        }
+
     }
 }
