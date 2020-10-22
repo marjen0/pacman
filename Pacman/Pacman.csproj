@@ -191,9 +191,11 @@
     <Compile Include="Classes\AbstractFactory\BlueGhost.cs" />
     <Compile Include="Classes\AbstractFactory\RedPacman.cs" />
     <Compile Include="Classes\AbstractFactory\BluePacman.cs" />
-    <Compile Include="Classes\Adapter\ILogAdapter.cs" />
+    <Compile Include="Classes\Adapter\ILog.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapter.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapter.cs" />
+    <Compile Include="Classes\Decorator\PacmanDecorator.cs" />
+    <Compile Include="Classes\Decorator\PinkBorderDecorator.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FactoryMethod\FoodCreator.cs" />
     <Compile Include="Classes\FormElements.cs" />

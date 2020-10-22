@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes.Adapter
 {
-    public class PacmanLogAdapter : ILogAdapter
+    public class PacmanLogAdapter : ILog
     {
-        private Pacman _pacman;
+        private Pacman _adaptee;
         public PacmanLogAdapter(Pacman p)
         {
-            _pacman = p;
+            _adaptee = p;
         }
         public string LogData()
         {
-            return _pacman.ToString();
+            return _adaptee.ToString();
         }
 
         public string getPacmanId()
         {
-            return _pacman.Id;
+            return _adaptee.Id;
         }
     }
 }
