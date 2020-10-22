@@ -19,12 +19,8 @@ namespace Pacman.Classes
 
         override public void AddPacmanImages()
         {
-            Bitmap bitmap = new Bitmap(Properties.Resources.RedPacman_1_0);
-            using (Graphics g = Graphics.FromImage(bitmap))
-            {
-                g.DrawRectangle(new Pen(Brushes.Yellow, 5), new Rectangle(0, 0, bitmap.Width, bitmap.Height));
-            }
-            PacmanImages.Images.Add(bitmap);
+            
+            PacmanImages.Images.Add(Properties.Resources.RedPacman_1_0);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_1);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_2);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_3);
