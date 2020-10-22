@@ -196,6 +196,8 @@
     <Compile Include="Classes\Adapter\PlayerLogAdapter.cs" />
     <Compile Include="Classes\Decorator\PacmanDecorator.cs" />
     <Compile Include="Classes\Decorator\PinkBorderDecorator.cs" />
+    <Compile Include="Classes\Decorator\WhiteBorderDecorator.cs" />
+    <Compile Include="Classes\Decorator\YellowBorderDecorator.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FactoryMethod\FoodCreator.cs" />
     <Compile Include="Classes\FormElements.cs" />
