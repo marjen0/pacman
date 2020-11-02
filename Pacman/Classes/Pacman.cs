@@ -27,6 +27,9 @@ namespace Pacman
         public PictureBox PacmanImage = new PictureBox();
         protected ImageList PacmanImages = new ImageList(); 
         Timer timer = new Timer();
+        Timer slowTimer = new Timer();
+        Timer fastTimer = new Timer();
+        Timer stateTimer = new Timer();
 
         private int imageOn = 0;
 
@@ -34,7 +37,10 @@ namespace Pacman
         {
             timer.Interval = 100;
             timer.Enabled = true;
-            timer.Tick += new EventHandler(timer_Tick);
+            timer.Tick += new EventHandler(Timer_Tick);
+
+            stateTimer.Interval = 10000;
+            stateTimer.Tick += new EventHandler(StateTimer_Tick);
 
             PacmanImages.ImageSize = new Size(27,28);
 
@@ -44,6 +50,15 @@ namespace Pacman
         public abstract void AddPacmanImages();
         public abstract void Set_Pacman();
 
+        public Timer GetTimer()
+        {
+            return timer;
+        }
+
+        public Timer GetStateTimer()
+        {
+            return stateTimer;
+        }
 
         public void CreatePacmanImage(Form formInstance, int StartXCoordinate, int StartYCoordinate)
         {
@@ -87,8 +102,9 @@ namespace Pacman
             // Check Pacmans position
             switch (Form1.gameboard.Matrix[yCoordinate, xCoordinate])
             {
-                case 1: Form1.food.EatFood(yCoordinate, xCoordinate); break;
-                case 2: Form1.food.EatSuperFood(yCoordinate, xCoordinate); break;
+                case 1: Form1.regularFood.EatFood(yCoordinate, xCoordinate); break;
+                case 2: Form1.superFood.EatFood(yCoordinate, xCoordinate); Form1.superFood.PlayerMoveSpeed(this); break;
+                case 3: Form1.megaFood.EatFood(yCoordinate, xCoordinate); Form1.megaFood.PlayerMoveSpeed(this); break;
             }
         }
 
@@ -121,14 +137,18 @@ namespace Pacman
             if (Form1.gameboard.Matrix[y, x] < 4) { return true; } else { return false; }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             // Keep moving pacman
             MovePacman(currentDirection);
         }
 
-        
-       
+        private void StateTimer_Tick(object sender, EventArgs e)
+        {
+            timer.Interval = 100;
+            stateTimer.Stop();
+        }
+
         public void DisableTimer()
         {
             timer.Enabled = false;

@@ -31,10 +31,12 @@ namespace Pacman
         public static GameBoard gameboard = new GameBoard();
 
         // Factory pattern for food objects
-        public static FoodCreator foodCreator = new RegularFoodCreator();
-        public static Food food = foodCreator.CreateFood();
-
-        
+        public static FoodCreator regularFoodCreator = new RegularFoodCreator();
+        public static Food regularFood = regularFoodCreator.CreateFood();
+        public static FoodCreator superFoodCreator = new SuperFoodCreator();
+        public static Food superFood = superFoodCreator.CreateFood();
+        public static FoodCreator megaFoodCreator = new MegaFoodCreator();
+        public static Food megaFood = megaFoodCreator.CreateFood();
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
@@ -157,7 +159,9 @@ namespace Pacman
             highscore.CreateHighScore(this);
 
             // Create Food
-            food.CreateFoodImages(this);
+            regularFood.CreateFoodImages(this);
+            superFood.CreateFoodImages(this);
+            megaFood.CreateFoodImages(this);
 
             // Create Ghosts
             ghost.CreateGhostImage(this);

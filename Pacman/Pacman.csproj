@@ -212,6 +212,9 @@
     <Compile Include="Classes\FactoryMethod\RegularFoodCreator.cs" />
     <Compile Include="Classes\FactoryMethod\SuperFood.cs" />
     <Compile Include="Classes\FactoryMethod\SuperFoodCreator.cs" />
+    <Compile Include="Classes\Strategy\MoveAlgorithm.cs" />
+    <Compile Include="Classes\Strategy\PlayerMoveFast.cs" />
+    <Compile Include="Classes\Strategy\PlayerMoveSlow.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,13 +222,13 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Pacman.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\API.cs" />
     <Compile Include="Services\SignalR.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -300,7 +303,6 @@
   <ItemGroup>
     <Content Include="Pacman.ico" />
     <Content Include="Resources\Block 2.png" />
-    <Content Include="Resources\Block 3.bmp" />
     <None Include="Resources\RedPacmanLife.png" />
     <None Include="Resources\RedPacman 4 3.png" />
     <None Include="Resources\RedPacman 4 2.png" />
@@ -337,6 +339,7 @@
     <None Include="Resources\BluePacman 4 2.png" />
     <None Include="Resources\BluePacman 4 3.png" />
     <None Include="Resources\BluePacmanLife.png" />
+    <None Include="Resources\Block 3.png" />
     <Content Include="Resources\board 2.bmp" />
   </ItemGroup>
   <ItemGroup>
