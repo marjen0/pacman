@@ -39,6 +39,8 @@ namespace Pacman
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
+        public static OrangeFactory orangeFactory = new OrangeFactory();
+        public static PinkFactory pinkFactory = new PinkFactory();
 
         // Observer pattern
         public static PlayerData playerData = PlayerData.GetInstance();
@@ -109,7 +111,9 @@ namespace Pacman
                         opponent.AddPacmanImages();
                         pacmans.Add(pacman);
                         pacmans.Add(opponent);
-                        
+
+
+
                         ghost.EnableTimer();
 
                         foreach (var p in pacmans)
@@ -118,8 +122,10 @@ namespace Pacman
                             p.EnableTImer();
                         }
 
+                        // For Observer testing
                         playerData.EditLives(5);
                         formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
+                        // For Observer testing
                     }
 
                     formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
