@@ -8,6 +8,6 @@ namespace Pacman.Classes.Adapter
 {
     public interface ILog
     {
-        string LogData();
+        void LogData(string message);
     }
 }

@@ -47,12 +47,13 @@ namespace Pacman
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
-       
+
         // Adapter pattern for Player and Pacman data logging
+        private static ILog _fileLogger = new FileLogger();
         private static ILog _pacmanLogAdapter;
         private static ILog _playerLogAdapter;
 
-        private static readonly FormElements formelements = new FormElements();
+        public static readonly FormElements formelements = new FormElements();
         public static List<Player> players = new List<Player>(2);
         public static List<Pacman> pacmans = new List<Pacman>(2);
 
@@ -132,10 +133,14 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     // Logging movement
-                    _pacmanLogAdapter = new PacmanLogAdapter(pacmans.Single(p => p.Id == id));
-                    _playerLogAdapter = new PlayerLogAdapter(players.Single(p => p.Id == id));
-                    formelements.Log.AppendText(_pacmanLogAdapter.LogData());
-                    formelements.Log.AppendText(_playerLogAdapter.LogData());
+                    Pacman currentPacman = pacmans.Single(p => p.Id == id);
+                    Player currentPlayer = players.Single(p => p.Id == id);
+                    _pacmanLogAdapter = new PacmanLogAdapter(currentPacman);
+                    _playerLogAdapter = new PlayerLogAdapter(currentPlayer);
+                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate)); ;
+                    _pacmanLogAdapter.LogData(null);
+                    _playerLogAdapter.LogData(null);
+
                     formelements.Log.ScrollToCaret();
                     pacmans.Single(p => p.Id == id).nextDirection = direction;
                 }));

@@ -14,9 +14,9 @@ namespace Pacman.Classes.Adapter
         {
             _adaptee = p;
         }
-        public string LogData()
+        public void LogData(string message)
         {
-            return _adaptee.ToString();
+            Form1.formelements.Log.AppendText(string.Format("{0}\n", _adaptee.ToString()));
         }
         public string getPlayerId()
         {

@@ -206,6 +206,7 @@
     <Compile Include="Classes\HighScore.cs" />
     <Compile Include="Classes\FactoryMethod\MegaFood.cs" />
     <Compile Include="Classes\FactoryMethod\MegaFoodCreator.cs" />
+    <Compile Include="Classes\FileLogger.cs" />
     <Compile Include="Classes\Observer\IObserver.cs" />
     <Compile Include="Classes\Observer\ISubject.cs" />
     <Compile Include="Classes\Observer\PlayerData.cs" />
