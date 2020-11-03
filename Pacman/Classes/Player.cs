@@ -120,5 +120,9 @@ namespace Pacman
         {
             return $"Player - Id:{Id} | Name:{Name} | Score:{Score} | Lives:{Lives}\n";
         }
+        public void LogDataToRichTextBox()
+        {
+            Form1.formelements.Log.AppendText(string.Format("{0}\n", this.ToString()));
+        }
     }
 }

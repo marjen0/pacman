@@ -17,7 +17,7 @@ namespace Pacman.Classes.Adapter
         }
         public void LogData(string message)
         {
-            Form1.formelements.Log.AppendText(string.Format("{0}\n", _adaptee.ToString()));
+            _adaptee.LogDataToRichTextBox();
         
         }
 
