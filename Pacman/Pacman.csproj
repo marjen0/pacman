@@ -194,6 +194,13 @@
     <Compile Include="Classes\Adapter\ILog.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapter.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapter.cs" />
+    <Compile Include="Classes\Command\Command.cs" />
+    <Compile Include="Classes\Command\Invoker.cs" />
+    <Compile Include="Classes\Command\MoveDownCommand.cs" />
+    <Compile Include="Classes\Command\MoveLeftCommand.cs" />
+    <Compile Include="Classes\Command\MoveRightCommand.cs" />
+    <Compile Include="Classes\Command\MoveUpCommand.cs" />
+    <Compile Include="Classes\Command\Receiver.cs" />
     <Compile Include="Classes\Decorator\PacmanDecorator.cs" />
     <Compile Include="Classes\Decorator\PinkBorderDecorator.cs" />
     <Compile Include="Classes\Food.cs" />

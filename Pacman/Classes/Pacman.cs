@@ -1,4 +1,5 @@
 ﻿using Pacman.Classes;
+using Pacman.Classes.Command;
 using Pacman.Services;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Pacman
 {
-    public abstract class Pacman
+    public abstract class Pacman : Receiver
     {
         public string Id { get; set; }
         protected SignalR _signalR;
@@ -50,6 +51,7 @@ namespace Pacman
         public abstract void AddPacmanImages();
         public abstract void Set_Pacman();
 
+        //Strategy pattern methods
         public Timer GetTimer()
         {
             return timer;
@@ -149,6 +151,32 @@ namespace Pacman
             stateTimer.Stop();
         }
 
+        public void Move(int direction)
+        {
+            nextDirection = direction;
+        }
+
+        //Command pattern methods
+        public void MoveUp()
+        {
+            Move(1);
+        }
+
+        public void MoveRight()
+        {
+            Move(2);
+        }
+
+        public void MoveDown()
+        {
+            Move(3);
+        }
+
+        public void MoveLeft()
+        {
+            Move(4);
+        }
+
         public void DisableTimer()
         {
             timer.Enabled = false;
@@ -173,6 +201,5 @@ namespace Pacman
         {
             return $"Pacman: Id:{Id} | xCoordinate:{xCoordinate} | yCoordinate:{yCoordinate} | direction:{currentDirection}\n";
         }
-
     }
 }
