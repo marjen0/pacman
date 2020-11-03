@@ -349,4 +349,7 @@
   <data name="RedPacman_4_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RedPacman 4 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Block_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Block 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
