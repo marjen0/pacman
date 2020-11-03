@@ -38,6 +38,13 @@ namespace Pacman.Classes
             PacmanImages.Images.Add(Properties.Resources.BluePacman_4_1);
             PacmanImages.Images.Add(Properties.Resources.BluePacman_4_2);
             PacmanImages.Images.Add(Properties.Resources.BluePacman_4_3);
+            foreach (Image image in PacmanImages.Images)
+            {
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawRectangle(new Pen(Brushes.Pink, 5), new Rectangle(0, 0, image.Width, image.Height));
+                }
+            }
         }
 
         public override void Set_Pacman()

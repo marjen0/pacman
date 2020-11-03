@@ -101,11 +101,10 @@ namespace Pacman
                     if (players.Count == 2)
                     {
                         // Decrator
-
-
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
-                        //pacman = new PinkBorderDecorator(pacman); 
                         pacman.AddPacmanImages();
+                 
+                   
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         opponent.AddPacmanImages();
                         pacmans.Add(pacman);
