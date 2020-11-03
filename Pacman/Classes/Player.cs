@@ -116,5 +116,9 @@ namespace Pacman
         {
             UpdateScore(amount);
         }
+        public override string ToString()
+        {
+            return $"Player - Id:{Id} | Name:{Name} | Score:{Score} | Lives:{Lives}\n";
+        }
     }
 }

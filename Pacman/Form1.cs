@@ -14,7 +14,10 @@ using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Pacman.Classes;
 using Pacman.Classes.Observer;
+using Pacman.Classes.FactoryMethod;
 using Pacman.Services;
+using Pacman.Classes.Adapter;
+using Pacman.Classes.Decorator;
 
 namespace Pacman
 {
@@ -31,6 +34,8 @@ namespace Pacman
         public static FoodCreator foodCreator = new RegularFoodCreator();
         public static Food food = foodCreator.CreateFood();
 
+        
+
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
@@ -42,6 +47,10 @@ namespace Pacman
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
+       
+        // Adapter pattern for Player and Pacman data logging
+        private static ILog _pacmanLogAdapter;
+        private static ILog _playerLogAdapter;
 
         private static readonly FormElements formelements = new FormElements();
         public static List<Player> players = new List<Player>(2);
@@ -90,11 +99,17 @@ namespace Pacman
 
                     if (players.Count == 2)
                     {
+                        // Decrator
+
+
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
+                        //pacman = new PinkBorderDecorator(pacman); 
+                        pacman.AddPacmanImages();
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
+                        opponent.AddPacmanImages();
                         pacmans.Add(pacman);
                         pacmans.Add(opponent);
-
+                        
                         ghost.EnableTimer();
 
                         foreach (var p in pacmans)
@@ -117,7 +132,11 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     // Logging movement
-                    //formelements.Log.AppendText($"\nPacman id = {id} | x:{xCoordinate} y:{yCoordinate}");
+                    _pacmanLogAdapter = new PacmanLogAdapter(pacmans.Single(p => p.Id == id));
+                    _playerLogAdapter = new PlayerLogAdapter(players.Single(p => p.Id == id));
+                    formelements.Log.AppendText(_pacmanLogAdapter.LogData());
+                    formelements.Log.AppendText(_playerLogAdapter.LogData());
+                    formelements.Log.ScrollToCaret();
                     pacmans.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });

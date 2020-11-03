@@ -19,6 +19,7 @@ namespace Pacman.Classes
 
         override public void AddPacmanImages()
         {
+            
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_0);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_1);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_2);

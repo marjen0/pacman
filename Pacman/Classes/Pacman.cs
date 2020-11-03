@@ -38,59 +38,12 @@ namespace Pacman
 
             PacmanImages.ImageSize = new Size(27,28);
 
-            AddPacmanImages();
+            //AddPacmanImages();
         }
 
         public abstract void AddPacmanImages();
+        public abstract void Set_Pacman();
 
-            //switch (_color)
-            //{
-            //    case "Blue":
-                    
-            //        break;
-            //    case "Red":
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_1_0);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_1_1);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_1_2);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_1_3);
-
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_2_0);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_2_1);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_2_2);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_2_3);
-
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_3_0);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_3_1);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_3_2);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_3_3);
-
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_4_0);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_4_1);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_4_2);
-            //        PacmanImages.Images.Add(Properties.Resources.RedPacman_4_3);
-            //        break;
-            //    default:
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_1_0);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_1_1);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_1_2);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_1_3);
-
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_2_0);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_2_1);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_2_2);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_2_3);
-
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_3_0);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_3_1);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_3_2);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_3_3);
-
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_4_0);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_4_1);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_4_2);
-            //        PacmanImages.Images.Add(Properties.Resources.Pacman_4_3);
-            //        break;
-            //}
 
         public void CreatePacmanImage(Form formInstance, int StartXCoordinate, int StartYCoordinate)
         {
@@ -174,22 +127,8 @@ namespace Pacman
             MovePacman(currentDirection);
         }
 
-        public abstract void Set_Pacman();
-        //{
-        //    // Place Pacman in board
-        //    if (_color == "Blue")
-        //        PacmanImage.Image = Properties.Resources.BluePacman_2_1;
-        //    else if (_color == "Red")
-        //        PacmanImage.Image = Properties.Resources.RedPacman_2_1;
-        //    else
-        //        PacmanImage.Image = Properties.Resources.Pacman_2_1;
-
-        //    currentDirection = 0;
-        //    nextDirection = 0;
-        //    xCoordinate = xStart;
-        //    yCoordinate = yStart;
-        //    PacmanImage.Location = new Point(xStart * 16 - 3, yStart * 16 + 43);
-        //}
+        
+       
         public void DisableTimer()
         {
             timer.Enabled = false;
@@ -210,6 +149,10 @@ namespace Pacman
         {
             return timer.Enabled;
         }
-        
+        public override string ToString()
+        {
+            return $"Pacman: Id:{Id} | xCoordinate:{xCoordinate} | yCoordinate:{yCoordinate} | direction:{currentDirection}\n";
+        }
+
     }
 }

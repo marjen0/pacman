@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pacman.Classes
+namespace Pacman.Classes.Adapter
 {
-    public abstract class FoodCreator
+    public interface ILog
     {
-        public abstract Food CreateFood();
+        string LogData();
     }
 }
