@@ -102,7 +102,7 @@ namespace Pacman
                     {
                         // Decrator
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
-                        
+                        pacman = new PinkBorderDecorator(pacman);
                         pacman.AddPacmanImages();
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         opponent.AddPacmanImages();
