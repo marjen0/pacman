@@ -32,6 +32,7 @@ namespace Pacman.Classes.Decorator
                 {
                     g.DrawRectangle(new Pen(Brushes.Pink, 5), new Rectangle(0, 0, image.Width, image.Height));
                 }
+                image.Save(string.Format(@"D:\Desktop\image{0}.jpg", new Random().Next()));
             }
         }
     }

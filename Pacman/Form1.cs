@@ -102,9 +102,8 @@ namespace Pacman
                     {
                         // Decrator
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
+                        
                         pacman.AddPacmanImages();
-                 
-                   
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         opponent.AddPacmanImages();
                         pacmans.Add(pacman);
@@ -136,7 +135,7 @@ namespace Pacman
                     Player currentPlayer = players.Single(p => p.Id == id);
                     _pacmanLogAdapter = new PacmanLogAdapter(currentPacman);
                     _playerLogAdapter = new PlayerLogAdapter(currentPlayer);
-                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate)); ;
+                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
                     _pacmanLogAdapter.LogData(null);
                     _playerLogAdapter.LogData(null);
 
