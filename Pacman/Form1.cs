@@ -18,6 +18,7 @@ using Pacman.Classes.FactoryMethod;
 using Pacman.Services;
 using Pacman.Classes.Adapter;
 using Pacman.Classes.Decorator;
+using Pacman.Classes.Command;
 
 namespace Pacman
 {
@@ -31,14 +32,18 @@ namespace Pacman
         public static GameBoard gameboard = new GameBoard();
 
         // Factory pattern for food objects
-        public static FoodCreator foodCreator = new RegularFoodCreator();
-        public static Food food = foodCreator.CreateFood();
-
-        
+        public static FoodCreator regularFoodCreator = new RegularFoodCreator();
+        public static Food regularFood = regularFoodCreator.CreateFood();
+        public static FoodCreator superFoodCreator = new SuperFoodCreator();
+        public static Food superFood = superFoodCreator.CreateFood();
+        public static FoodCreator megaFoodCreator = new MegaFoodCreator();
+        public static Food megaFood = megaFoodCreator.CreateFood();
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
         public static RedFactory redFactory = new RedFactory();
+        public static OrangeFactory orangeFactory = new OrangeFactory();
+        public static PinkFactory pinkFactory = new PinkFactory();
 
         // Observer pattern
         public static PlayerData playerData = PlayerData.GetInstance();
@@ -57,6 +62,13 @@ namespace Pacman
         public static List<Player> players = new List<Player>(2);
         public static List<Pacman> pacmans = new List<Pacman>(2);
 
+        Invoker invoker;
+
+        MoveUpCommand moveUp;
+        MoveDownCommand moveDown;
+        MoveRightCommand moveRight;
+        MoveLeftCommand moveLeft;
+
         public Form1()
         {
             InitializeComponent();
@@ -70,6 +82,8 @@ namespace Pacman
             _signalR = new SignalR(_hubConnection);
             _api = new API();
             ghost.DisableTimer();
+
+            invoker = new Invoker();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -102,13 +116,18 @@ namespace Pacman
                     {
                         // Decrator
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
-                        pacman = new PinkBorderDecorator(pacman);
+                        //pacman = new PinkBorderDecorator(pacman); 
                         pacman.AddPacmanImages();
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         opponent.AddPacmanImages();
                         pacmans.Add(pacman);
                         pacmans.Add(opponent);
-                        
+
+                        moveUp = new MoveUpCommand(opponent);
+                        moveDown = new MoveDownCommand(opponent);
+                        moveRight = new MoveRightCommand(opponent);
+                        moveLeft = new MoveLeftCommand(opponent);
+
                         ghost.EnableTimer();
 
                         foreach (var p in pacmans)
@@ -117,8 +136,10 @@ namespace Pacman
                             p.EnableTImer();
                         }
 
+                        // For Observer testing
                         playerData.EditLives(5);
                         formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
+                        // For Observer testing
                     }
 
                     formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
@@ -160,7 +181,9 @@ namespace Pacman
             highscore.CreateHighScore(this);
 
             // Create Food
-            food.CreateFoodImages(this);
+            regularFood.CreateFoodImages(this);
+            superFood.CreateFoodImages(this);
+            megaFood.CreateFoodImages(this);
 
             // Create Ghosts
             ghost.CreateGhostImage(this);
@@ -172,32 +195,35 @@ namespace Pacman
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    if (players.Count < 2)
-                        return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                    pacman.nextDirection = 1;
+                    invoker.SetCommand(moveUp);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Right:
-                    if (players.Count < 2)
-                        return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                    pacman.nextDirection = 2;
+                    invoker.SetCommand(moveRight);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Down:
-                    if (players.Count < 2)
-                        return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                    pacman.nextDirection = 3;
+                    invoker.SetCommand(moveDown);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Left:
-                    if (players.Count < 2)
-                        return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                    pacman.nextDirection = 4;
+                    invoker.SetCommand(moveLeft);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
+                    break;
+                case Keys.Space:
+                    invoker.undo();
                     break;
                 case Keys.S:
                     if (players.Count < 2)

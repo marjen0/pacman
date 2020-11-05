@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pacman.Classes.Strategy;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.FactoryMethod
 {
-    class RegularFood : Food
+    public class RegularFood : Food
     {
         private int _foodScore;
         private int _superFoodScore;
@@ -33,7 +34,7 @@ namespace Pacman.Classes.FactoryMethod
             {
                 for (int x = 0; x < 27; x++)
                 {
-                    if (Form1.gameboard.Matrix[y, x] == 1 || Form1.gameboard.Matrix[y, x] == 2)
+                    if (Form1.gameboard.Matrix[y, x] == 1)
                     {
                         FoodImage[y, x] = new PictureBox();
                         FoodImage[y, x].Name = "FoodImage" + Amount.ToString();
@@ -45,10 +46,10 @@ namespace Pacman.Classes.FactoryMethod
                             FoodImage[y, x].Image = Properties.Resources.Block_1;
                             Amount++;
                         }
-                        else
-                        {
-                            FoodImage[y, x].Image = Properties.Resources.Block_2;
-                        }
+                        //else
+                        //{
+                        //    FoodImage[y, x].Image = Properties.Resources.Block_2;
+                        //}
 
                         formInstance.Controls.Add(FoodImage[y, x]);
                         FoodImage[y, x].BringToFront();
@@ -69,14 +70,14 @@ namespace Pacman.Classes.FactoryMethod
             //Form1.audio.Play(1);
         }
 
-        public override void EatSuperFood(int x, int y)
-        {
-            // Eat food
-            FoodImage[x, y].Visible = false;
-            Form1.gameboard.Matrix[x, y] = 0;
-            //Form1.player.UpdateScore(SuperFoodScore);
-            Form1.playerData.EditHighScore(300);
-            Form1.ghost.ChangeGhostState();
-        }
+        //public override void EatSuperFood(int x, int y)
+        //{
+        //    // Eat food
+        //    FoodImage[x, y].Visible = false;
+        //    Form1.gameboard.Matrix[x, y] = 0;
+        //    //Form1.player.UpdateScore(SuperFoodScore);
+        //    Form1.playerData.EditHighScore(300);
+        //    Form1.ghost.ChangeGhostState();
+        //}
     }
 }
