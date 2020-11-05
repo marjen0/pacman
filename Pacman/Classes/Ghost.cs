@@ -124,7 +124,7 @@ namespace Pacman
 
         private void statetimer_Tick(object sender, EventArgs e)
         {
-            // Turn Ghosts back
+            // Turn Ghosts back to normal
             for (int x=0; x<GhostAmount; x++)
             {
                 State[x] = 0;

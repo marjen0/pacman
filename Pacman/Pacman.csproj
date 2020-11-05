@@ -200,6 +200,13 @@
     <Compile Include="Classes\Adapter\ILog.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapter.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapter.cs" />
+    <Compile Include="Classes\Command\Command.cs" />
+    <Compile Include="Classes\Command\Invoker.cs" />
+    <Compile Include="Classes\Command\MoveDownCommand.cs" />
+    <Compile Include="Classes\Command\MoveLeftCommand.cs" />
+    <Compile Include="Classes\Command\MoveRightCommand.cs" />
+    <Compile Include="Classes\Command\MoveUpCommand.cs" />
+    <Compile Include="Classes\Command\Receiver.cs" />
     <Compile Include="Classes\Decorator\PacmanDecorator.cs" />
     <Compile Include="Classes\Decorator\PinkBorderDecorator.cs" />
     <Compile Include="Classes\Decorator\WhiteBorderDecorator.cs" />
@@ -221,6 +228,9 @@
     <Compile Include="Classes\FactoryMethod\RegularFoodCreator.cs" />
     <Compile Include="Classes\FactoryMethod\SuperFood.cs" />
     <Compile Include="Classes\FactoryMethod\SuperFoodCreator.cs" />
+    <Compile Include="Classes\Strategy\MoveAlgorithm.cs" />
+    <Compile Include="Classes\Strategy\PlayerMoveFast.cs" />
+    <Compile Include="Classes\Strategy\PlayerMoveSlow.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,7 +273,45 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Pacman 4 3.bmp" />
+    <None Include="Resources\Pacman 4 2.bmp" />
+    <None Include="Resources\Pacman 4 1.bmp" />
+    <None Include="Resources\Pacman 4 0.bmp" />
+    <None Include="Resources\Pacman 3 3.bmp" />
+    <None Include="Resources\Pacman 3 2.bmp" />
+    <None Include="Resources\Pacman 3 1.bmp" />
+    <None Include="Resources\Pacman 3 0.bmp" />
+    <None Include="Resources\Pacman 2 3.bmp" />
+    <None Include="Resources\Pacman 2 2.bmp" />
+    <None Include="Resources\Pacman 2 1.bmp" />
+    <None Include="Resources\Pacman 2 0.bmp" />
+    <None Include="Resources\Pacman 1 3.bmp" />
+    <None Include="Resources\Pacman 1 2.bmp" />
+    <None Include="Resources\Pacman 1 1.bmp" />
+    <None Include="Resources\Pacman 1 0.bmp" />
+    <None Include="Resources\Pacman 0.bmp" />
+    <None Include="Resources\Life.bmp" />
+    <None Include="Resources\Ghost 5.bmp" />
+    <None Include="Resources\Ghost 4.bmp" />
+    <None Include="Resources\Ghost 3 4.bmp" />
+    <None Include="Resources\Ghost 3 3.bmp" />
+    <None Include="Resources\Ghost 3 2.bmp" />
+    <None Include="Resources\Ghost 3 1.bmp" />
+    <None Include="Resources\Ghost 2 4.bmp" />
+    <None Include="Resources\Ghost 2 3.bmp" />
+    <None Include="Resources\Ghost 2 2.bmp" />
+    <None Include="Resources\Ghost 2 1.bmp" />
+    <None Include="Resources\Ghost 1 4.bmp" />
+    <None Include="Resources\Ghost 1 3.bmp" />
+    <None Include="Resources\Ghost 1 2.bmp" />
+    <None Include="Resources\Ghost 1 1.bmp" />
+    <None Include="Resources\Ghost 0 4.bmp" />
+    <None Include="Resources\Ghost 0 3.bmp" />
+    <None Include="Resources\Ghost 0 2.bmp" />
+    <None Include="Resources\Ghost 0 1.bmp" />
+    <None Include="Resources\eyes.bmp" />
     <None Include="Resources\Board 1.bmp" />
+    <None Include="Resources\Block 1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\audio1.wav" />
@@ -344,6 +392,7 @@
     <None Include="Resources\BluePacman 4 2.png" />
     <None Include="Resources\BluePacman 4 3.png" />
     <None Include="Resources\BluePacmanLife.png" />
+    <None Include="Resources\Block 3.png" />
     <Content Include="Resources\board 2.bmp" />
   </ItemGroup>
   <ItemGroup>
