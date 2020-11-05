@@ -13,11 +13,6 @@ namespace Pacman.Classes.Observer
         private int Lives;
         private int Amount;
 
-        /*public PlayerData()
-        {
-            observers = new List<IObserver>();
-        }*/
-
         private PlayerData()
         { }
 
