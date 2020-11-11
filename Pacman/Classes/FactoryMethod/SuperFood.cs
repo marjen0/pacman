@@ -32,13 +32,13 @@ namespace Pacman.Classes.FactoryMethod
             {
                 for (int x = 0; x < 27; x++)
                 {
-                    if (Form1.gameboard.Matrix[y, x] == 1 || Form1.gameboard.Matrix[y, x] == 2)
+                    if (Form1.facade.Matrix[y, x] == 1 || Form1.facade.Matrix[y, x] == 2)
                     {
                         FoodImage[y, x] = new PictureBox();
                         FoodImage[y, x].Name = "FoodImage" + Amount.ToString();
                         FoodImage[y, x].SizeMode = PictureBoxSizeMode.AutoSize;
                         FoodImage[y, x].Location = new Point(x * 16 - 1, y * 16 + 47);
-                        if (Form1.gameboard.Matrix[y, x] == 1)
+                        if (Form1.facade.Matrix[y, x] == 1)
                         {
                             FoodImage[y, x].Image = Properties.Resources.Block_2;
                             Amount++;
@@ -59,7 +59,7 @@ namespace Pacman.Classes.FactoryMethod
         {
             // Eat food
             FoodImage[x, y].Visible = false;
-            Form1.gameboard.Matrix[x, y] = 0;
+            Form1.facade.Matrix[x, y] = 0;
             Form1.player.UpdateScore(FoodScore);
             Amount--;
             if (Amount < 1) { Form1.player.LevelComplete(); }
@@ -70,7 +70,7 @@ namespace Pacman.Classes.FactoryMethod
         {
             // Eat food
             FoodImage[x, y].Visible = false;
-            Form1.gameboard.Matrix[x, y] = 0;
+            Form1.facade.Matrix[x, y] = 0;
             Form1.player.UpdateScore(SuperFoodScore);
             Form1.ghost.ChangeGhostState();
         }
