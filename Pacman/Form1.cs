@@ -168,7 +168,7 @@ namespace Pacman
                     _pacmanLogAdapter.LogData(null);
                     _playerLogAdapter.LogData(null);
 
-                    formelements.Log.ScrollToCaret();
+                    facade.Log.ScrollToCaret();
                     pacmans.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });
