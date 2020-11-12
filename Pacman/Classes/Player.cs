@@ -122,7 +122,7 @@ namespace Pacman
         }
         public void LogDataToRichTextBox()
         {
-            Form1.formelements.Log.AppendText(string.Format("{0}\n", this.ToString()));
+            Form1.facade.Log.AppendText(string.Format("{0}\n", this.ToString()));
         }
     }
 }
