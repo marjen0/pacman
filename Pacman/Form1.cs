@@ -18,6 +18,8 @@ using Pacman.Classes.FactoryMethod;
 using Pacman.Services;
 using Pacman.Classes.Adapter;
 using Pacman.Classes.Decorator;
+using Pacman.Classes.Facade;
+using Pacman.Classes.Bridge;
 using Pacman.Classes.Command;
 
 namespace Pacman
@@ -52,13 +54,19 @@ namespace Pacman
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
-
+       
         // Adapter pattern for Player and Pacman data logging
         private static ILog _fileLogger = new FileLogger();
         private static ILog _pacmanLogAdapter;
         private static ILog _playerLogAdapter;
 
-        public static readonly FormElements formelements = new FormElements();
+        //Facade pattern
+        public static GameDetailFacade facade = new GameDetailFacade();
+
+        // Bridge pattern
+       // public static RefinedGhost refinedGhost = new RefinedGhost();
+     
+        //private static readonly FormElements formelements = new FormElements();
         public static List<Player> players = new List<Player>(2);
         public static List<Pacman> pacmans = new List<Pacman>(2);
 
@@ -71,6 +79,7 @@ namespace Pacman
 
         public Form1()
         {
+            
             InitializeComponent();
            
             _hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:44394/hub").Build();
@@ -81,6 +90,7 @@ namespace Pacman
             };
             _signalR = new SignalR(_hubConnection);
             _api = new API();
+            
             ghost.DisableTimer();
 
             invoker = new Invoker();
@@ -88,20 +98,20 @@ namespace Pacman
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             _signalR.RegisterPlayer();
 
             // Create Board Matrix
             Tuple<int, int> PacmanStartCoordinates = gameboard.InitialiseBoardMatrix(1);
             SetupGame(1);
-
             playerData.RegisterObserver(player);
             playerData.RegisterObserver(highscore);
-
+        
             _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
             {
-                formelements.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
+                facade.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
                     $"Player1 plays with blue pacman, Player2 plays with red.\n");
-                formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
+                facade.Log.AppendText($"\nPlayer lives: {player.Lives}");
             });
 
             _hubConnection.On<string>("ReceiveConnectedMessage", (connnectionId) =>
@@ -138,11 +148,10 @@ namespace Pacman
 
                         // For Observer testing
                         playerData.EditLives(5);
-                        formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
-                        // For Observer testing
+                        facade.Log.AppendText($"\nPlayer lives: {player.Lives}");
                     }
 
-                    formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
+                    facade.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
                         $"\nTotal players: {players.Count}");
                 }));
             });
@@ -167,18 +176,19 @@ namespace Pacman
         }
         public void SetupGame(int Level)
         {
+            
             // Create Game Board
-            gameboard.CreateBoardImage(this, Level);
-
+            // gameboard.CreateBoardImage(this, Level);
+            facade.CreateBoardImage(this, Level);
             // Create Player
             player.CreatePlayerDetails(this);
             player.CreateLives(this);
 
             // Create Form Elements
-            formelements.CreateFormElements(this);
+            facade.CreateFormElements(this);
 
             // Create High Score
-            highscore.CreateHighScore(this);
+            facade.CreateHighScore(this);
 
             // Create Food
             regularFood.CreateFoodImages(this);
@@ -186,11 +196,14 @@ namespace Pacman
             megaFood.CreateFoodImages(this);
 
             // Create Ghosts
-            ghost.CreateGhostImage(this);
+             ghost.CreateGhostImage(this);
+          
+        
         }
 
         protected async override void OnKeyDown(KeyEventArgs e)
         {
+       
             base.OnKeyDown(e);
             switch (e.KeyCode)
             {

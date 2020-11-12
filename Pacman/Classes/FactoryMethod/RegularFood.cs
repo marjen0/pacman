@@ -62,7 +62,7 @@ namespace Pacman.Classes.FactoryMethod
         {
             // Eat food
             FoodImage[x, y].Visible = false;
-            Form1.gameboard.Matrix[x, y] = 0;
+            Form1.facade.Matrix[x, y] = 0;
             //Form1.player.UpdateScore(FoodScore);
             Form1.playerData.EditHighScore(100);
             Amount--;
@@ -70,14 +70,15 @@ namespace Pacman.Classes.FactoryMethod
             //Form1.audio.Play(1);
         }
 
-        //public override void EatSuperFood(int x, int y)
-        //{
-        //    // Eat food
-        //    FoodImage[x, y].Visible = false;
-        //    Form1.gameboard.Matrix[x, y] = 0;
-        //    //Form1.player.UpdateScore(SuperFoodScore);
-        //    Form1.playerData.EditHighScore(300);
-        //    Form1.ghost.ChangeGhostState();
-        //}
+        public override void EatSuperFood(int x, int y)
+        {
+            // Eat food
+            FoodImage[x, y].Visible = false;
+            //Form1.gameboard.Matrix[x, y] = 0;
+            Form1.facade.Matrix[x, y] = 0; //facade usage example
+            //Form1.player.UpdateScore(SuperFoodScore);
+            Form1.playerData.EditHighScore(300);
+            Form1.ghost.ChangeGhostState();
+        }
     }
 }
