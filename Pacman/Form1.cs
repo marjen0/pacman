@@ -32,6 +32,7 @@ namespace Pacman
         public List<Player> currentPlayers = new List<Player>(2);
         
         public static GameBoard gameboard = new GameBoard();
+
         // Factory pattern for food objects
         public static FoodCreator regularFoodCreator = new RegularFoodCreator();
         public static Food regularFood = regularFoodCreator.CreateFood();
