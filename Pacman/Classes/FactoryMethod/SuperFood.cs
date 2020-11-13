@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.FactoryMethod
 {
-    class SuperFood : Food
+    public class SuperFood : Food
     {
         private string _type;
         private int _amount;

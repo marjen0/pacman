@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.FactoryMethod
 {
-    class MegaFood : Food
+    public class MegaFood : Food
     {
         private PictureBox[,] _foodImage;
         private int _amount;
