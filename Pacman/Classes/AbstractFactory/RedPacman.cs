@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes
 {
-    class RedPacman : Pacman
+    public class RedPacman : Pacman
     {
         public RedPacman(SignalR signalr, string id)
         {
