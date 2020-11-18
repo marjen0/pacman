@@ -199,7 +199,7 @@ namespace Pacman
                     }*/
                     // <-- Code that was changed with the use of iteration pattern
 
-                    formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
+                    formElements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
                         $"\nTotal players: {players.GetCount()}");
                 }));
             });
@@ -245,8 +245,6 @@ namespace Pacman
 
             // Create Ghosts
              ghost.CreateGhostImage(this);
-          
-        
         }
 
         protected async override void OnKeyDown(KeyEventArgs e)
@@ -258,8 +256,9 @@ namespace Pacman
                 case Keys.Up:
                     if (players.GetCount() < 2)
                         return;
-                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
-                    pacman.nextDirection = 1;
+
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                    //pacman.nextDirection = 1;
                     invoker.SetCommand(moveUp);
                     invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
@@ -268,8 +267,9 @@ namespace Pacman
                 case Keys.Right:
                     if (players.GetCount() < 2)
                         return;
-                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
-                    pacman.nextDirection = 2;
+
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                    //pacman.nextDirection = 2;
                     invoker.SetCommand(moveRight);
                     invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
@@ -278,8 +278,9 @@ namespace Pacman
                 case Keys.Down:
                     if (players.GetCount() < 2)
                         return;
-                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
-                    pacman.nextDirection = 3;
+
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                    //pacman.nextDirection = 3;
                     invoker.SetCommand(moveDown);
                     invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
@@ -288,8 +289,9 @@ namespace Pacman
                 case Keys.Left:
                     if (players.GetCount() < 2)
                         return;
-                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
-                    pacman.nextDirection = 4;
+
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                    //pacman.nextDirection = 4;
                     invoker.SetCommand(moveLeft);
                     invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
