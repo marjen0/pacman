@@ -21,6 +21,7 @@ using Pacman.Classes.Decorator;
 using Pacman.Classes.Command;
 using Pacman.Classes.Facade;
 using Pacman.Classes.Bridge;
+using Pacman.Classes.Template;
 
 namespace Pacman
 {
@@ -40,6 +41,9 @@ namespace Pacman
         public static Food superFood = superFoodCreator.CreateFood();
         public static FoodCreator megaFoodCreator = new MegaFoodCreator();
         public static Food megaFood = megaFoodCreator.CreateFood();
+
+        // Template pattern
+        public static FormElements formElements = new FormElementsStandard();
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
@@ -109,9 +113,9 @@ namespace Pacman
         
             _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
             {
-                facade.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
+                formElements.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
                     $"Player1 plays with blue pacman, Player2 plays with red.\n");
-                facade.Log.AppendText($"\nPlayer lives: {player.Lives}");
+                formElements.Log.AppendText($"\nPlayer lives: {player.Lives}");
             });
 
             _hubConnection.On<string>("ReceiveConnectedMessage", (connnectionId) =>
@@ -148,10 +152,10 @@ namespace Pacman
 
                         // For Observer testing
                         playerData.EditLives(5);
-                        facade.Log.AppendText($"\nPlayer lives: {player.Lives}");
+                        formElements.Log.AppendText($"\nPlayer lives: {player.Lives}");
                     }
 
-                    facade.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
+                    formElements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
                         $"\nTotal players: {players.Count}");
                 }));
             });
@@ -169,7 +173,7 @@ namespace Pacman
                     _pacmanLogAdapter.LogData(null);
                     _playerLogAdapter.LogData(null);
 
-                    facade.Log.ScrollToCaret();
+                    formElements.Log.ScrollToCaret();
                     pacmans.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });
@@ -185,10 +189,10 @@ namespace Pacman
             player.CreateLives(this);
 
             // Create Form Elements
-            facade.CreateFormElements(this);
+            formElements.CreateFormElements(this);
 
             // Create High Score
-            facade.CreateHighScore(this);
+            //facade.CreateHighScore(this);
 
             // Create Food
             regularFood.CreateFoodImages(this);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Pacman.Classes.Template;
 using Pacman.Classes.Observer;
 using System.Drawing;
 
@@ -30,7 +31,8 @@ namespace Pacman.Classes.Facade
 
         public GameDetailFacade()
         {
-            this._formElements = new FormElements();
+            this._formElements = new FormElementsStandard();
+            _formElements.Log = Log;
             this._gameBoard = new GameBoard();
             this._highscore = new HighScore();
         }
@@ -128,7 +130,7 @@ namespace Pacman.Classes.Facade
         }
         public void CreateFormElements(Form formInstance)
         {
-            PlayerOneScoreText.ForeColor = System.Drawing.Color.White;
+            /*PlayerOneScoreText.ForeColor = System.Drawing.Color.White;
             PlayerOneScoreText.Font = new System.Drawing.Font("Folio XBd BT", 14);
             PlayerOneScoreText.Top = 5;
             PlayerOneScoreText.Left = 20;
@@ -152,7 +154,8 @@ namespace Pacman.Classes.Facade
             Log.Top = 5;
             Log.Left = 475;
             Log.Enabled = false;
-            formInstance.Controls.Add(Log);
+            formInstance.Controls.Add(Log);*/
+            _formElements.CreateFormElements(formInstance);
         }
     }
 }

@@ -3,26 +3,25 @@ using Pacman.Classes.Adapter;
 using Pacman.Classes;
 using System;
 using Xunit;
+using Pacman.Services;
+using Microsoft.AspNet.SignalR.Hubs;
+using Moq;
 
 namespace Pacman.UnitTests.Classes.Adapter
 {
     public class PacmanLogAdapterTests
     {
-        /*ILog _pacmanLogAdapter;
-        public PacmanLogAdapterTests()
-        {
-            _pacmanLogAdapter = new PacmanLogAdapter(new RedPacman());
-        }
         [Fact]
         public void LogData_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var pacmanLogAdapter = new PacmanLogAdapter(TODO);
+            
+            Pacman p = new RedPacman("pacmanId");
+            var pacmanLogAdapter = new PacmanLogAdapter(p);
             string message = null;
 
             // Act
-            pacmanLogAdapter.LogData(
-                message);
+            pacmanLogAdapter.LogData(message);
 
             // Assert
             Assert.True(false);
