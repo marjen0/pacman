@@ -136,7 +136,7 @@ namespace Pacman
                     {
                         foreach (Player p in players)
                         {
-                            if (connnectionId == p.Id)
+                            if (connnectionId != p.Id)
                             {
                                 pacman = blueFactory.CreatePacman(_signalR, p.Id);
                                 pacman.AddPacmanImages();
@@ -148,10 +148,11 @@ namespace Pacman
                                 opponent.AddPacmanImages();
                                 pacmans.Add(opponent);
 
-                                moveUp = new MoveUpCommand(opponent);
-                                moveDown = new MoveDownCommand(opponent);
-                                moveRight = new MoveRightCommand(opponent);
-                                moveLeft = new MoveLeftCommand(opponent);
+                                // Command pattern
+                                //moveUp = new MoveUpCommand(opponent);
+                                //moveDown = new MoveDownCommand(opponent);
+                                //moveRight = new MoveRightCommand(opponent);
+                                //moveLeft = new MoveLeftCommand(opponent);
                             }
                         }
 
@@ -259,8 +260,8 @@ namespace Pacman
 
                     pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
                     //pacman.nextDirection = 1;
-                    invoker.SetCommand(moveUp);
-                    invoker.run();
+                    //invoker.SetCommand(moveUp);
+                    //invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
                     //_signalR.SendCoordinates(pacman);
                     break;
@@ -270,8 +271,8 @@ namespace Pacman
 
                     pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
                     //pacman.nextDirection = 2;
-                    invoker.SetCommand(moveRight);
-                    invoker.run();
+                    //invoker.SetCommand(moveRight);
+                    //invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
                     //_signalR.SendCoordinates(pacman);
                     break;
@@ -281,8 +282,8 @@ namespace Pacman
 
                     pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
                     //pacman.nextDirection = 3;
-                    invoker.SetCommand(moveDown);
-                    invoker.run();
+                    //invoker.SetCommand(moveDown);
+                    //invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
@@ -292,8 +293,8 @@ namespace Pacman
 
                     pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
                     //pacman.nextDirection = 4;
-                    invoker.SetCommand(moveLeft);
-                    invoker.run();
+                    //invoker.SetCommand(moveLeft);
+                    //invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
