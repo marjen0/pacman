@@ -18,6 +18,7 @@ using Pacman.Classes.FactoryMethod;
 using Pacman.Services;
 using Pacman.Classes.Adapter;
 using Pacman.Classes.Decorator;
+using Pacman.Classes.Iterator;
 
 namespace Pacman
 {
@@ -33,8 +34,6 @@ namespace Pacman
         // Factory pattern for food objects
         public static FoodCreator foodCreator = new RegularFoodCreator();
         public static Food food = foodCreator.CreateFood();
-
-        
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
@@ -55,8 +54,15 @@ namespace Pacman
         private static ILog _playerLogAdapter;
 
         private static readonly FormElements formelements = new FormElements();
-        public static List<Player> players = new List<Player>(2);
-        public static List<Pacman> pacmans = new List<Pacman>(2);
+
+        // Iterator pattern
+        //public static List<Player> players = new List<Player>(2);
+        //public static List<Pacman> pacmans = new List<Pacman>(2);
+        private static Players players = new Players();
+        private static Pacmans pacmans = new Pacmans();
+
+        private static List<Player> playersList;
+        private static List<Pacman> pacmansList;
 
         public Form1()
         {
@@ -95,24 +101,50 @@ namespace Pacman
             {
                 this.Invoke((Action)(() =>
                 {
-                    Player newPlayer = new Player(connnectionId, "Player" + (players.Count + 1));
+                    Player newPlayer = new Player(connnectionId, "Player" + (players.GetCount() + 1));
                     _api.CreatePlayer(newPlayer);
                     players.Add(newPlayer);
 
-                    if (players.Count == 2)
+                    if (players.GetCount() == 2)
                     {
-                        // Decrator
+                        foreach (Player p in players)
+                        {
+                            if (connnectionId == p.Id)
+                            {
+                                pacman = blueFactory.CreatePacman(_signalR, p.Id);
+                                pacman.AddPacmanImages();
+                                pacmans.Add(pacman);
+                            }
+                            else
+                            {
+                                opponent = redFactory.CreatePacman(_signalR, p.Id);
+                                opponent.AddPacmanImages();
+                                pacmans.Add(opponent);
+                            }
+                        }
 
+                        ghost.EnableTimer();
+                        playersList = players.GetPlayers().ToList();
+                        pacmansList = pacmans.GetPacmans();
 
+                        foreach (Pacman p in pacmans)
+                        {
+                            p.CreatePacmanImage(this, PacmanStartCoordinates.Item1, PacmanStartCoordinates.Item2);
+                            p.EnableTImer();
+                        }
+                    }
+
+                    // Code that was changed with the use of iteration pattern -->
+                    /*if (players.GetCount() == 2)
+                    {
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
+                        // Decorator
                         //pacman = new PinkBorderDecorator(pacman); 
                         pacman.AddPacmanImages();
                         opponent = redFactory.CreatePacman(_signalR, players.Last().Id);
                         opponent.AddPacmanImages();
                         pacmans.Add(pacman);
                         pacmans.Add(opponent);
-
-
 
                         ghost.EnableTimer();
 
@@ -126,10 +158,11 @@ namespace Pacman
                         playerData.EditLives(5);
                         formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
                         // For Observer testing
-                    }
+                    }*/
+                    // <-- Code that was changed with the use of iteration pattern
 
                     formelements.Log.AppendText($"\n{newPlayer.Name} with id {connnectionId} joined the game!" +
-                        $"\nTotal players: {players.Count}");
+                        $"\nTotal players: {players.GetCount()}");
                 }));
             });
 
@@ -138,12 +171,12 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     // Logging movement
-                    _pacmanLogAdapter = new PacmanLogAdapter(pacmans.Single(p => p.Id == id));
-                    _playerLogAdapter = new PlayerLogAdapter(players.Single(p => p.Id == id));
+                    _pacmanLogAdapter = new PacmanLogAdapter(pacmansList.Single(p => p.Id == id));
+                    _playerLogAdapter = new PlayerLogAdapter(playersList.Single(p => p.Id == id));
                     formelements.Log.AppendText(_pacmanLogAdapter.LogData());
                     formelements.Log.AppendText(_playerLogAdapter.LogData());
                     formelements.Log.ScrollToCaret();
-                    pacmans.Single(p => p.Id == id).nextDirection = direction;
+                    pacmansList.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });
         }
@@ -175,56 +208,56 @@ namespace Pacman
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Right:
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Down:
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Left:
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         return;
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.S:
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         return;
                     ghost.EnableTimer();
-                    pacmans.Single(p => p.Id == _hubConnection.ConnectionId).EnableTImer();
+                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).EnableTImer();
                     break;
                 case Keys.P:
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         return;
-                    if (pacmans.Single(p => p.Id == _hubConnection.ConnectionId).IsTimerEnabled() && ghost.IsTimerEnabled())
+                    if (pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).IsTimerEnabled() && ghost.IsTimerEnabled())
                     {
-                        pacmans.Single(p => p.Id == _hubConnection.ConnectionId).StopTimer();
+                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).StopTimer();
                         ghost.StopTimer();   
                     }
                     else
                     {
-                        pacmans.Single(p => p.Id == _hubConnection.ConnectionId).StartTimer();
+                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).StartTimer();
                         ghost.StartTimer();
                     }
                     break;
                 case Keys.F1:
                     // Join the game
-                    if (players.Count < 2)
+                    if (players.GetCount() < 2)
                         await _signalR.ConnectPlayer();
                     break;
             }
