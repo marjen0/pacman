@@ -75,10 +75,10 @@ namespace Pacman
             hometimer.Tick += new EventHandler(hometimer_Tick);
         }
 
-        public void CreateGhostImage(Form formInstance)
+        public virtual void CreateGhostImage(Form formInstance)
         {
             // Create Ghost Image
-            for (int x=0; x<Ghosts; x++)
+            for (int x = 0; x < Ghosts; x++)
             {
                 GhostImage[x] = new PictureBox();
                 GhostImage[x].Name = "GhostImage" + x.ToString();
@@ -90,7 +90,7 @@ namespace Pacman
             ResetGhosts();
         }
 
-        public void Set_Ghosts()
+        public virtual void Set_Ghosts()
         {
             // Find Ghost locations
             int Amount = -1;
@@ -108,10 +108,10 @@ namespace Pacman
             }
         }
 
-        public void ResetGhosts()
+        public virtual void ResetGhosts()
         {
             // Reset Ghost States
-            for (int x=0; x<GhostAmount; x++)
+            for (int x = 0; x < GhostAmount; x++)
             {
                 xCoordinate[x] = xStart[x];
                 yCoordinate[x] = yStart[x];
@@ -124,7 +124,7 @@ namespace Pacman
 
         private void statetimer_Tick(object sender, EventArgs e)
         {
-            // Turn Ghosts back
+            // Turn Ghosts back to normal
             for (int x=0; x<GhostAmount; x++)
             {
                 State[x] = 0;
@@ -136,7 +136,7 @@ namespace Pacman
         private void hometimer_Tick(object sender, EventArgs e)
         {
             // Move ghosts to their home positions
-            for (int x=0; x<GhostAmount; x++)
+            for (int x = 0; x < GhostAmount; x++)
             {
                 if (State[x] == 2)
                 {
@@ -144,7 +144,7 @@ namespace Pacman
                     int ypos = yStart[x] * 16 + 43;
                     if (GhostImage[x].Left > xpos) { GhostImage[x].Left--; }
                     if (GhostImage[x].Left < xpos) { GhostImage[x].Left++; }
-                    if (GhostImage[x].Top  > ypos) { GhostImage[x].Top--; }
+                    if (GhostImage[x].Top > ypos) { GhostImage[x].Top--; }
                     if (GhostImage[x].Top < ypos) { GhostImage[x].Top++; }
                     if (GhostImage[x].Top == ypos && GhostImage[x].Left == xpos)
                     {
@@ -154,7 +154,7 @@ namespace Pacman
                         GhostImage[x].Left = xStart[x] * 16 - 3;
                         GhostImage[x].Top = yStart[x] * 16 + 43;
                     }
-                } 
+                }
             }
         }
 
@@ -186,7 +186,7 @@ namespace Pacman
             // Move the ghosts
             if (Direction[x] == 0)
             {
-                if (ran.Next(0, 5) == 3) { Direction[x] = 1;}
+                if (ran.Next(0, 5) == 3) { Direction[x] = 1; }
             }
             else
             {
@@ -212,7 +212,7 @@ namespace Pacman
                     {
                         case 0: GhostImage[x].Image = GhostImages.Images[x * 4 + (Direction[x] - 1)]; break;
                         case 1:
-                            if (GhostOn) { GhostImage[x].Image = GhostImages.Images[17];} else { GhostImage[x].Image = GhostImages.Images[16]; };
+                            if (GhostOn) { GhostImage[x].Image = GhostImages.Images[17]; } else { GhostImage[x].Image = GhostImages.Images[16]; };
                             break;
                         case 2: GhostImage[x].Image = GhostImages.Images[18]; break;
                     }
@@ -273,7 +273,7 @@ namespace Pacman
         public void ChangeGhostState()
         {
             // Change the state off all of the ghosts so that they can be eaten
-            for (int x=0; x<GhostAmount; x++)
+            for (int x = 0; x < GhostAmount; x++)
             {
                 if (State[x] == 0)
                 {

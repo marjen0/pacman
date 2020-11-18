@@ -19,6 +19,10 @@ using Pacman.Services;
 using Pacman.Classes.Adapter;
 using Pacman.Classes.Decorator;
 using Pacman.Classes.Iterator;
+using Pacman.Classes.Command;
+using Pacman.Classes.Facade;
+using Pacman.Classes.Bridge;
+using Pacman.Classes.Template;
 
 namespace Pacman
 {
@@ -32,8 +36,15 @@ namespace Pacman
         public static GameBoard gameboard = new GameBoard();
 
         // Factory pattern for food objects
-        public static FoodCreator foodCreator = new RegularFoodCreator();
-        public static Food food = foodCreator.CreateFood();
+        public static FoodCreator regularFoodCreator = new RegularFoodCreator();
+        public static Food regularFood = regularFoodCreator.CreateFood();
+        public static FoodCreator superFoodCreator = new SuperFoodCreator();
+        public static Food superFood = superFoodCreator.CreateFood();
+        public static FoodCreator megaFoodCreator = new MegaFoodCreator();
+        public static Food megaFood = megaFoodCreator.CreateFood();
+
+        // Template pattern
+        public static FormElements formElements = new FormElementsStandard();
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
@@ -48,12 +59,11 @@ namespace Pacman
         public static Ghost ghost = new Ghost();
         public static Player player = new Player();
         public static HighScore highscore = new HighScore();
-       
+
         // Adapter pattern for Player and Pacman data logging
+        private static ILog _fileLogger = new FileLogger();
         private static ILog _pacmanLogAdapter;
         private static ILog _playerLogAdapter;
-
-        private static readonly FormElements formelements = new FormElements();
 
         // Iterator pattern
         //public static List<Player> players = new List<Player>(2);
@@ -64,8 +74,22 @@ namespace Pacman
         private static List<Player> playersList;
         private static List<Pacman> pacmansList;
 
+        //Facade pattern
+        public static GameDetailFacade facade = new GameDetailFacade();
+
+        // Bridge pattern
+        // public static RefinedGhost refinedGhost = new RefinedGhost();
+
+        Invoker invoker;
+
+        MoveUpCommand moveUp;
+        MoveDownCommand moveDown;
+        MoveRightCommand moveRight;
+        MoveLeftCommand moveLeft;
+
         public Form1()
         {
+            
             InitializeComponent();
            
             _hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:44394/hub").Build();
@@ -76,25 +100,28 @@ namespace Pacman
             };
             _signalR = new SignalR(_hubConnection);
             _api = new API();
+            
             ghost.DisableTimer();
+
+            invoker = new Invoker();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             _signalR.RegisterPlayer();
 
             // Create Board Matrix
             Tuple<int, int> PacmanStartCoordinates = gameboard.InitialiseBoardMatrix(1);
             SetupGame(1);
-
             playerData.RegisterObserver(player);
             playerData.RegisterObserver(highscore);
-
+        
             _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
             {
-                formelements.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
+                formElements.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
                     $"Player1 plays with blue pacman, Player2 plays with red.\n");
-                formelements.Log.AppendText($"\nPlayer lives: {player.Lives}");
+                formElements.Log.AppendText($"\nPlayer lives: {player.Lives}");
             });
 
             _hubConnection.On<string>("ReceiveConnectedMessage", (connnectionId) =>
@@ -120,6 +147,11 @@ namespace Pacman
                                 opponent = redFactory.CreatePacman(_signalR, p.Id);
                                 opponent.AddPacmanImages();
                                 pacmans.Add(opponent);
+
+                                moveUp = new MoveUpCommand(opponent);
+                                moveDown = new MoveDownCommand(opponent);
+                                moveRight = new MoveRightCommand(opponent);
+                                moveLeft = new MoveLeftCommand(opponent);
                             }
                         }
 
@@ -137,6 +169,7 @@ namespace Pacman
                     // Code that was changed with the use of iteration pattern -->
                     /*if (players.GetCount() == 2)
                     {
+                        // Decrator
                         pacman = blueFactory.CreatePacman(_signalR, players.First().Id);
                         // Decorator
                         //pacman = new PinkBorderDecorator(pacman); 
@@ -145,6 +178,11 @@ namespace Pacman
                         opponent.AddPacmanImages();
                         pacmans.Add(pacman);
                         pacmans.Add(opponent);
+
+                        moveUp = new MoveUpCommand(opponent);
+                        moveDown = new MoveDownCommand(opponent);
+                        moveRight = new MoveRightCommand(opponent);
+                        moveLeft = new MoveLeftCommand(opponent);
 
                         ghost.EnableTimer();
 
@@ -171,69 +209,94 @@ namespace Pacman
                 this.Invoke((Action)(() =>
                 {
                     // Logging movement
-                    _pacmanLogAdapter = new PacmanLogAdapter(pacmansList.Single(p => p.Id == id));
-                    _playerLogAdapter = new PlayerLogAdapter(playersList.Single(p => p.Id == id));
-                    formelements.Log.AppendText(_pacmanLogAdapter.LogData());
-                    formelements.Log.AppendText(_playerLogAdapter.LogData());
-                    formelements.Log.ScrollToCaret();
+                    Pacman currentPacman = pacmansList.Single(p => p.Id == id);
+                    Player currentPlayer = playersList.Single(p => p.Id == id);
+                    _pacmanLogAdapter = new PacmanLogAdapter(currentPacman);
+                    _playerLogAdapter = new PlayerLogAdapter(currentPlayer);
+                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
+                    _pacmanLogAdapter.LogData(null);
+                    _playerLogAdapter.LogData(null);
+
+                    formElements.Log.ScrollToCaret();
                     pacmansList.Single(p => p.Id == id).nextDirection = direction;
                 }));
             });
         }
         public void SetupGame(int Level)
         {
+            
             // Create Game Board
-            gameboard.CreateBoardImage(this, Level);
-
+            // gameboard.CreateBoardImage(this, Level);
+            facade.CreateBoardImage(this, Level);
             // Create Player
             player.CreatePlayerDetails(this);
             player.CreateLives(this);
 
             // Create Form Elements
-            formelements.CreateFormElements(this);
+            formElements.CreateFormElements(this);
 
             // Create High Score
-            highscore.CreateHighScore(this);
+            //facade.CreateHighScore(this);
 
             // Create Food
-            food.CreateFoodImages(this);
+            regularFood.CreateFoodImages(this);
+            superFood.CreateFoodImages(this);
+            megaFood.CreateFoodImages(this);
 
             // Create Ghosts
-            ghost.CreateGhostImage(this);
+             ghost.CreateGhostImage(this);
+          
+        
         }
 
         protected async override void OnKeyDown(KeyEventArgs e)
         {
+       
             base.OnKeyDown(e);
             switch (e.KeyCode)
             {
                 case Keys.Up:
                     if (players.GetCount() < 2)
                         return;
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                    pacman.nextDirection = 1;
+                    invoker.SetCommand(moveUp);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Right:
                     if (players.GetCount() < 2)
                         return;
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                    pacman.nextDirection = 2;
+                    invoker.SetCommand(moveRight);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Down:
                     if (players.GetCount() < 2)
                         return;
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                    pacman.nextDirection = 3;
+                    invoker.SetCommand(moveDown);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
                     break;
                 case Keys.Left:
                     if (players.GetCount() < 2)
                         return;
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                    // pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                    pacman.nextDirection = 4;
+                    invoker.SetCommand(moveLeft);
+                    invoker.run();
                     //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
                     //_signalR.SendCoordinates(pacman);
+                    break;
+                case Keys.Space:
+                    invoker.undo();
                     break;
                 case Keys.S:
                     if (players.GetCount() < 2)

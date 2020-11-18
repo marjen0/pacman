@@ -1,4 +1,5 @@
-﻿using Pacman.Services;
+﻿using Pacman.Classes.Decorator;
+using Pacman.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

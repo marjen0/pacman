@@ -19,7 +19,7 @@ namespace Pacman.Classes.Decorator
         }
         public override void Set_Pacman()
         {
-            _wrappee.AddPacmanImages();
+            _wrappee.Set_Pacman();
         }
 
     }

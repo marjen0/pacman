@@ -9,8 +9,13 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes
 {
-    class RedPacman : Pacman
+    public class RedPacman : Pacman
     {
+        public RedPacman(string id)
+        {
+            Id = id;
+            _signalR = null;
+        }
         public RedPacman(SignalR signalr, string id)
         {
             _signalR = signalr;

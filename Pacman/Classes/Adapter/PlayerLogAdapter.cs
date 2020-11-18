@@ -14,9 +14,9 @@ namespace Pacman.Classes.Adapter
         {
             _adaptee = p;
         }
-        public string LogData()
+        public void LogData(string message)
         {
-            return _adaptee.ToString();
+            _adaptee.LogDataToRichTextBox();
         }
         public string getPlayerId()
         {

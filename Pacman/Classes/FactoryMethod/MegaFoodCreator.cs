@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes.FactoryMethod
 {
-    class MegaFoodCreator : FoodCreator
+    public class MegaFoodCreator : FoodCreator
     {
         public override Food CreateFood()
         {
