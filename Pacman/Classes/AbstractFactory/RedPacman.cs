@@ -11,6 +11,11 @@ namespace Pacman.Classes
 {
     public class RedPacman : Pacman
     {
+        public RedPacman(string id)
+        {
+            Id = id;
+            _signalR = null;
+        }
         public RedPacman(SignalR signalr, string id)
         {
             _signalR = signalr;

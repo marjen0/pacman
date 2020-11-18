@@ -217,7 +217,7 @@
     <Compile Include="Classes\Facade\GameDetailFacade.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FactoryMethod\FoodCreator.cs" />
-    <Compile Include="Classes\FormElements.cs" />
+    <Compile Include="Classes\Template\FormElements.cs" />
     <Compile Include="Classes\GameBoard.cs" />
     <Compile Include="Classes\Ghost.cs" />
     <Compile Include="Classes\HighScore.cs" />
@@ -235,6 +235,10 @@
     <Compile Include="Classes\Strategy\MoveAlgorithm.cs" />
     <Compile Include="Classes\Strategy\PlayerMoveFast.cs" />
     <Compile Include="Classes\Strategy\PlayerMoveSlow.cs" />
+    <Compile Include="Classes\Template\FormElementsBase.cs" />
+    <Compile Include="Classes\Template\FormElementsBright.cs" />
+    <Compile Include="Classes\Template\FormElementsMinimal.cs" />
+    <Compile Include="Classes\Template\FormElementsStandard.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

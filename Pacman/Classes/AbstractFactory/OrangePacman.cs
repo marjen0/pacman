@@ -11,11 +11,18 @@ namespace Pacman.Classes
 {
     class OrangePacman : Pacman
     {
+        public OrangePacman(string id)
+        {
+            Id = id;
+            _signalR = null;
+        }
         public OrangePacman(SignalR signalr, string id)
         {
             _signalR = signalr;
             Id = id;
         }
+
+       
 
         override public void AddPacmanImages()
         {

@@ -17,7 +17,7 @@ namespace Pacman
     {
         public string Id { get; set; }
         protected SignalR _signalR;
-
+        
         // Initialise variables
         public int xCoordinate = 0;
         public int yCoordinate = 0;
@@ -203,7 +203,7 @@ namespace Pacman
         }
         public void LogDataToRichTextBox()
         {
-            Form1.facade.Log.AppendText(string.Format("{0}\n", this.ToString()));
+            Form1.formElements.Log.AppendText(string.Format("{0}\n", this.ToString()));
         }
 
     }
