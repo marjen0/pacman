@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.Template
 {
-    class FormElementsMinimal : FormElements
+    public class FormElementsMinimal : FormElements
     {
         
         private readonly bool _addLogBox = false;
@@ -27,6 +27,7 @@ namespace Pacman.Classes.Template
         }
         public override void CreateHighScoreLabel(Form formInstance)
         {
+            HighScoreText.Name = "HighscoreLabel";
             HighScoreText.ForeColor = System.Drawing.Color.White;
             HighScoreText.Font = new System.Drawing.Font("Folio XBd BT", 14);
             HighScoreText.Top = 5;
@@ -39,16 +40,18 @@ namespace Pacman.Classes.Template
 
         public override void CreateLogBox(Form formInstance)
         {
-            Log.Height = 550;
+            throw new NotImplementedException();
+            /*Log.Height = 550;
             Log.Width = 345;
             Log.Top = 5;
             Log.Left = 475;
             Log.Enabled = false;
-            formInstance.Controls.Add(Log);
+            formInstance.Controls.Add(Log);*/
         }
 
         public override void CreatePlayerOneScoreLabel(Form formInstance)
         {
+            PlayerOneScoreText.Name = "PayerOneScoreLabel";
             PlayerOneScoreText.ForeColor = System.Drawing.Color.White;
             PlayerOneScoreText.Font = new System.Drawing.Font("Folio XBd BT", 14);
             PlayerOneScoreText.Top = 5;

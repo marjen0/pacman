@@ -4,7 +4,6 @@ using Pacman.Classes;
 using System;
 using Xunit;
 using Pacman.Services;
-using Microsoft.AspNet.SignalR.Hubs;
 using Moq;
 
 namespace Pacman.UnitTests.Classes.Adapter
@@ -27,7 +26,7 @@ namespace Pacman.UnitTests.Classes.Adapter
             Assert.True(false);
         }
 
-        [Fact]
+       /* [Fact]
         public void getPacmanId_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
