@@ -43,7 +43,7 @@ namespace Pacman
         public static Food megaFood = megaFoodCreator.CreateFood();
 
         // Template pattern
-        public static FormElements formElements = new FormElementsBright();
+        public static FormElements formElements = new FormElementsStandard();
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
