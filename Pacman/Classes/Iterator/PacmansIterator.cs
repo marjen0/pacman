@@ -9,13 +9,11 @@ namespace Pacman.Classes.Iterator
 {
     public class PacmansIterator : IEnumerator
     {
-        //private Pacman[] pacmans;
         private int position = -1;
         private List<Pacman> pacmans;
 
         public PacmansIterator(List<Pacman> p)
         {
-            //pacmans = new Pacman[p.Count];
             pacmans = p;
         }
 
@@ -23,7 +21,6 @@ namespace Pacman.Classes.Iterator
         {
             position++;
             return position < pacmans.Count;
-            //return position < pacmans.Length;
         }
 
         public void Reset()
@@ -46,7 +43,6 @@ namespace Pacman.Classes.Iterator
                 try
                 {
                     return pacmans.ElementAt(position);
-                    //return pacmans[position];
                 }
                 catch (IndexOutOfRangeException)
                 {
