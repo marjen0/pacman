@@ -128,7 +128,7 @@ namespace Pacman
             {
                 this.Invoke((Action)(() =>
                 {
-                    Player newPlayer = new Player(connnectionId, "Player" + (players.GetCount() + 1));
+                    Player newPlayer = new Player(connnectionId, String.Format("Player{0}", players.GetCount() + 1));
                     _api.CreatePlayer(newPlayer);
                     players.Add(newPlayer);
 
