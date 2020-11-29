@@ -44,7 +44,7 @@ namespace Pacman
         public static Food megaFood = megaFoodCreator.CreateFood();
 
         // Template pattern
-        public static FormElements formElements = new FormElementsStandard();
+        public FormElements formElements = new FormElementsStandard();
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
@@ -212,8 +212,8 @@ namespace Pacman
                     // Logging movement
                     Pacman currentPacman = pacmansList.Single(p => p.Id == id);
                     Player currentPlayer = playersList.Single(p => p.Id == id);
-                    _pacmanLogAdapter = new PacmanLogAdapter(currentPacman);
-                    _playerLogAdapter = new PlayerLogAdapter(currentPlayer);
+                    _pacmanLogAdapter = new PacmanLogAdapter(currentPacman, this);
+                    _playerLogAdapter = new PlayerLogAdapter(currentPlayer, this);
                     _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
                     _pacmanLogAdapter.LogData(null);
                     _playerLogAdapter.LogData(null);

@@ -201,9 +201,9 @@ namespace Pacman
         {
             return $"Pacman: Id:{Id} | xCoordinate:{xCoordinate} | yCoordinate:{yCoordinate} | direction:{currentDirection}\n";
         }
-        public void LogDataToRichTextBox()
+        public void LogDataToRichTextBox(Form1 form)
         {
-            Form1.formElements.Log.AppendText(string.Format("{0}\n", this.ToString()));
+            form.formElements.Log.AppendText(string.Format("{0}\n", this.ToString()));
         }
 
     }

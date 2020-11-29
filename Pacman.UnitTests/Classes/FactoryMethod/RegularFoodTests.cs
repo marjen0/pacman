@@ -18,11 +18,12 @@ namespace Pacman.UnitTests.Classes.FactoryMethod
         public void CreateFoodImages_Creates240FoodImages_True()
         {
             // Arange
+            Form1 form = new Form1();
             Food regularFood = _regularFoodCreator.CreateFood();
             // Act
-            regularFood.CreateFoodImages(new Form1());
+            regularFood.CreateFoodImages(form);
             // Assert
-            Assert.Equal(240, regularFood.Amount);
+            Assert.Equal(240,regularFood.Amount);
         }
         [Fact]
         public void EatFood_EatenFoodIsInvisible_True()
