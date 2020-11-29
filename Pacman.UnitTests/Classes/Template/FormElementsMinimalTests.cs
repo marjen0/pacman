@@ -70,5 +70,16 @@ namespace Pacman.UnitTests.Classes.Template
             // Assert
             Assert.True(formElements.Log.Enabled);
         }
+        [Fact]
+        public void CreateLogBox__ThrowsException__True()
+        {
+            // Arrange
+            FormElements formElements = new FormElementsMinimal();
+            // Act
+           
+            // Assert
+            Assert.Throws<NotImplementedException>(() =>formElements.CreateLogBox(new Form1()));
+        }
+
     }
 }
