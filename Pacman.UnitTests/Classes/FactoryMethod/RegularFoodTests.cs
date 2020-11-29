@@ -23,7 +23,7 @@ namespace Pacman.UnitTests.Classes.FactoryMethod
             // Act
             regularFood.CreateFoodImages(form);
             // Assert
-            Assert.Equal(240, form.regularFood.Amount);
+            Assert.Equal(240,regularFood.Amount);
         }
         [Fact]
         public void EatFood_EatenFoodIsInvisible_True()
