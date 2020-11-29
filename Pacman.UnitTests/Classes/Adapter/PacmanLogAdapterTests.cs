@@ -1,5 +1,6 @@
 using Pacman;
 using Pacman.Classes.Adapter;
+using Pacman.Classes.Template;
 using Pacman.Classes;
 using System;
 using Xunit;
@@ -14,29 +15,32 @@ namespace Pacman.UnitTests.Classes.Adapter
         public void LogData_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            Form1 form = new Form1();
+            FormElements formElements = new FormElementsStandard();
             Pacman p = new RedPacman("pacmanId");
-            var pacmanLogAdapter = new PacmanLogAdapter(p);
-            string message = null;
+            ILog pacmanLogAdapter = new PacmanLogAdapter(p, form);
 
             // Act
-            pacmanLogAdapter.LogData(message);
-
+            p.AddPacmanImages();
+            p.Set_Pacman();
+            formElements.CreateFormElements(form);
+            pacmanLogAdapter.LogData(null);
             // Assert
-            Assert.True(false);
+            Assert.Equal(p.ToString()+"\n",form.formElements.Log.Text);
         }
 
-       /* [Fact]
-        public void getPacmanId_StateUnderTest_ExpectedBehavior()
+       [Fact]
+        public void getPacmanId_ReturnsCorrectID_True()
         {
             // Arrange
-            var pacmanLogAdapter = new PacmanLogAdapter(TODO);
-
+            Pacman p = new RedPacman("qwe147");
+            Form1 form = new Form1();
+            PacmanLogAdapter adapter = new PacmanLogAdapter(p, form);
             // Act
-            var result = pacmanLogAdapter.getPacmanId();
+            string id = adapter.getPacmanId();
 
             // Assert
-            Assert.True(false);
-        }*/
+            Assert.Equal("qwe147", id);
+        }
     }
 }
