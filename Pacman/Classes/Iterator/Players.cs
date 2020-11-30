@@ -30,14 +30,10 @@ namespace Pacman.Classes.Iterator
             return number;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return (IEnumerator)GetEnumerator();
-        }
-
         public IEnumerator GetEnumerator()
         {
-            return new PlayersIterator(players);
+            for (int i = 0; i < players.Count(); i++)
+                yield return players[i];
         }
     }
 }

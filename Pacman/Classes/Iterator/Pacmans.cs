@@ -29,14 +29,10 @@ namespace Pacman.Classes.Iterator
             return pacmans.Count;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return (IEnumerator)GetEnumerator();
-        }
-
         public IEnumerator GetEnumerator()
         {
-            return new PacmansIterator(pacmans);
+            foreach (var p in pacmans)
+                yield return p;
         }
     }
 }

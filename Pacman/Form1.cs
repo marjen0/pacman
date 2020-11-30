@@ -245,7 +245,7 @@ namespace Pacman
             megaFood.CreateFoodImages(this);
 
             // Create Ghosts
-             ghost.CreateGhostImage(this);
+            ghost.CreateGhostImage(this);
         }
 
         protected async override void OnKeyDown(KeyEventArgs e)
