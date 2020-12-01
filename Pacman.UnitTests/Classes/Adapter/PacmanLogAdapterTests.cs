@@ -18,7 +18,7 @@ namespace Pacman.UnitTests.Classes.Adapter
             Form1 form = new Form1();
             FormElements formElements = new FormElementsStandard();
             Pacman p = new RedPacman("pacmanId");
-            ILog pacmanLogAdapter = new PacmanLogAdapter(p, form);
+            AbstractLogger pacmanLogAdapter = new PacmanLogAdapter(p, form);
 
             // Act
             p.AddPacmanImages();

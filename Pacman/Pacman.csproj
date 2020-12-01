@@ -198,9 +198,14 @@
     <Compile Include="Classes\AbstractFactory\PinkPacman.cs" />
     <Compile Include="Classes\AbstractFactory\RedPacman.cs" />
     <Compile Include="Classes\AbstractFactory\BluePacman.cs" />
+    <Compile Include="Classes\ChainOfResponsibility\AbstractLogger.cs" />
     <Compile Include="Classes\Adapter\ILog.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapter.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapter.cs" />
+    <Compile Include="Classes\ChainOfResponsibility\DebugLogger.cs" />
+    <Compile Include="Classes\ChainOfResponsibility\DefaultLogger.cs" />
+    <Compile Include="Classes\ChainOfResponsibility\ConsoleLogger.cs" />
+    <Compile Include="Classes\ChainOfResponsibility\FileLogger.cs" />
     <Compile Include="Classes\Command\Command.cs" />
     <Compile Include="Classes\Command\Invoker.cs" />
     <Compile Include="Classes\Command\MoveDownCommand.cs" />
@@ -228,7 +233,6 @@
     <Compile Include="Classes\Iterator\PacmansIterator.cs" />
     <Compile Include="Classes\Iterator\Players.cs" />
     <Compile Include="Classes\Iterator\PlayersIterator.cs" />
-    <Compile Include="Classes\FileLogger.cs" />
     <Compile Include="Classes\Observer\IObserver.cs" />
     <Compile Include="Classes\Observer\ISubject.cs" />
     <Compile Include="Classes\Observer\PlayerData.cs" />
@@ -426,7 +430,9 @@
       <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Classes\State\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets" Condition="Exists('..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
