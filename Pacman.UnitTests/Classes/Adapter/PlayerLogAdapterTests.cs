@@ -15,7 +15,7 @@ namespace Pacman.UnitTests.Classes.Adapter
             Form1 form = new Form1();
             FormElements formElements = new FormElementsStandard();
             Player p = new Player("id", "name");
-            AbstractLogger playerLogAdapter = new PlayerLogAdapter(p, form);
+            ILog playerLogAdapter = new PlayerLogAdapter(p, form);
             formElements.CreateFormElements(form);
             // Act
             playerLogAdapter.LogData(null);

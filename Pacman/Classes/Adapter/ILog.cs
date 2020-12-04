@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes.Adapter
 {
-    interface ILog
+    public interface ILog
     {
         void LogData(string message);
     }

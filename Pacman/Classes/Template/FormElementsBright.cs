@@ -58,14 +58,14 @@ namespace Pacman.Classes.Template
 
         public override void CreatePlayerOneScoreLabel(Form formInstance)
         {
-            NotJoinedText.Name = "NotJoinedLabel";
-            NotJoinedText.ForeColor = System.Drawing.Color.GreenYellow;
-            NotJoinedText.Font = new System.Drawing.Font("Folio XBd BT", 14);
-            NotJoinedText.Top = 5;
-            NotJoinedText.Left = 155;
-            NotJoinedText.Height = 20;
-            NotJoinedText.Width = 200;
-            NotJoinedText.Text = "JOIN THE GAME FIRDT BY PRESSING F1 ON KEYBOARD";
+            PlayerOneScoreText.Name = "PayerOneScoreLabel";
+            PlayerOneScoreText.ForeColor = System.Drawing.Color.GreenYellow;
+            PlayerOneScoreText.Font = new System.Drawing.Font("Folio XBd BT", 14);
+            PlayerOneScoreText.Top = 5;
+            PlayerOneScoreText.Left = 155;
+            PlayerOneScoreText.Height = 20;
+            PlayerOneScoreText.Width = 200;
+            PlayerOneScoreText.Text = "1UP";
             formInstance.Controls.Add(NotJoinedText);
         }
 

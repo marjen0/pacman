@@ -6,6 +6,7 @@ using System;
 using Xunit;
 using Pacman.Services;
 using Moq;
+using Pacman.Classes.Adapter;
 
 namespace Pacman.UnitTests.Classes.Adapter
 {
@@ -18,7 +19,7 @@ namespace Pacman.UnitTests.Classes.Adapter
             Form1 form = new Form1();
             FormElements formElements = new FormElementsStandard();
             Pacman p = new RedPacman("pacmanId");
-            AbstractLogger pacmanLogAdapter = new PacmanLogAdapter(p, form);
+            ILog pacmanLogAdapter = new PacmanLogAdapter(p, form);
 
             // Act
             p.AddPacmanImages();
