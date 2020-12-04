@@ -68,8 +68,8 @@ namespace Pacman
         // Iterator pattern
         //public static List<Player> players = new List<Player>(2);
         //public static List<Pacman> pacmans = new List<Pacman>(2);
-        private static Players players = new Players();
-        private static Pacmans pacmans = new Pacmans();
+        private static readonly Players players = new Players();
+        private static readonly Pacmans pacmans = new Pacmans();
 
         private static List<Player> playersList;
         private static List<Pacman> pacmansList;
@@ -214,7 +214,8 @@ namespace Pacman
                     Player currentPlayer = playersList.Single(p => p.Id == id);
                     _pacmanLogAdapter = new PacmanLogAdapter(currentPacman, this);
                     _playerLogAdapter = new PlayerLogAdapter(currentPlayer, this);
-                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
+                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}",
+                        currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
                     _pacmanLogAdapter.LogData(null);
                     _playerLogAdapter.LogData(null);
 
@@ -250,7 +251,6 @@ namespace Pacman
 
         protected async override void OnKeyDown(KeyEventArgs e)
         {
-       
             base.OnKeyDown(e);
             switch (e.KeyCode)
             {

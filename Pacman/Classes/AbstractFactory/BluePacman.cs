@@ -23,8 +23,6 @@ namespace Pacman.Classes
             Id = id;
         }
 
-        
-
         public override void AddPacmanImages()
         {
             PacmanImages.Images.Add(Properties.Resources.BluePacman_1_0);
@@ -46,7 +44,6 @@ namespace Pacman.Classes
             PacmanImages.Images.Add(Properties.Resources.BluePacman_4_1);
             PacmanImages.Images.Add(Properties.Resources.BluePacman_4_2);
             PacmanImages.Images.Add(Properties.Resources.BluePacman_4_3);
-        
         }
 
         public override void Set_Pacman()

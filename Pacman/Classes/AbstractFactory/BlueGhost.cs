@@ -10,10 +10,10 @@ namespace Pacman.Classes
     {
         //public override void AddGhostImages()
         //{
-        //    GhostImages.Images.Add(Properties.Resources.Ghost_0_1);
-        //    GhostImages.Images.Add(Properties.Resources.Ghost_0_2);
-        //    GhostImages.Images.Add(Properties.Resources.Ghost_0_3);
-        //    GhostImages.Images.Add(Properties.Resources.Ghost_0_4);
+        //    GhostImages.Images.Add(Properties.Resources.Ghost_1_1);
+        //    GhostImages.Images.Add(Properties.Resources.Ghost_1_2);
+        //    GhostImages.Images.Add(Properties.Resources.Ghost_1_3);
+        //    GhostImages.Images.Add(Properties.Resources.Ghost_1_4);
         //}
     }
 }
