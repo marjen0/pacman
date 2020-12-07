@@ -22,6 +22,7 @@ namespace Pacman
         public PictureBox[] LifeImage = new PictureBox[MaxLives];
 
         public Player() { }
+
         public Player(string id, string name)
         {
             Id = id;
@@ -118,10 +119,12 @@ namespace Pacman
         {
             UpdateScore(amount);
         }
+
         public override string ToString()
         {
             return $"Player - Id:{Id} | Name:{Name} | Score:{Score} | Lives:{Lives}\n";
         }
+
         public void LogDataToRichTextBox(Form1 form)
         {
             form.formElements.Log.AppendText(string.Format("{0}\n", this.ToString()));

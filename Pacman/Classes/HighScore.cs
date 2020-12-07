@@ -11,7 +11,7 @@ namespace Pacman
 {
     public class HighScore : IObserver
     {
-        public const int InitalScore = 100;
+        private const int InitalScore = 100;
         public Label HighScoreText = new Label();
         public int Score = InitalScore;
 
@@ -39,8 +39,6 @@ namespace Pacman
         { }
 
         public void UpdateHighScore(int amount)
-        {
-            
-        }
+        { }
     }
 }
