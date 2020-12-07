@@ -7,40 +7,28 @@ namespace Pacman.UnitTests.Classes.Iterator
 {
     public class PlayersTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public PlayersTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private Players CreatePlayers()
         {
             return new Players();
         }
 
         [Fact]
-        public void Add_StateUnderTest_ExpectedBehavior()
+        public void Add_AddsPlayerToArray_ArrayLengthIsNot0()
         {
             // Arrange
             var players = this.CreatePlayers();
             Player p = null;
 
             // Act
-            players.Add(
-                p);
+            players.Add(p);
+            var result = players.GetCount();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.NotEqual(0, result);
         }
 
         [Fact]
-        public void GetPlayers_StateUnderTest_ExpectedBehavior()
+        public void GetPlayers_GetsPlayersArray_TypeIsArrayOfTypePlayer()
         {
             // Arrange
             var players = this.CreatePlayers();
@@ -49,12 +37,11 @@ namespace Pacman.UnitTests.Classes.Iterator
             var result = players.GetPlayers();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<Player[]>(result);
         }
 
         [Fact]
-        public void GetCount_StateUnderTest_ExpectedBehavior()
+        public void GetCount_GetPlayersCount_TypeIsInt()
         {
             // Arrange
             var players = this.CreatePlayers();
@@ -63,22 +50,28 @@ namespace Pacman.UnitTests.Classes.Iterator
             var result = players.GetCount();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<int>(result);
         }
 
         [Fact]
-        public void GetEnumerator_StateUnderTest_ExpectedBehavior()
+        public void GetEnumerator_GetsEnumerator_ContainsSpecifiedPlayers ()
         {
             // Arrange
             var players = this.CreatePlayers();
+            var p1 = new Player("1", "1");
+            var p2 = new Player("1", "1");
 
             // Act
+            players.Add(p1);
+            players.Add(p2);
             var result = players.GetEnumerator();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            result.MoveNext();
+            Assert.True(result.Current == p1);
+
+            result.MoveNext();
+            Assert.True(result.Current == p2);
         }
     }
 }

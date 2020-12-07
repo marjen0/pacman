@@ -25,8 +25,11 @@ namespace Pacman.Classes.Observer
         {
             foreach (IObserver o in observers)
             {
-                o.UpdateLives(Lives);
-                o.UpdateHighScore(Amount);
+                if (o != null)
+                {
+                    o.UpdateLives(Lives);
+                    o.UpdateHighScore(Amount);
+                }
             }
         }
 
@@ -36,10 +39,20 @@ namespace Pacman.Classes.Observer
             NotifyObservers();
         }
 
+        public int GetLives()
+        {
+            return Lives;
+        }
+
         public void EditHighScore(int score)
         {
             Amount = score;
             NotifyObservers();
+        }
+
+        public int GetHighScore()
+        {
+            return Amount;
         }
 
         public void RegisterObserver(IObserver o)

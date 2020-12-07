@@ -27,6 +27,7 @@ namespace Pacman
             Id = id;
             Name = name;
         }
+
         public void CreateLives(Form formInstance)
         {
             for(int x = 0; x < MaxLives; x++)
@@ -39,6 +40,7 @@ namespace Pacman
                 formInstance.Controls.Add(LifeImage[x]);
                 LifeImage[x].BringToFront();
             }
+
             SetLives();
         }
 

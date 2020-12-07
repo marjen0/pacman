@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes
 {
-    class BlueGhost : Ghost
+    public class BlueGhost : Ghost
     {
         //public override void AddGhostImages()
         //{

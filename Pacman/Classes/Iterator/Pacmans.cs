@@ -9,7 +9,7 @@ namespace Pacman.Classes.Iterator
 {
     public class Pacmans : IEnumerable
     {
-        private List<Pacman> pacmans = new List<Pacman>();
+        private readonly List<Pacman> pacmans = new List<Pacman>();
 
         public Pacmans()
         { }

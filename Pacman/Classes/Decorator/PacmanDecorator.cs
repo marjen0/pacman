@@ -13,14 +13,20 @@ namespace Pacman.Classes.Decorator
         {
             _wrappee = p;
         }
-        public override void AddPacmanImages()
+        public override int AddPacmanImages()
         {
             _wrappee.AddPacmanImages();
+
+            return PacmanImages.Images.Count;
         }
-        public override void Set_Pacman()
+        public override bool Set_Pacman()
         {
             _wrappee.Set_Pacman();
-        }
 
+            if (PacmanImage.Image != null)
+                return true;
+            else
+                return false;
+        }
     }
 }

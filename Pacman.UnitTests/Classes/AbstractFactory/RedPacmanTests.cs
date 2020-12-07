@@ -7,49 +7,37 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
 {
     public class RedPacmanTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public RedPacmanTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private RedPacman CreateRedPacman()
         {
-            return new RedPacman(
-                TODO);
+            string id = null;
+
+            return new RedPacman(id);
         }
 
         [Fact]
-        public void AddPacmanImages_StateUnderTest_ExpectedBehavior()
+        public void AddPacmanImages_AddsPacmanImages_PacmanImagesCountIsNot0()
         {
             // Arrange
             var redPacman = this.CreateRedPacman();
 
             // Act
-            redPacman.AddPacmanImages();
+            var result = redPacman.AddPacmanImages();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.NotEqual(0, result);
         }
 
         [Fact]
-        public void Set_Pacman_StateUnderTest_ExpectedBehavior()
+        public void Set_Pacman_SetsPacmanObject_SetPacmanReturnsTrue()
         {
             // Arrange
             var redPacman = this.CreateRedPacman();
 
             // Act
-            redPacman.Set_Pacman();
+            var result = redPacman.Set_Pacman();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(result);
         }
     }
 }

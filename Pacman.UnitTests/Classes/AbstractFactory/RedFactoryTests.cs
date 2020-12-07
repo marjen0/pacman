@@ -1,5 +1,6 @@
 using Moq;
 using Pacman.Classes;
+using Pacman.Services;
 using System;
 using Xunit;
 
@@ -7,24 +8,13 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
 {
     public class RedFactoryTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public RedFactoryTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private RedFactory CreateFactory()
         {
             return new RedFactory();
         }
 
         [Fact]
-        public void CreateGhost_StateUnderTest_ExpectedBehavior()
+        public void CreateGhost_CreatesGhostOfTypeRedGhost_TypeIsRedGhost()
         {
             // Arrange
             var factory = this.CreateFactory();
@@ -33,12 +23,11 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
             var result = factory.CreateGhost();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<RedGhost>(result);
         }
 
         [Fact]
-        public void CreatePacman_StateUnderTest_ExpectedBehavior()
+        public void CreatePacman_CreatesPacmanOfTypeRedPacman_TypeIsRedPacman()
         {
             // Arrange
             var factory = this.CreateFactory();
@@ -51,8 +40,7 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
                 id);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<RedPacman>(result);
         }
     }
 }

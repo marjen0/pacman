@@ -14,14 +14,21 @@ namespace Pacman.Classes.Decorator
         {
 
         }
-        public override void AddPacmanImages()
+        public override int AddPacmanImages()
         {
             base.AddPacmanImages();
             AddYellowBorder(PacmanImages);
+
+            return PacmanImages.Images.Count;
         }
-        public override void Set_Pacman()
+        public override bool Set_Pacman()
         {
             base.Set_Pacman();
+
+            if (PacmanImage.Image != null)
+                return true;
+            else
+                return false;
         }
         private void AddYellowBorder(ImageList images)
         {

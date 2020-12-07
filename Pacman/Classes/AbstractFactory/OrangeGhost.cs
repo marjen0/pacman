@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes
 {
-    class OrangeGhost : Ghost
+    public class OrangeGhost : Ghost
     {
     }
 }

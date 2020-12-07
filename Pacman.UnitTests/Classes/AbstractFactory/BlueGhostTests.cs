@@ -22,7 +22,7 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
         {
             return new BlueGhost();
         }
-
+        /*
         [Fact]
         public void TestMethod1()
         {
@@ -35,6 +35,6 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
             // Assert
             Assert.True(false);
             this.mockRepository.VerifyAll();
-        }
+        }*/
     }
 }

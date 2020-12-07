@@ -22,7 +22,7 @@ namespace Pacman.Classes
             Id = id;
         }
 
-        override public void AddPacmanImages()
+        override public int AddPacmanImages()
         {
             
             PacmanImages.Images.Add(Properties.Resources.RedPacman_1_0);
@@ -44,16 +44,26 @@ namespace Pacman.Classes
             PacmanImages.Images.Add(Properties.Resources.RedPacman_4_1);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_4_2);
             PacmanImages.Images.Add(Properties.Resources.RedPacman_4_3);
+
+            return PacmanImages.Images.Count;
         }
 
-        public override void Set_Pacman()
+        public override bool Set_Pacman()
         {
             PacmanImage.Image = Properties.Resources.RedPacman_2_1;
-            currentDirection = 0;
-            nextDirection = 0;
-            xCoordinate = xStart;
-            yCoordinate = yStart;
-            PacmanImage.Location = new Point(xStart * 16 - 3, yStart * 16 + 43);
+
+            if (PacmanImage.Image != null)
+            {
+                currentDirection = 0;
+                nextDirection = 0;
+                xCoordinate = xStart;
+                yCoordinate = yStart;
+                PacmanImage.Location = new Point(xStart * 16 - 3, yStart * 16 + 43);
+
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

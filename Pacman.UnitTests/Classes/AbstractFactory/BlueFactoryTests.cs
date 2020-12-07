@@ -8,38 +8,23 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
 {
     public class BlueFactoryTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public BlueFactoryTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private BlueFactory CreateFactory()
         {
             return new BlueFactory();
         }
 
         [Fact]
-        public void CreateGhost_StateUnderTest_ExpectedBehavior()
+        public void CreateGhost_CreatesGhostOfTypeBlueGhosts_TypeIsBlueGhost()
         {
-            // Arrange
             var factory = this.CreateFactory();
 
-            // Act
             var result = factory.CreateGhost();
 
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<BlueGhost>(result);
         }
 
         [Fact]
-        public void CreatePacman_StateUnderTest_ExpectedBehavior()
+        public void CreatePacman_CreatesPacmanOfTypeBluePacman_TypeIsBluePacman()
         {
             // Arrange
             var factory = this.CreateFactory();
@@ -52,8 +37,7 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
                 id);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<BluePacman>(result);
         }
     }
 }

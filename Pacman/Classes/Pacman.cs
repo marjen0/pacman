@@ -44,12 +44,10 @@ namespace Pacman
             stateTimer.Tick += new EventHandler(StateTimer_Tick);
 
             PacmanImages.ImageSize = new Size(27,28);
-
-            //AddPacmanImages();
         }
 
-        public abstract void AddPacmanImages();
-        public abstract void Set_Pacman();
+        public abstract int AddPacmanImages();
+        public abstract bool Set_Pacman();
 
         //Strategy pattern methods
         public Timer GetTimer()
