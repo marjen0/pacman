@@ -157,6 +157,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AbstractFactory\BlueFactoryTests.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapterTests.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapterTests.cs" />
     <Compile Include="Classes\FactoryMethod\MegaFoodCreatorTests.cs" />
