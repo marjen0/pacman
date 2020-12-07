@@ -6,6 +6,7 @@ using System;
 using Xunit;
 using Pacman.Services;
 using Moq;
+using Pacman.Classes.Adapter;
 
 namespace Pacman.UnitTests.Classes.Adapter
 {

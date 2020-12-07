@@ -12,18 +12,24 @@ namespace Pacman.Classes.Template
         
         private readonly bool _addLogBox = false;
         private Label _playerOneScoreText;
+        private Label _notJoinedText;
         private Label _highscoreText;
         private RichTextBox _log;
+        private RichTextBox _debugLog;
         public override bool AddLogBox { get => _addLogBox; set => throw new NotImplementedException(); }
         public override Label PlayerOneScoreText { get => _playerOneScoreText; set => _playerOneScoreText = value; }
         public override Label HighScoreText { get => _highscoreText; set => _highscoreText = value; }
         public override RichTextBox Log { get => _log; set => _log = value; }
+        public override RichTextBox DebugLog { get => _debugLog; set => _debugLog = value; }
+        public override Label NotJoinedText { get => _notJoinedText; set => _notJoinedText = value; }
 
         public FormElementsMinimal()
         {
             _playerOneScoreText = new Label();
             _highscoreText = new Label();
+            _notJoinedText = new Label();
             _log = new RichTextBox();
+            _debugLog = new RichTextBox();
         }
         public override void CreateHighScoreLabel(Form formInstance)
         {
@@ -48,6 +54,10 @@ namespace Pacman.Classes.Template
             Log.Enabled = false;
             formInstance.Controls.Add(Log);*/
         }
+        public override void CreateDebugLogBox(Form formInstance)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void CreatePlayerOneScoreLabel(Form formInstance)
         {
@@ -60,6 +70,20 @@ namespace Pacman.Classes.Template
             PlayerOneScoreText.Width = 100;
             PlayerOneScoreText.Text = "1UP";
             formInstance.Controls.Add(PlayerOneScoreText);
+        }
+
+        public override void CreateNotJoinedLabel(Form formInstance)
+        {
+            NotJoinedText.Name = "NotJoinedLabel";
+            NotJoinedText.ForeColor = System.Drawing.Color.Aqua;
+            NotJoinedText.Font = new System.Drawing.Font("Folio XBd BT", 14);
+            NotJoinedText.Top = 20;
+            NotJoinedText.Left = 300;
+            NotJoinedText.Height = 20;
+            NotJoinedText.Width = 200;
+            NotJoinedText.Text = "JOIN THE GAME! ";
+            NotJoinedText.BringToFront();
+            formInstance.Controls.Add(NotJoinedText);
         }
     }
 }

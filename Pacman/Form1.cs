@@ -23,6 +23,7 @@ using Pacman.Classes.Command;
 using Pacman.Classes.Facade;
 using Pacman.Classes.Bridge;
 using Pacman.Classes.Template;
+using Pacman.Classes.ChainOfResponsibility;
 
 namespace Pacman
 {
@@ -32,7 +33,7 @@ namespace Pacman
         private static SignalR _signalR;
         private static API _api;
         public List<Player> currentPlayers = new List<Player>(2);
-        
+
         public static GameBoard gameboard = new GameBoard();
 
         // Factory pattern for food objects
@@ -45,6 +46,12 @@ namespace Pacman
 
         // Template pattern
         public FormElements formElements = new FormElementsStandard();
+
+        // Chain Of Responsibility pattern
+        public AbstractLogger consoleLogger;
+        public AbstractLogger debugLogger;
+        public AbstractLogger defaultLogger;
+        public AbstractLogger fileLogger;
 
         // Abstract Factory pattern for pacmans and ghosts
         public static BlueFactory blueFactory = new BlueFactory();
@@ -61,7 +68,7 @@ namespace Pacman
         public static HighScore highscore = new HighScore();
 
         // Adapter pattern for Player and Pacman data logging
-        private static ILog _fileLogger = new FileLogger();
+        private static ILog _fileLogger;
         private static ILog _pacmanLogAdapter;
         private static ILog _playerLogAdapter;
 
@@ -89,9 +96,9 @@ namespace Pacman
 
         public Form1()
         {
-            
+
             InitializeComponent();
-           
+
             _hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:44394/hub").Build();
             _hubConnection.Closed += async (error) =>
             {
@@ -100,15 +107,24 @@ namespace Pacman
             };
             _signalR = new SignalR(_hubConnection);
             _api = new API();
-            
+
             ghost.DisableTimer();
 
             invoker = new Invoker();
+
+            debugLogger = new DebugLogger(this, AbstractLogger.DEBUG);
+            consoleLogger = new ConsoleLogger(this, AbstractLogger.CONSOLE);
+            fileLogger = new FileLogger(this, AbstractLogger.FILE);
+            defaultLogger = new DefaultLogger(this, AbstractLogger.DEFAULT);
+
+            debugLogger.SetNextLogger(consoleLogger);
+            consoleLogger.SetNextLogger(fileLogger);
+            fileLogger.SetNextLogger(defaultLogger);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            debugLogger.LogMessage(AbstractLogger.DEBUG, "Debug Logger44");
             _signalR.RegisterPlayer();
 
             // Create Board Matrix
@@ -116,7 +132,7 @@ namespace Pacman
             SetupGame(1);
             playerData.RegisterObserver(player);
             playerData.RegisterObserver(highscore);
-        
+
             _hubConnection.On("ReceiveRegisterCompletedMessage", () =>
             {
                 formElements.Log.AppendText($"\nWait until your friend opens this game then press F1 to join the game!\n" +
@@ -212,10 +228,10 @@ namespace Pacman
                     // Logging movement
                     Pacman currentPacman = pacmansList.Single(p => p.Id == id);
                     Player currentPlayer = playersList.Single(p => p.Id == id);
+
                     _pacmanLogAdapter = new PacmanLogAdapter(currentPacman, this);
                     _playerLogAdapter = new PlayerLogAdapter(currentPlayer, this);
-                    _fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}",
-                        currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
+                    //_fileLogger.LogData(string.Format("pacman ID: {0} | xCoordinate:{1} | yCordinate:{2} | date:{3}", currentPacman.Id, currentPacman.xCoordinate, currentPacman.yCoordinate, DateTime.UtcNow));
                     _pacmanLogAdapter.LogData(null);
                     _playerLogAdapter.LogData(null);
 
@@ -226,7 +242,7 @@ namespace Pacman
         }
         public void SetupGame(int Level)
         {
-            
+
             // Create Game Board
             // gameboard.CreateBoardImage(this, Level);
             facade.CreateBoardImage(this, Level);
@@ -313,7 +329,7 @@ namespace Pacman
                     if (pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).IsTimerEnabled() && ghost.IsTimerEnabled())
                     {
                         pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).StopTimer();
-                        ghost.StopTimer();   
+                        ghost.StopTimer();
                     }
                     else
                     {

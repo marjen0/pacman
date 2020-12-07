@@ -11,18 +11,24 @@ namespace Pacman.Classes.Template
     {
         private readonly bool _addLogBox = true;
         private Label _playerOneScoreText;
+        private Label _notJoinedText;
         private Label _highscoreText;
         private RichTextBox _log;
+        private RichTextBox _debugLog;
         public override bool AddLogBox { get => _addLogBox; set => throw new NotImplementedException(); }
         public override Label PlayerOneScoreText { get => _playerOneScoreText; set => _playerOneScoreText = value ; }
         public override Label HighScoreText { get => _highscoreText; set => _highscoreText = value; }
         public override RichTextBox Log { get => _log; set => _log = value; }
+        public override RichTextBox DebugLog { get => _debugLog; set => _debugLog = value; }
+        public override Label NotJoinedText { get => _notJoinedText; set => _notJoinedText = value; }
 
         public FormElementsBright()
         {
             _playerOneScoreText = new Label();
             _highscoreText = new Label();
+            _notJoinedText = new Label();
             _log = new RichTextBox();
+            _debugLog = new RichTextBox();
         }
         public override void CreateHighScoreLabel(Form formInstance)
         {
@@ -40,7 +46,7 @@ namespace Pacman.Classes.Template
         public override void CreateLogBox(Form formInstance)
         {
             Log.Name = "LogBox";
-            Log.Height = 550;
+            Log.Height = 250;
             Log.Width = 345;
             Log.Top = 5;
             Log.Left = 475;
@@ -56,11 +62,38 @@ namespace Pacman.Classes.Template
             PlayerOneScoreText.ForeColor = System.Drawing.Color.GreenYellow;
             PlayerOneScoreText.Font = new System.Drawing.Font("Folio XBd BT", 14);
             PlayerOneScoreText.Top = 5;
-            PlayerOneScoreText.Left = 20;
+            PlayerOneScoreText.Left = 155;
             PlayerOneScoreText.Height = 20;
-            PlayerOneScoreText.Width = 100;
+            PlayerOneScoreText.Width = 200;
             PlayerOneScoreText.Text = "1UP";
-            formInstance.Controls.Add(PlayerOneScoreText);
+            formInstance.Controls.Add(NotJoinedText);
+        }
+
+        public override void CreateNotJoinedLabel(Form formInstance)
+        {
+            NotJoinedText.Name = "NotJoinedLabel";
+            NotJoinedText.ForeColor = System.Drawing.Color.Aqua;
+            NotJoinedText.Font = new System.Drawing.Font("Folio XBd BT", 14);
+            NotJoinedText.Top = 20;
+            NotJoinedText.Left = 300;
+            NotJoinedText.Height = 20;
+            NotJoinedText.Width = 200;
+            NotJoinedText.Text = "JOIN THE GAME! ";
+            NotJoinedText.BringToFront();
+            formInstance.Controls.Add(NotJoinedText);
+        }
+
+        public override void CreateDebugLogBox(Form formInstance)
+        {
+            DebugLog.Name = "DebugLogBox";
+            DebugLog.Height = 250;
+            DebugLog.Width = 345;
+            DebugLog.Top = 5;
+            DebugLog.Left = 260;
+            //Log.Enabled = false; su situo kazkodel neprijungia zaideju
+            DebugLog.BackColor = System.Drawing.Color.GreenYellow;
+            DebugLog.ReadOnly = true;
+            formInstance.Controls.Add(DebugLog);
         }
     }
 }
