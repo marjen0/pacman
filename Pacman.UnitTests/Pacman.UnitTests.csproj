@@ -158,6 +158,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AbstractFactory\BlueFactoryTests.cs" />
+    <Compile Include="Classes\AbstractFactory\BlueGhostTests.cs" />
+    <Compile Include="Classes\AbstractFactory\BluePacmanTests.cs" />
+    <Compile Include="Classes\AbstractFactory\OrangeFactoryTests.cs" />
+    <Compile Include="Classes\AbstractFactory\OrangeGhostTests.cs" />
+    <Compile Include="Classes\AbstractFactory\OrangePacmanTests.cs" />
+    <Compile Include="Classes\AbstractFactory\PinkFactoryTests.cs" />
+    <Compile Include="Classes\AbstractFactory\PinkGhostTests.cs" />
+    <Compile Include="Classes\AbstractFactory\PinkPacmanTests.cs" />
+    <Compile Include="Classes\AbstractFactory\RedFactoryTests.cs" />
+    <Compile Include="Classes\AbstractFactory\RedGhostTests.cs" />
+    <Compile Include="Classes\AbstractFactory\RedPacmanTests.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapterTests.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapterTests.cs" />
     <Compile Include="Classes\FactoryMethod\MegaFoodCreatorTests.cs" />
@@ -165,6 +176,10 @@
     <Compile Include="Classes\FactoryMethod\RegularFoodCreatorTests.cs" />
     <Compile Include="Classes\FactoryMethod\RegularFoodTests.cs" />
     <Compile Include="Classes\FactoryMethod\SuperFoodCreatorTests.cs" />
+    <Compile Include="Classes\Flyweight\ImageLocationTests.cs" />
+    <Compile Include="Classes\Iterator\PacmansTests.cs" />
+    <Compile Include="Classes\Iterator\PlayersTests.cs" />
+    <Compile Include="Classes\Observer\PlayerDataTests.cs" />
     <Compile Include="Classes\Template\FormElementsBrightTests.cs" />
     <Compile Include="Classes\Template\FormElementsStandardTests.cs" />
     <Compile Include="Classes\Template\FormElementsMinimalTests.cs" />
