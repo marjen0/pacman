@@ -7,32 +7,21 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes.Flyweight
 {
-    public class ImageLocation
+    public class ImageLocation : Flyweight
     {
-        private static readonly ImageLocation singleObject = new ImageLocation();
-        private Point point = new Point(0, 0);
-
-        private ImageLocation()
-        { }
-
-        public void SetX(int x)
+        public override void SetX(int x)
         {
             point.X = x;
         }
 
-        public void SetY(int y)
+        public override void SetY(int y)
         {
             point.Y = y;
         }
 
-        public Point GetPoint()
+        public override Point GetPoint()
         {
             return point;
-        }
-
-        public static ImageLocation GetInstance()
-        {
-            return singleObject;
         }
     }
 }

@@ -33,8 +33,6 @@ namespace Pacman.Classes.FactoryMethod
 
         public override void CreateFoodImages(Form formInstance)
         {
-            var point = ImageLocation.GetInstance();
-
             for (int y = 0; y < 30; y++)
             {
                 for (int x = 0; x < 27; x++)
@@ -50,7 +48,7 @@ namespace Pacman.Classes.FactoryMethod
                         // <-- Replaced with Flyweight Pattern
 
                         // Flyweight Pattern -->
-                        point.SetX(x * 16 - 1);
+                        var point = ImageLocationFactory.GetImageLocation(x * 16 - 1);
                         point.SetY(y * 16 + 47);
                         FoodImage[y, x].Location = point.GetPoint();
                         // <-- Flyweight Pattern

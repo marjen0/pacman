@@ -1,4 +1,5 @@
-﻿using Pacman.Classes.Strategy;
+﻿using Pacman.Classes.Flyweight;
+using Pacman.Classes.Strategy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,7 +41,16 @@ namespace Pacman.Classes.FactoryMethod
                         FoodImage[y, x] = new PictureBox();
                         FoodImage[y, x].Name = "FoodImage" + Amount.ToString();
                         FoodImage[y, x].SizeMode = PictureBoxSizeMode.AutoSize;
-                        FoodImage[y, x].Location = new Point(x * 16 - 1, y * 16 + 47);
+
+                        // Replaced with Flyweight Pattern -->
+                        //FoodImage[y, x].Location = new Point(x * 16 - 1, y * 16 + 47);
+                        // <-- Replaced with Flyweight Pattern
+
+                        // Flyweight Pattern -->
+                        var point = ImageLocationFactory.GetImageLocation(x * 16 - 1);
+                        point.SetY(y * 16 + 47);
+                        FoodImage[y, x].Location = point.GetPoint();
+                        // <-- Flyweight Pattern
 
                         if (Form1.gameboard.Matrix[y, x] != 1)
                         {

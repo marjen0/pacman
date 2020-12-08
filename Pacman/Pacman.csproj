@@ -221,9 +221,13 @@
     <Compile Include="Classes\Decorator\WhiteBorderDecorator.cs" />
     <Compile Include="Classes\Decorator\YellowBorderDecorator.cs" />
     <Compile Include="Classes\Facade\GameDetailFacade.cs" />
+    <Compile Include="Classes\Flyweight\Flyweight.cs" />
+    <Compile Include="Classes\Flyweight\ImageLocationFactory.cs" />
     <Compile Include="Classes\Flyweight\ImageLocation.cs" />
     <Compile Include="Classes\Food.cs" />
     <Compile Include="Classes\FactoryMethod\FoodCreator.cs" />
+    <Compile Include="Classes\Interpreter\Context.cs" />
+    <Compile Include="Classes\Interpreter\Expression.cs" />
     <Compile Include="Classes\Template\FormElements.cs" />
     <Compile Include="Classes\GameBoard.cs" />
     <Compile Include="Classes\Ghost.cs" />
