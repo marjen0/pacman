@@ -24,13 +24,14 @@ using Pacman.Classes.Facade;
 using Pacman.Classes.Bridge;
 using Pacman.Classes.Template;
 using Pacman.Classes.ChainOfResponsibility;
+using Pacman.Classes.Interpreter;
 
 namespace Pacman
 {
     public partial class Form1 : Form
     {
-        private HubConnection _hubConnection;
-        private static SignalR _signalR;
+        public static HubConnection _hubConnection;
+        public static SignalR _signalR;
         private static API _api;
         public List<Player> currentPlayers = new List<Player>(2);
 
@@ -75,11 +76,11 @@ namespace Pacman
         // Iterator pattern
         //public static List<Player> players = new List<Player>(2);
         //public static List<Pacman> pacmans = new List<Pacman>(2);
-        private static readonly Players players = new Players();
+        public static readonly Players players = new Players();
         private static readonly Pacmans pacmans = new Pacmans();
 
         private static List<Player> playersList;
-        private static List<Pacman> pacmansList;
+        public static List<Pacman> pacmansList;
 
         //Facade pattern
         public static GameDetailFacade facade = new GameDetailFacade();
@@ -265,83 +266,60 @@ namespace Pacman
             ghost.CreateGhostImage(this);
         }
 
-        protected async override void OnKeyDown(KeyEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            switch (e.KeyCode)
+
+            List<Expression> tree = new List<Expression>();
+            tree.Add(new JoinGameExpression());
+            tree.Add(new PauseGameExpression());
+            tree.Add(new QuitGameExpression());
+
+            var context = new Classes.Interpreter.Context(e.KeyData.ToString().ToLower());
+
+            foreach (var exp in tree)
+                exp.Interpret(context);
+
+            if (players.GetCount() > 1)
             {
-                case Keys.Up:
-                    if (players.GetCount() < 2)
-                        return;
-
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
-                    //pacman.nextDirection = 1;
-                    //invoker.SetCommand(moveUp);
-                    //invoker.run();
-                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
-                    //_signalR.SendCoordinates(pacman);
-                    break;
-                case Keys.Right:
-                    if (players.GetCount() < 2)
-                        return;
-
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
-                    //pacman.nextDirection = 2;
-                    //invoker.SetCommand(moveRight);
-                    //invoker.run();
-                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
-                    //_signalR.SendCoordinates(pacman);
-                    break;
-                case Keys.Down:
-                    if (players.GetCount() < 2)
-                        return;
-
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
-                    //pacman.nextDirection = 3;
-                    //invoker.SetCommand(moveDown);
-                    //invoker.run();
-                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
-                    //_signalR.SendCoordinates(pacman);
-                    break;
-                case Keys.Left:
-                    if (players.GetCount() < 2)
-                        return;
-
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
-                    //pacman.nextDirection = 4;
-                    //invoker.SetCommand(moveLeft);
-                    //invoker.run();
-                    //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
-                    //_signalR.SendCoordinates(pacman);
-                    break;
-                case Keys.Space:
-                    invoker.undo();
-                    break;
-                case Keys.S:
-                    if (players.GetCount() < 2)
-                        return;
-                    ghost.EnableTimer();
-                    pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).EnableTImer();
-                    break;
-                case Keys.P:
-                    if (players.GetCount() < 2)
-                        return;
-                    if (pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).IsTimerEnabled() && ghost.IsTimerEnabled())
-                    {
-                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).StopTimer();
-                        ghost.StopTimer();
-                    }
-                    else
-                    {
-                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).StartTimer();
-                        ghost.StartTimer();
-                    }
-                    break;
-                case Keys.F1:
-                    // Join the game
-                    if (players.GetCount() < 2)
-                        await _signalR.ConnectPlayer();
-                    break;
+                switch (e.KeyCode)
+                {
+                    case Keys.Up:
+                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 1;
+                        //pacman.nextDirection = 1;
+                        //invoker.SetCommand(moveUp);
+                        //invoker.run();
+                        //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(1);
+                        //_signalR.SendCoordinates(pacman);
+                        break;
+                    case Keys.Right:
+                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 2;
+                        //pacman.nextDirection = 2;
+                        //invoker.SetCommand(moveRight);
+                        //invoker.run();
+                        //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(2);
+                        //_signalR.SendCoordinates(pacman);
+                        break;
+                    case Keys.Down:
+                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 3;
+                        //pacman.nextDirection = 3;
+                        //invoker.SetCommand(moveDown);
+                        //invoker.run();
+                        //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
+                        //_signalR.SendCoordinates(pacman);
+                        break;
+                    case Keys.Left:
+                        pacmansList.Single(p => p.Id == _hubConnection.ConnectionId).nextDirection = 4;
+                        //pacman.nextDirection = 4;
+                        //invoker.SetCommand(moveLeft);
+                        //invoker.run();
+                        //pacmans.Single(p => p.Id == _hubConnection.ConnectionId).MovePacman(4);
+                        //_signalR.SendCoordinates(pacman);
+                        break;
+                    case Keys.Space:
+                        invoker.undo();
+                        break;
+                }
             }
         }
     }

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Pacman.Classes.Interpreter
 {
     class Context
     {
         private string _input;
-        private string _output;
+
+        public Context()
+        {
+            _input = "";
+        }
 
         public Context(string input)
         {
@@ -20,12 +25,6 @@ namespace Pacman.Classes.Interpreter
         {
             get { return _input; }
             set { _input = value; }
-        }
-
-        public string Output
-        {
-            get { return _output; }
-            set { _output = value; }
         }
     }
 }

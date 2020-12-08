@@ -294,7 +294,7 @@ namespace Pacman
             // Check to see if a ghost is on the same block as Pacman
             for (int x = 0; x < GhostAmount; x++)
             {
-                if (xCoordinate[x] == Form1.pacman.xCoordinate && yCoordinate[x] == Form1.pacman.yCoordinate)
+                if (Form1.pacman != null && xCoordinate[x] == Form1.pacman.xCoordinate && yCoordinate[x] == Form1.pacman.yCoordinate)
                 {
                     switch (State[x])
                     {
