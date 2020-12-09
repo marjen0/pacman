@@ -95,6 +95,8 @@ namespace Pacman
         MoveRightCommand moveRight;
         MoveLeftCommand moveLeft;
 
+        List<Expression> tree = new List<Expression>();
+
         public Form1()
         {
 
@@ -121,6 +123,10 @@ namespace Pacman
             debugLogger.SetNextLogger(consoleLogger);
             consoleLogger.SetNextLogger(fileLogger);
             fileLogger.SetNextLogger(defaultLogger);
+
+            tree.Add(new JoinGameExpression());
+            tree.Add(new PauseGameExpression());
+            tree.Add(new QuitGameExpression());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -269,11 +275,6 @@ namespace Pacman
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-
-            List<Expression> tree = new List<Expression>();
-            tree.Add(new JoinGameExpression());
-            tree.Add(new PauseGameExpression());
-            tree.Add(new QuitGameExpression());
 
             var context = new Classes.Interpreter.Context(e.KeyData.ToString().ToLower());
 
