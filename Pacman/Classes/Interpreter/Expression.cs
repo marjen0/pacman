@@ -7,8 +7,8 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.Interpreter
 {
-    abstract class Expression
+    public abstract class Expression
     {
-        public abstract void Interpret(Context context);
+        public abstract bool Interpret(Context context);
     }
 }

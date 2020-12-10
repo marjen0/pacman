@@ -7,36 +7,34 @@ namespace Pacman.UnitTests.Classes.Interpreter
 {
     public class PauseGameExpressionTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public PauseGameExpressionTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private PauseGameExpression CreatePauseGameExpression()
         {
             return new PauseGameExpression();
         }
 
         [Fact]
-        public void Interpret_StateUnderTest_ExpectedBehavior()
+        public void Interpret_InterpretsPressedPButton_OnlyPButtonPressReturnsTrue()
         {
             // Arrange
             var pauseGameExpression = this.CreatePauseGameExpression();
-            Context context = null;
+            Context context1 = new Context("");
+            Context context2 = new Context("q");
+            Context context3 = new Context("p");
+
+            Form1.players.RemoveAll();
+            while (Form1.players.GetCount() < 2)
+                Form1.players.Add(new Player());
 
             // Act
-            pauseGameExpression.Interpret(
-                context);
+            var result1 = pauseGameExpression.Interpret(context1);
+            var result2 = pauseGameExpression.Interpret(context2);
+            var result3 = pauseGameExpression.Interpret(context3);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.False(result1);
+            Assert.False(result2);
+            Assert.True(result3);
+            Form1.players.RemoveAll();
         }
     }
 }

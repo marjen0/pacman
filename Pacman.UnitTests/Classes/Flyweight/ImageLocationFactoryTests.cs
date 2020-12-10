@@ -1,42 +1,31 @@
 using Moq;
 using Pacman.Classes.Flyweight;
 using System;
+using System.Drawing;
 using Xunit;
 
 namespace Pacman.UnitTests.Classes.Flyweight
 {
     public class ImageLocationFactoryTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public ImageLocationFactoryTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
-        private ImageLocationFactory CreateFactory()
-        {
-            return new ImageLocationFactory();
-        }
-
         [Fact]
-        public void GetImageLocation_StateUnderTest_ExpectedBehavior()
+        public void GetImageLocation_GetsExistingOrNewImageLocation_ReturnsExistingOrNewImageLocation()
         {
             // Arrange
-            var factory = this.CreateFactory();
             int x = 0;
 
             // Act
-            var result = factory.GetImageLocation(
-                x);
+            var imageLocation1 = ImageLocationFactory.GetImageLocation(x);
+            imageLocation1.SetY(1);
+            x = 1;
+            var imageLocation2 = ImageLocationFactory.GetImageLocation(x);
+            x = 0;
+            var imageLocation3 = ImageLocationFactory.GetImageLocation(x);
+            imageLocation3.SetY(3);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.NotEqual(imageLocation1, imageLocation2);
+            Assert.Equal(imageLocation1, imageLocation3);
         }
     }
 }

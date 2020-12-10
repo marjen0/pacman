@@ -7,36 +7,29 @@ namespace Pacman.UnitTests.Classes.Interpreter
 {
     public class QuitGameExpressionTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public QuitGameExpressionTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private QuitGameExpression CreateQuitGameExpression()
         {
             return new QuitGameExpression();
         }
 
         [Fact]
-        public void Interpret_StateUnderTest_ExpectedBehavior()
+        public void Interpret_InterpretsPressedQButton_OnlyQButtonPressReturnsTrue()
         {
             // Arrange
             var quitGameExpression = this.CreateQuitGameExpression();
-            Context context = null;
+            Context context1 = new Context("");
+            Context context2 = new Context("w");
+            Context context3 = new Context("q");
 
             // Act
-            quitGameExpression.Interpret(
-                context);
+            var result1 = quitGameExpression.Interpret(context1);
+            var result2 = quitGameExpression.Interpret(context2);
+            var result3 = quitGameExpression.Interpret(context3);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.False(result1);
+            Assert.False(result2);
+            Assert.True(result3);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Pacman.UnitTests.Classes.Flyweight
 
         private ImageLocation CreateImageLocation()
         {
-            return ImageLocation.GetInstance();
+            return new ImageLocation();
         }
 
         [Fact]
@@ -58,45 +58,6 @@ namespace Pacman.UnitTests.Classes.Flyweight
 
             // Assert
             Assert.IsType<Point>(result);
-        }
-
-        [Fact]
-        public void GetInstance_GetsImageLocationInstance_OnlyOneInstanceIsCreated()
-        {
-            // Arrange
-            var t1 = new Thread(new ThreadStart(ThreadProc));
-            var t2 = new Thread(new ThreadStart(ThreadProc));
-            int x = 10;
-
-            // Act
-            t1.Start();
-            t2.Start();
-
-            t1.Join();
-            t2.Join();
-
-            var localImageLocation = CreateImageLocation();
-            localImageLocation.SetX(x);
-            localImageLocation.SetY(x);
-
-            // Assert
-            foreach (var elem in imageLocations)
-            {
-                Assert.Equal(localImageLocation, elem);
-                Assert.Equal(x, elem.GetPoint().X);
-                Assert.Equal(x, elem.GetPoint().Y);
-            }
-        }
-
-        public void ThreadProc()
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                imageLocations.Add(ImageLocation.GetInstance());
-                imageLocations[i].SetX(i);
-                imageLocations[i].SetY(i);
-                Thread.Sleep(10);
-            }
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.Interpreter
 {
-    class Context
+    public class Context
     {
         private string _input;
 

@@ -7,17 +7,22 @@ using System.Windows.Forms;
 
 namespace Pacman.Classes.Interpreter
 {
-    class QuitGameExpression : Expression
+    public class QuitGameExpression : Expression
     {
-        public override void Interpret(Context context)
+        public override bool Interpret(Context context)
         {
             if (context.Input.Length == 0)
-                return;
+                return false;
 
             if (context.Input.Equals("q"))
             {
-                Form1.ActiveForm.Close();
+                if (Form1.ActiveForm != null)
+                    Form1.ActiveForm.Close();
+
+                return true;
             }
+            
+            return false;
         }
     }
 }

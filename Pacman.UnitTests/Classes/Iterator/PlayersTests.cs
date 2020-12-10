@@ -28,6 +28,21 @@ namespace Pacman.UnitTests.Classes.Iterator
         }
 
         [Fact]
+        public void RemoveAll_RemovesAllPlayersFromArray_ArrayLengthIs0()
+        {
+            // Arrange
+            var players = this.CreatePlayers();
+            Player p = null;
+
+            // Act
+            players.RemoveAll();
+            var result = players.GetCount();
+
+            // Assert
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
         public void GetPlayers_GetsPlayersArray_TypeIsArrayOfTypePlayer()
         {
             // Arrange

@@ -20,6 +20,14 @@ namespace Pacman.Classes.Iterator
             players[number++] = p;
         }
 
+        public void RemoveAll()
+        {
+            for (int i = 0; i < players.Length; i++)
+                players[i] = null;
+
+            number = 0;
+        }
+
         public Player[] GetPlayers()
         {
             return players;

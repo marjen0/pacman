@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace Pacman.Classes.Interpreter
 {
-    class JoinGameExpression : Expression
+    public class JoinGameExpression : Expression
     {
-        public override void Interpret(Context context)
+        public override bool Interpret(Context context)
         {
             if (context.Input.Length == 0)
-                return;
+                return false;
 
             if (context.Input.Equals("f1") && Form1.players.GetCount() < 2)
             {
-                Form1._signalR.ConnectPlayer().GetAwaiter();
+                if (Form1._signalR != null)
+                    Form1._signalR.ConnectPlayer().GetAwaiter();
+
+                return true;
             }
+            
+            return false;
         }
     }
 }
