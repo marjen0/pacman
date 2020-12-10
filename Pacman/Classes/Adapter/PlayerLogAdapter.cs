@@ -16,10 +16,12 @@ namespace Pacman.Classes.Adapter
             _form = form;
             _adaptee = p;
         }
+
         public void LogData(string message)
         {
             _adaptee.LogDataToRichTextBox(_form);
         }
+
         public string getPlayerId()
         {
             return _adaptee.Id;

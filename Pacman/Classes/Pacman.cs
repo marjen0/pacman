@@ -76,18 +76,40 @@ namespace Pacman
         {
             // Move Pacman
             bool CanMove = check_direction(nextDirection);
-            if (!CanMove) { CanMove = check_direction(currentDirection); direction = currentDirection; } else { direction = nextDirection; }
-            if (CanMove) { currentDirection = direction; }
+
+            if (!CanMove)
+            {
+                CanMove = check_direction(currentDirection);
+                direction = currentDirection;
+            }
+            else
+            {
+                direction = nextDirection;
+            }
+
+            if (CanMove)
+            {
+                currentDirection = direction;
+            }
 
             if (CanMove)
             {
                 switch (direction)
                 {
-                    case 1: PacmanImage.Top -= 16; yCoordinate--; break;
-                    case 2: PacmanImage.Left += 16; xCoordinate++; break;
-                    case 3: PacmanImage.Top += 16; yCoordinate++; break;
-                    case 4: PacmanImage.Left -= 16; xCoordinate--; break;
+                    case 1:
+                        PacmanImage.Top -= 16; yCoordinate--;
+                        break;
+                    case 2:
+                        PacmanImage.Left += 16; xCoordinate++;
+                        break;
+                    case 3:
+                        PacmanImage.Top += 16; yCoordinate++;
+                        break;
+                    case 4:
+                        PacmanImage.Left -= 16; xCoordinate--;
+                        break;
                 }
+
                 currentDirection = direction;
 
                 UpdatePacmanImage();
@@ -102,9 +124,17 @@ namespace Pacman
             // Check Pacmans position
             switch (Form1.gameboard.Matrix[yCoordinate, xCoordinate])
             {
-                case 1: Form1.regularFood.EatFood(yCoordinate, xCoordinate); break;
-                case 2: Form1.superFood.EatFood(yCoordinate, xCoordinate); Form1.superFood.PlayerMoveSpeed(this); break;
-                case 3: Form1.megaFood.EatFood(yCoordinate, xCoordinate); Form1.megaFood.PlayerMoveSpeed(this); break;
+                case 1:
+                    Form1.regularFood.EatFood(yCoordinate, xCoordinate);
+                    break;
+                case 2:
+                    Form1.superFood.EatFood(yCoordinate, xCoordinate);
+                    Form1.superFood.PlayerMoveSpeed(this);
+                    break;
+                case 3:
+                    Form1.megaFood.EatFood(yCoordinate, xCoordinate);
+                    Form1.megaFood.PlayerMoveSpeed(this);
+                    break;
             }
         }
 
@@ -113,6 +143,7 @@ namespace Pacman
             // Update Pacman image
             PacmanImage.Image = PacmanImages.Images[((currentDirection - 1) * 4) + imageOn];
             imageOn++;
+
             if (imageOn > 3) { imageOn = 0; }
         }
 
@@ -121,20 +152,40 @@ namespace Pacman
             // Check if pacman can move to space
             switch (direction)
             {
-                case 1: return direction_ok(xCoordinate, yCoordinate - 1);
-                case 2: return direction_ok(xCoordinate + 1, yCoordinate);
-                case 3: return direction_ok(xCoordinate, yCoordinate + 1);
-                case 4: return direction_ok(xCoordinate - 1, yCoordinate);
-                default: return false;
+                case 1:
+                    return direction_ok(xCoordinate, yCoordinate - 1);
+                case 2:
+                    return direction_ok(xCoordinate + 1, yCoordinate);
+                case 3:
+                    return direction_ok(xCoordinate, yCoordinate + 1);
+                case 4:
+                    return direction_ok(xCoordinate - 1, yCoordinate);
+                default:
+                    return false;
             }
         }
 
         private bool direction_ok(int x, int y)
         {
             // Check if board space can be used
-            if (x < 0) { xCoordinate = 27; PacmanImage.Left = 429; return true ; }
-            if (x > 27) { xCoordinate = 0; PacmanImage.Left = -5; return true; }
-            if (Form1.gameboard.Matrix[y, x] < 4) { return true; } else { return false; }
+            if (x < 0)
+            {
+                xCoordinate = 27;
+                PacmanImage.Left = 429;
+                return true;
+            }
+
+            if (x > 27)
+            {
+                xCoordinate = 0;
+                PacmanImage.Left = -5;
+                return true;
+            }
+
+            if (Form1.gameboard.Matrix[y, x] < 4)
+                return true;
+            else 
+                return false;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
