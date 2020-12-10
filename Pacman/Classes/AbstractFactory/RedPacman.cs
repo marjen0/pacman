@@ -1,4 +1,5 @@
-﻿using Pacman.Services;
+﻿using Pacman.Classes.Flyweight;
+using Pacman.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -58,12 +59,14 @@ namespace Pacman.Classes
                 nextDirection = 0;
                 xCoordinate = xStart;
                 yCoordinate = yStart;
-                PacmanImage.Location = new Point(xStart * 16 - 3, yStart * 16 + 43);
+                var point = ImageLocationFactory.GetImageLocation(xStart * 16 - 3);
+                point.SetY(yStart * 16 + 43);
+                PacmanImage.Location = point.GetPoint();
 
                 return true;
             }
-            else
-                return false;
+
+            return false;
         }
     }
 }
