@@ -1,33 +1,34 @@
+
 using Moq;
-using Pacman.Classes;
+using Pacman.Classes.Interpreter;
 using System;
 using Xunit;
 
-namespace Pacman.UnitTests.Classes.AbstractFactory
+namespace Pacman.UnitTests.Classes.Interpreter
 {
-    public class OrangeGhostTests
+    public class ContextTests
     {
         private MockRepository mockRepository;
 
 
 
-        public OrangeGhostTests()
+        public ContextTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
 
 
         }
 
-        private OrangeGhost CreateOrangeGhost()
+        private Context CreateContext()
         {
-            return new OrangeGhost();
+            return new Context();
         }
 
         [Fact]
         public void TestMethod1()
         {
             // Arrange
-            var orangeGhost = this.CreateOrangeGhost();
+            var context = this.CreateContext();
 
             // Act
 
