@@ -35,10 +35,14 @@ namespace Pacman
             HighScoreText.Text = Score.ToString();
         }
 
-        public void UpdateLives(int lives)
-        { }
+        public bool UpdateLives(int lives)
+        {
+            return true;
+        }
 
-        public void UpdateHighScore(int amount)
-        { }
+        public bool UpdateHighScore(int amount)
+        {
+            return true;
+        }
     }
 }

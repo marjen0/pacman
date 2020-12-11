@@ -8,7 +8,7 @@ namespace Pacman.Classes.Observer
 {
     public interface IObserver
     {
-        void UpdateLives(int lives);
-        void UpdateHighScore(int amount);
+        bool UpdateLives(int lives);
+        bool UpdateHighScore(int amount);
     }
 }

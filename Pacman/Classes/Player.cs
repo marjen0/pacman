@@ -110,14 +110,24 @@ namespace Pacman
             Application.Exit();
         }
 
-        public void UpdateLives(int lives)
+        public bool UpdateLives(int lives)
         {
             Lives = lives;
+
+            if (Lives == lives)
+                return true;
+
+            return false;
         }
 
-        public void UpdateHighScore(int amount)
+        public bool UpdateHighScore(int amount)
         {
             UpdateScore(amount);
+
+            if (Score + amount == amount)
+                return true;
+
+            return false;
         }
 
         public override string ToString()

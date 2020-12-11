@@ -10,6 +10,6 @@ namespace Pacman.Classes.Observer
     {
         public void RegisterObserver(IObserver o);
         public void RemoveObserver(IObserver o);
-        public void NotifyObservers();
+        public bool NotifyObservers();
     }
 }

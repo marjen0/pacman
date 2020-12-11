@@ -54,16 +54,21 @@ namespace Pacman.UnitTests.Classes.Observer
         }
         
         [Fact]
-        public void NotifyObservers_StateUnderTest_ExpectedBehavior()
+        public void NotifyObservers_NotifiesObservers_ObserversAreNotified()
         {
             // Arrange
             var playerData = this.CreatePlayerData();
+            int lives = 5;
+            int score = 500;
+
+            playerData.EditLives(lives);
+            playerData.EditHighScore(score);
 
             // Act
-            playerData.NotifyObservers();
+            var result = playerData.NotifyObservers();
 
             // Assert
-            Assert.True(false);
+            Assert.True(result);
         }
 
         [Fact]

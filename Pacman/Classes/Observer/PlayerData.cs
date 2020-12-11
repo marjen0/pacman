@@ -21,16 +21,23 @@ namespace Pacman.Classes.Observer
             return instance;
         }
 
-        public void NotifyObservers()
+        public bool NotifyObservers()
         {
+            bool ok = true;
+
             foreach (IObserver o in observers)
             {
                 if (o != null)
                 {
-                    o.UpdateLives(Lives);
-                    o.UpdateHighScore(Amount);
+                    bool updatedLives = o.UpdateLives(Lives);
+                    bool updatedHighScore = o.UpdateHighScore(Amount);
+
+                    if (!updatedLives || !updatedHighScore)
+                        ok = false;
                 }
             }
+
+            return ok;
         }
 
         public void EditLives(int lives)
