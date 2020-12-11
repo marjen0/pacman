@@ -7,34 +7,23 @@ namespace Pacman.UnitTests.Classes.Interpreter
 {
     public class ContextTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public ContextTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private Context CreateContext()
         {
             return new Context();
         }
 
         [Fact]
-        public void TestMethod1()
+        public void Input_SetsOrGetsInput_InputIsSetCorrectly()
         {
             // Arrange
             var context = this.CreateContext();
+            string input = "f1";
 
             // Act
-
+            context.Input = input;
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.Equal(input, context.Input);
         }
     }
 }
