@@ -131,13 +131,16 @@ namespace Pacman.UnitTests.Classes.Observer
         {
             // Arrange
             var playerData = this.CreatePlayerData();
-            IObserver o = null;
+            var o1 = new HighScore();
+            var o2 = new HighScore();
 
             // Act
-            playerData.RegisterObserver(o);
+            playerData.RemoveObservers();
+            playerData.RegisterObserver(o1);
+            playerData.RegisterObserver(o2);
 
             // Assert
-            Assert.NotEmpty(playerData.observers);
+            Assert.Equal(2, playerData.observers.Count);
         }
 
         [Fact]
@@ -145,17 +148,28 @@ namespace Pacman.UnitTests.Classes.Observer
         {
             // Arrange
             var playerData = this.CreatePlayerData();
-            IObserver o = null;
-            playerData.RegisterObserver(o);
-            playerData.RegisterObserver(o);
+            var o1 = new HighScore();
+            var o2 = new HighScore();
+            playerData.RegisterObserver(o1);
+            playerData.RegisterObserver(o2);
             int count = playerData.observers.Count;
 
             // Act
-            playerData.RemoveObserver(o);
+            playerData.RemoveObserver(o1);
             int count2 = playerData.observers.Count;
 
             // Assert
             Assert.True(count2 < count);
+        }
+
+        [Fact]
+        public void RemoveObservers_RemovesAllObserversFromObserversList_ObserversListIsEmpty()
+        {
+            var playerData = this.CreatePlayerData();
+
+            playerData.RemoveObservers();
+
+            Assert.Empty(playerData.observers);
         }
     }
 }

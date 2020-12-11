@@ -71,5 +71,11 @@ namespace Pacman.Classes.Observer
         {
             observers.Remove(o);
         }
+
+        public void RemoveObservers()
+        {
+            for (int i = 0; i < observers.Count; i++)
+                observers.RemoveAt(i);
+        }
     }
 }
