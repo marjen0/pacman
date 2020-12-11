@@ -193,6 +193,7 @@
     <Compile Include="Classes\Flyweight\ImageLocationFactoryTests.cs" />
     <Compile Include="Classes\Flyweight\ImageLocationTests.cs" />
     <Compile Include="Classes\HighScoreTests.cs" />
+    <Compile Include="Classes\Interpreter\ContextTests.cs" />
     <Compile Include="Classes\Interpreter\JoinGameExpressionTests.cs" />
     <Compile Include="Classes\Interpreter\PauseGameExpressionTests.cs" />
     <Compile Include="Classes\Interpreter\QuitGameExpressionTests.cs" />
