@@ -35,10 +35,10 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
             var pinkPacman = this.CreatePinkPacman();
 
             // Act
-            var result = pinkPacman.Set_Pacman();
+            pinkPacman.Set_Pacman();
 
             // Assert
-            Assert.True(result);
+            Assert.NotNull(pinkPacman.PacmanImage.Image);
         }
     }
 }

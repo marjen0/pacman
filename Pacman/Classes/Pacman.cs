@@ -47,7 +47,7 @@ namespace Pacman
         }
 
         public abstract int AddPacmanImages();
-        public abstract bool Set_Pacman();
+        public abstract void Set_Pacman();
 
         //Strategy pattern methods
         public Timer GetTimer()

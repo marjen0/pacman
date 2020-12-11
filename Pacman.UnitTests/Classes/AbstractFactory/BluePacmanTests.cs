@@ -28,16 +28,16 @@ namespace Pacman.UnitTests.Classes.AbstractFactory
         }
         
         [Fact]
-        public void Set_Pacman_SetsPacmanObject_SetPacmanReturnsTrue()
+        public void Set_Pacman_SetsPacmanObject_PacmanImageIsNotNull()
         {
             // Arrange
             var bluePacman = this.CreateBluePacman();
 
             // Act
-            var result = bluePacman.Set_Pacman();
+            bluePacman.Set_Pacman();
 
             // Assert
-            Assert.True(result);
+            Assert.NotNull(bluePacman.PacmanImage.Image);
         }
     }
 }

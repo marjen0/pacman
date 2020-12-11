@@ -19,14 +19,9 @@ namespace Pacman.Classes.Decorator
 
             return PacmanImages.Images.Count;
         }
-        public override bool Set_Pacman()
+        public override void Set_Pacman()
         {
             _wrappee.Set_Pacman();
-
-            if (PacmanImage.Image != null)
-                return true;
-            else
-                return false;
         }
     }
 }

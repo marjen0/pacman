@@ -21,14 +21,9 @@ namespace Pacman.Classes.Decorator
 
             return PacmanImages.Images.Count;
         }
-        public override bool Set_Pacman()
+        public override void Set_Pacman()
         {
             base.Set_Pacman();
-
-            if (PacmanImage.Image != null)
-                return true;
-            else
-                return false;
         }
         private void AddWhiteBorder(ImageList images)
         {

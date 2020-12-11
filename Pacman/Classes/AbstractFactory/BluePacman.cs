@@ -49,24 +49,16 @@ namespace Pacman.Classes
             return PacmanImages.Images.Count;
         }
 
-        public override bool Set_Pacman()
+        public override void Set_Pacman()
         {
             PacmanImage.Image = Properties.Resources.BluePacman_2_1;
-
-            if (PacmanImage.Image != null)
-            {
-                currentDirection = 0;
-                nextDirection = 0;
-                xCoordinate = xStart;
-                yCoordinate = yStart;
-                var point = ImageLocationFactory.GetImageLocation(xStart * 16 - 3);
-                point.SetY(yStart * 16 + 43);
-                PacmanImage.Location = point.GetPoint();
-
-                return true;
-            }
-
-            return false;
+            currentDirection = 0;
+            nextDirection = 0;
+            xCoordinate = xStart;
+            yCoordinate = yStart;
+            var point = ImageLocationFactory.GetImageLocation(xStart * 16 - 3);
+            point.SetY(yStart * 16 + 43);
+            PacmanImage.Location = point.GetPoint();
         }
     }
 }
