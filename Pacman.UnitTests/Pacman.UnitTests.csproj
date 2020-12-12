@@ -200,6 +200,7 @@
     <Compile Include="Classes\Iterator\PacmansTests.cs" />
     <Compile Include="Classes\Iterator\PlayersTests.cs" />
     <Compile Include="Classes\Observer\PlayerDataTests.cs" />
+    <Compile Include="Classes\PlayerTests.cs" />
     <Compile Include="Classes\Template\FormElementsBrightTests.cs" />
     <Compile Include="Classes\Template\FormElementsStandardTests.cs" />
     <Compile Include="Classes\Template\FormElementsMinimalTests.cs" />
