@@ -1,152 +1,64 @@
 using Moq;
 using Pacman;
 using System;
+using System.Windows.Forms;
 using Xunit;
 
 namespace Pacman.UnitTests.Classes
 {
     public class PlayerTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public PlayerTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
         private Player CreatePlayer()
         {
             return new Player();
         }
 
         [Fact]
-        public void CreateLives_StateUnderTest_ExpectedBehavior()
+        public void UpdateScore_UpdatesPlayerScore_ScoreIsUpdated()
         {
             // Arrange
             var player = this.CreatePlayer();
-            Form formInstance = null;
+            int amount = 500;
+            int initialScore = player.Score;
 
             // Act
-            player.CreateLives(
-                formInstance);
+            player.UpdateScore(amount);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(player.Score > initialScore);
+            Assert.Equal(initialScore + amount, player.Score);
         }
 
         [Fact]
-        public void CreatePlayerDetails_StateUnderTest_ExpectedBehavior()
+        public void UpdateLives_UpdatesPlayerLives_PlayerLivesAreUpdated()
         {
             // Arrange
             var player = this.CreatePlayer();
-            Form formInstance = null;
+            int lives = 5;
 
             // Act
-            player.CreatePlayerDetails(
-                formInstance);
+            var result = player.UpdateLives(lives);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(result);
         }
 
         [Fact]
-        public void UpdateScore_StateUnderTest_ExpectedBehavior()
+        public void UpdateHighScore_UpdatesHighScore_PlayerHighScoreIsUpdated()
         {
             // Arrange
             var player = this.CreatePlayer();
-            int amount = 0;
+            int amount = 500;
 
             // Act
-            player.UpdateScore(
-                amount);
+            var result = player.UpdateHighScore(amount);
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(result);
         }
 
         [Fact]
-        public void SetLives_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var player = this.CreatePlayer();
-
-            // Act
-            player.SetLives();
-
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
-
-        [Fact]
-        public void LoseLife_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var player = this.CreatePlayer();
-
-            // Act
-            player.LoseLife();
-
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
-
-        [Fact]
-        public void LevelComplete_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var player = this.CreatePlayer();
-
-            // Act
-            player.LevelComplete();
-
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
-
-        [Fact]
-        public void UpdateLives_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var player = this.CreatePlayer();
-            int lives = 0;
-
-            // Act
-            var result = player.UpdateLives(
-                lives);
-
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
-
-        [Fact]
-        public void UpdateHighScore_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var player = this.CreatePlayer();
-            int amount = 0;
-
-            // Act
-            var result = player.UpdateHighScore(
-                amount);
-
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
-
-        [Fact]
-        public void ToString_StateUnderTest_ExpectedBehavior()
+        public void ToString_ReturnsPlayerDataInString_TypeIsString()
         {
             // Arrange
             var player = this.CreatePlayer();
@@ -155,24 +67,23 @@ namespace Pacman.UnitTests.Classes
             var result = player.ToString();
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.IsType<string>(result);
         }
 
         [Fact]
-        public void LogDataToRichTextBox_StateUnderTest_ExpectedBehavior()
+        public void LogDataToRichTextBox_LogsPlayerDataToRichTextBox_RichTextBoxLengthIsLonger()
         {
             // Arrange
             var player = this.CreatePlayer();
-            Form1 form = null;
+            Form1 form = new Form1();
+            var initialLog = form.formElements.Log.Text;
 
             // Act
-            player.LogDataToRichTextBox(
-                form);
+            player.LogDataToRichTextBox(form);
+            var log = form.formElements.Log.Text;
 
             // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.True(log.Length > initialLog.Length);
         }
     }
 }

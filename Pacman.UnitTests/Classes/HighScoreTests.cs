@@ -7,7 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Xunit;
 
-namespace Pacman.UnitTests
+namespace Pacman.UnitTests.Classes
 {
     public class HighScoreTests
     {

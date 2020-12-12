@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using Pacman.Classes.Observer;
+using Pacman.Classes.Flyweight;
 
 namespace Pacman
 {
@@ -36,7 +37,11 @@ namespace Pacman
                 LifeImage[x] = new PictureBox();
                 LifeImage[x].Name = "Life" + x.ToString();
                 LifeImage[x].SizeMode = PictureBoxSizeMode.AutoSize;
-                LifeImage[x].Location = new Point(x * 30 + 3, 550);
+
+                var point = ImageLocationFactory.GetImageLocation(x * 30 + 3);
+                point.SetY(550);
+                LifeImage[x].Location = point.GetPoint();
+
                 LifeImage[x].Image = Properties.Resources.Life;
                 formInstance.Controls.Add(LifeImage[x]);
                 LifeImage[x].BringToFront();
@@ -73,25 +78,27 @@ namespace Pacman
         public void SetLives()
         {
             // Display lives in form
-            for (int x=0; x<Lives+1; x++)
-            {
-                LifeImage[x].Visible = true;
-            }
-            for (int x = Lives-1; x < MaxLives; x++)
-            {
+            for (int x = Lives - 1; x < MaxLives; x++)
                 LifeImage[x].Visible = false;
-            }
+
+            for (int x = 0; x < Lives; x++)
+                LifeImage[x].Visible = true;
         }
 
         public void LoseLife()
         {
             // Lose a life
-            Form1.playerData.EditLives(Lives - 1);
+            if (Form1.playerData != null)
+                Form1.playerData.EditLives(Lives - 1);
 
             if (Lives > 0)
             {
-                Form1.pacman.Set_Pacman();
-                Form1.ghost.ResetGhosts();
+                if (Form1.pacman != null)
+                    Form1.pacman.Set_Pacman();
+
+                if (Form1.ghost != null)
+                    Form1.ghost.ResetGhosts();
+
                 SetLives();
             }
             else
@@ -124,7 +131,7 @@ namespace Pacman
         {
             UpdateScore(amount);
 
-            if (Score + amount == amount)
+            if (Score == amount)
                 return true;
 
             return false;
