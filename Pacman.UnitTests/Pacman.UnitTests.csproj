@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.props')" />
   <Import Project="..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.props" Condition="Exists('..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.props')" />
   <Import Project="..\packages\coverlet.msbuild.2.9.0\build\coverlet.msbuild.props" Condition="Exists('..\packages\coverlet.msbuild.2.9.0\build\coverlet.msbuild.props')" />
   <Import Project="..\packages\ReportGenerator.4.8.0\build\netstandard2.0\ReportGenerator.props" Condition="Exists('..\packages\ReportGenerator.4.8.0\build\netstandard2.0\ReportGenerator.props')" />
@@ -157,18 +158,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AbstractFactory\BlueFactoryTests.cs" />
-    <Compile Include="Classes\AbstractFactory\BlueGhostTests.cs" />
-    <Compile Include="Classes\AbstractFactory\BluePacmanTests.cs" />
-    <Compile Include="Classes\AbstractFactory\OrangeFactoryTests.cs" />
-    <Compile Include="Classes\AbstractFactory\OrangeGhostTests.cs" />
-    <Compile Include="Classes\AbstractFactory\OrangePacmanTests.cs" />
-    <Compile Include="Classes\AbstractFactory\PinkFactoryTests.cs" />
-    <Compile Include="Classes\AbstractFactory\PinkGhostTests.cs" />
-    <Compile Include="Classes\AbstractFactory\PinkPacmanTests.cs" />
-    <Compile Include="Classes\AbstractFactory\RedFactoryTests.cs" />
-    <Compile Include="Classes\AbstractFactory\RedGhostTests.cs" />
-    <Compile Include="Classes\AbstractFactory\RedPacmanTests.cs" />
     <Compile Include="Classes\Adapter\PacmanLogAdapterTests.cs" />
     <Compile Include="Classes\Adapter\PlayerLogAdapterTests.cs" />
     <Compile Include="Classes\FactoryMethod\MegaFoodCreatorTests.cs" />
@@ -176,10 +165,6 @@
     <Compile Include="Classes\FactoryMethod\RegularFoodCreatorTests.cs" />
     <Compile Include="Classes\FactoryMethod\RegularFoodTests.cs" />
     <Compile Include="Classes\FactoryMethod\SuperFoodCreatorTests.cs" />
-    <Compile Include="Classes\Flyweight\ImageLocationTests.cs" />
-    <Compile Include="Classes\Iterator\PacmansTests.cs" />
-    <Compile Include="Classes\Iterator\PlayersTests.cs" />
-    <Compile Include="Classes\Observer\PlayerDataTests.cs" />
     <Compile Include="Classes\Template\FormElementsBrightTests.cs" />
     <Compile Include="Classes\Template\FormElementsStandardTests.cs" />
     <Compile Include="Classes\Template\FormElementsMinimalTests.cs" />
@@ -190,6 +175,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +200,12 @@
     <Error Condition="!Exists('..\packages\coverlet.msbuild.2.9.0\build\coverlet.msbuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\coverlet.msbuild.2.9.0\build\coverlet.msbuild.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.targets'))" />
   </Target>
   <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
   <Import Project="..\packages\coverlet.collector.1.3.0\build\netstandard1.0\coverlet.collector.targets" Condition="Exists('..\packages\coverlet.collector.1.3.0\build\netstandard1.0\coverlet.collector.targets')" />
   <Import Project="..\packages\coverlet.msbuild.2.9.0\build\coverlet.msbuild.targets" Condition="Exists('..\packages\coverlet.msbuild.2.9.0\build\coverlet.msbuild.targets')" />
   <Import Project="..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.targets" Condition="Exists('..\packages\Microsoft.CodeCoverage.16.8.0\build\netstandard1.0\Microsoft.CodeCoverage.targets')" />
+  <Import Project="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.targets" Condition="Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.5.0.1\build\Microsoft.CodeAnalysis.NetAnalyzers.targets')" />
 </Project>

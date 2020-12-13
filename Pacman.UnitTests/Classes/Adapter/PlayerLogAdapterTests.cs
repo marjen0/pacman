@@ -6,37 +6,53 @@ using Xunit;
 
 namespace Pacman.UnitTests.Classes.Adapter
 {
-    public class PlayerLogAdapterTests
+    public class PlayerLogAdapterTests:IDisposable
     {
-        [Fact]
-        public void LogData_StateUnderTest_ExpectedBehavior()
+        private Form1 _form;
+
+        public PlayerLogAdapterTests()
+        {
+            _form = new Form1();
+        }
+
+        [Theory]
+        [InlineData("id", "name")]
+        [InlineData("adgjl","Joshua")]
+        [InlineData("zxcvbnm","Mathew")]
+        public void LogData_LogsPlayerData_LogboxHasPlayerData(string playerId, string playerName)
         {
             // Arrange
-            Form1 form = new Form1();
             FormElements formElements = new FormElementsStandard();
-            Player p = new Player("id", "name");
-            ILog playerLogAdapter = new PlayerLogAdapter(p, form);
-            formElements.CreateFormElements(form);
+            Player p = new Player(playerId, playerName);
+            ILog playerLogAdapter = new PlayerLogAdapter(p, _form);
+            formElements.CreateFormElements(_form);
             // Act
             playerLogAdapter.LogData(null);
 
             // Assert
-            Assert.Equal(p.ToString()+"\n", form.formElements.Log.Text);
+            Assert.Equal(p.ToString()+"\n", _form.formElements.Log.Text);
         }
 
-        [Fact]
-        public void getPlayerId_StateUnderTest_ExpectedBehavior()
+        [Theory]
+        [InlineData("id")]
+        [InlineData("adgjl")]
+        [InlineData("zxcvbnm")]
+        public void getPlayerId_ReturnsCorrectPlayerId_True(string playerId)
         {
             // Arrange
-            Form1 form = new Form1();
-            Player p = new Player("id", "name");
-            PlayerLogAdapter playerLogAdapter = new PlayerLogAdapter(p, form);
+            Player p = new Player(playerId, "name");
+            PlayerLogAdapter playerLogAdapter = new PlayerLogAdapter(p, _form);
 
             // Act
             string id = playerLogAdapter.getPlayerId();
 
             // Assert
-            Assert.Equal("id", id);
+            Assert.Equal(playerId, id);
+        }
+
+        public void Dispose()
+        {
+            _form.Dispose();
         }
     }
 }

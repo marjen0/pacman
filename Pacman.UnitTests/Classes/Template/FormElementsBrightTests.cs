@@ -5,105 +5,115 @@ using System.Drawing;
 
 namespace Pacman.UnitTests.Classes.Template
 {
-    public class FormElementsBrightTests
+    public class FormElementsBrightTests: IDisposable
     {
+        private FormElements _formElements;
+        private Form1 _form;
+
+        public FormElementsBrightTests()
+        {
+            _formElements = new FormElementsBright();
+            _form = new Form1();
+        }
+
         [Fact]
         public void CreatePlayerOneScoreLabel__ShouldCreatePlayerScoreText__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
-            Form1 form = new Form1();
+           
             // Act
 
-            formElements.CreateFormElements(form);
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.NotNull(formElements.PlayerOneScoreText);
+            Assert.NotNull(_formElements.PlayerOneScoreText);
         }
         [Fact]
         public void CreatePlayerOneScoreLabel__ForeColorGreenYellow__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
-            Form1 form = new Form1();
+   
             // Act
 
-            formElements.CreateFormElements(form);
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal(Color.GreenYellow,formElements.PlayerOneScoreText.ForeColor);
+            Assert.Equal(Color.GreenYellow,_formElements.PlayerOneScoreText.ForeColor);
         }
         [Fact]
         public void CreateLogBox__ShouldCreateLoggingBox__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
+        
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(new Form1());
             // Assert
-            Assert.NotNull(formElements.Log);
+            Assert.NotNull(_formElements.Log);
         }
         [Fact]
         public void CreateLogBox__BackColorGreenYellow__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
-            Form1 form = new Form1();
+        
             // Act
 
-            formElements.CreateFormElements(form);
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal(Color.GreenYellow, formElements.Log.BackColor);
+            Assert.Equal(Color.GreenYellow, _formElements.Log.BackColor);
         }
         [Fact]
         public void CreateHighScoreLabel__LabelNotNull__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
+     
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.NotNull(formElements.HighScoreText);
+            Assert.NotNull(_formElements.HighScoreText);
         }
         [Fact]
         public void CreateHighScoreLabel__ForeColorGreenYellow__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
-            Form1 form = new Form1();
+
             // Act
 
-            formElements.CreateFormElements(form);
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal(Color.GreenYellow, formElements.HighScoreText.ForeColor);
+            Assert.Equal(Color.GreenYellow, _formElements.HighScoreText.ForeColor);
         }
         [Fact]
         public void CreateFormElements__InitialPlayerScoreText__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
+            
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal("1UP", formElements.PlayerOneScoreText.Text);
+            Assert.Equal("1UP", _formElements.PlayerOneScoreText.Text);
         }
         [Fact]
         public void CreateFormElements__HighScoreText__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
+   
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal("HIGH SCORE", formElements.HighScoreText.Text);
+            Assert.Equal("HIGH SCORE", _formElements.HighScoreText.Text);
         }
         [Fact]
         public void CreateFormElements__LoggingBoxEnabled__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsBright();
+ 
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.True(formElements.Log.Enabled);
+            Assert.True(_formElements.Log.Enabled);
+        }
+
+        public void Dispose()
+        {
+            _form.Dispose();
         }
     }
 }

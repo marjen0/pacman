@@ -8,68 +8,76 @@ namespace Pacman.UnitTests.Classes.Template
 {
     public class FormElementsStandardTests
     {
+        private FormElements _formElements;
+        private Form1 _form;
+
+        public FormElementsStandardTests()
+        {
+            _formElements = new FormElementsStandard();
+            _form = new Form1();
+        }
+
         [Fact]
         public void CreatePlayerOneScoreLabel__ShouldCreatePlayerScoreText__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsStandard();
-            Form1 form = new Form1();
+            
             // Act
 
-            formElements.CreateFormElements(form);
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.NotNull(form.Controls.Find("PayerOneScoreLabel", false).FirstOrDefault());
+            Assert.NotNull(_form.Controls.Find("PayerOneScoreLabel", false).FirstOrDefault());
         }
 
         [Fact]
         public void CreateLogBox__ShouldCreateLoggingBox__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsStandard();
+      
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.NotNull(formElements.Log);
+            Assert.NotNull(_formElements.Log);
         }
         [Fact] 
         public void CreateHighScoreLabel__LabelNotNull__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsStandard();
+   
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.NotNull(formElements.HighScoreText);
+            Assert.NotNull(_formElements.HighScoreText);
         }
         [Fact]
         public void CreateFormElements__InitialPlayerScoreText__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsStandard();
+  
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal("1UP", formElements.PlayerOneScoreText.Text);
+            Assert.Equal("1UP", _formElements.PlayerOneScoreText.Text);
         }
         [Fact]
         public void CreateFormElements__HighScoreText__True()
         {
             // Arrange
-            FormElements formElements = new FormElementsStandard();
+
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.Equal("HIGH SCORE", formElements.HighScoreText.Text);
+            Assert.Equal("HIGH SCORE", _formElements.HighScoreText.Text);
         }
         [Fact]
         public void CreateFormElements__LoggingBoxEnabled__False()
         {
             // Arrange
-            FormElements formElements = new FormElementsStandard();
+    
             // Act
-            formElements.CreateFormElements(new Form1());
+            _formElements.CreateFormElements(_form);
             // Assert
-            Assert.False(formElements.Log.Enabled);
+            Assert.False(_formElements.Log.Enabled);
         }
     }
 }

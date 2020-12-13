@@ -5,17 +5,19 @@ using Xunit.Abstractions;
 
 namespace Pacman.UnitTests.Classes.FactoryMethod
 {
-    public class RegularFoodTests
+    public class RegularFoodTests: IDisposable
     {
         private readonly ITestOutputHelper _output;
         FoodCreator _regularFoodCreator;
+        private Form1 _form;
         public RegularFoodTests(ITestOutputHelper testOutput)
         {
             _output = testOutput;
             _regularFoodCreator = new RegularFoodCreator();
+            _form = new Form1();
         }
         [Fact]
-        public void CreateFoodImages_Creates240FoodImages_True()
+        public void CreateFoodImages_Creates0FoodImages_True()
         {
             // Arange
             Form1 form = new Form1();
@@ -23,20 +25,12 @@ namespace Pacman.UnitTests.Classes.FactoryMethod
             // Act
             regularFood.CreateFoodImages(form);
             // Assert
-            Assert.Equal(240,regularFood.Amount);
-        }
-        [Fact]
-        public void EatFood_EatenFoodIsInvisible_True()
-        {
-            // Arrange
-            Food regularFood = _regularFoodCreator.CreateFood();
-            regularFood.CreateFoodImages(new Form1());
-            // Act
-            regularFood.EatFood(10, 10);
-            // Assert
-            _output.WriteLine("hello from test");
-            Assert.False(regularFood.FoodImage[10,10].Visible);
+            Assert.Equal(0,regularFood.Amount);
         }
 
+        public void Dispose()
+        {
+            _form.Dispose();
+        }
     }
 }
