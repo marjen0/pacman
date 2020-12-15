@@ -231,6 +231,12 @@
     <Compile Include="Classes\Interpreter\JoinGameExpression.cs" />
     <Compile Include="Classes\Interpreter\QuitGameExpression.cs" />
     <Compile Include="Classes\Interpreter\PauseGameExpression.cs" />
+    <Compile Include="Classes\Proxy\Proxy.cs" />
+    <Compile Include="Classes\Proxy\Subject.cs" />
+    <Compile Include="Classes\State\AutoMessageBox.cs" />
+    <Compile Include="Classes\State\NormalState.cs" />
+    <Compile Include="Classes\State\State.cs" />
+    <Compile Include="Classes\State\KillableState.cs" />
     <Compile Include="Classes\Template\FormElements.cs" />
     <Compile Include="Classes\GameBoard.cs" />
     <Compile Include="Classes\Ghost.cs" />
@@ -437,7 +443,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\State\" />
+    <Folder Include="Classes\Composite\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets" Condition="Exists('..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets')" />

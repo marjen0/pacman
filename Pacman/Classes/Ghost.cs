@@ -1,4 +1,6 @@
 ﻿using Pacman.Classes;
+using Pacman.Classes.Proxy;
+using Pacman.Classes.State;
 using Pacman.Services;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Pacman
 {
-    public class Ghost
+    public class Ghost : Subject
     {
         private const int GhostAmount = 4;
         public int Ghosts = GhostAmount;
@@ -31,8 +33,18 @@ namespace Pacman
         private Random ran = new Random();
         private bool GhostOn = false;
 
+        State killableState;
+        State normalState;
+
+        State ghostState;
+
         public Ghost()
         {
+            killableState = new KillableState(this);
+            normalState = new NormalState(this);
+
+            ghostState = killableState;
+
             GhostImages.Images.Add(Properties.Resources.Ghost_0_1);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_2);
             GhostImages.Images.Add(Properties.Resources.Ghost_0_3);
@@ -74,6 +86,24 @@ namespace Pacman
             hometimer.Enabled = false;
             hometimer.Tick += new EventHandler(hometimer_Tick);
         }
+
+        public void SetState(State newGhostState)
+        {
+            ghostState = newGhostState;
+        }
+
+        public void Killable()
+        {
+            ghostState.Killable();
+        }
+
+        public void Normal()
+        {
+            ghostState.Normal();
+        }
+
+        public State GetStateKillable() { return killableState; }
+        public State GetStateNormal() { return normalState; }
 
         public virtual void CreateGhostImage(Form formInstance)
         {
@@ -125,11 +155,13 @@ namespace Pacman
         private void statetimer_Tick(object sender, EventArgs e)
         {
             // Turn Ghosts back to normal
+            Form1.ghost.Normal();
             for (int x=0; x<GhostAmount; x++)
             {
                 State[x] = 0;
             }
             statetimer.Enabled = false;
+            Form1.ghost.Normal();
             //killabletimer.Enabled = false;
         }
 

@@ -20,7 +20,7 @@ namespace Pacman
         public int Lives = 3;
         public Label ScoreText = new Label();
         public PictureBox[] LifeImage = new PictureBox[MaxLives];
-
+        
         public Player() { }
 
         public Player(string id, string name)

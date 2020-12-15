@@ -1,5 +1,6 @@
 ﻿using Pacman.Classes;
 using Pacman.Classes.Command;
+using Pacman.Classes.State;
 using Pacman.Services;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,6 @@ namespace Pacman
 
             PacmanImages.ImageSize = new Size(27,28);
         }
-
         public abstract int AddPacmanImages();
         public abstract bool Set_Pacman();
 

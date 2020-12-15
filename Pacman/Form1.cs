@@ -25,6 +25,7 @@ using Pacman.Classes.Bridge;
 using Pacman.Classes.Template;
 using Pacman.Classes.ChainOfResponsibility;
 using Pacman.Classes.Interpreter;
+using Pacman.Classes.Proxy;
 
 namespace Pacman
 {
@@ -82,18 +83,22 @@ namespace Pacman
         private static List<Player> playersList;
         public static List<Pacman> pacmansList;
 
-        //Facade pattern
+        // Facade pattern
         public static GameDetailFacade facade = new GameDetailFacade();
+
+        // Proxy pattern
+        Proxy proxyGhost = new Proxy(ghost);
 
         // Bridge pattern
         // public static RefinedGhost refinedGhost = new RefinedGhost();
 
         Invoker invoker;
 
-        MoveUpCommand moveUp;
-        MoveDownCommand moveDown;
-        MoveRightCommand moveRight;
-        MoveLeftCommand moveLeft;
+        // Command pattern
+        // MoveUpCommand moveUp;
+        // MoveDownCommand moveDown;
+        // MoveRightCommand moveRight;
+        // MoveLeftCommand moveLeft;
 
         List<Expression> tree = new List<Expression>();
 
@@ -111,7 +116,8 @@ namespace Pacman
             _signalR = new SignalR(_hubConnection);
             _api = new API();
 
-            ghost.DisableTimer();
+            //ghost.DisableTimer();
+            proxyGhost.DisableTimer();
 
             invoker = new Invoker();
 
@@ -179,7 +185,9 @@ namespace Pacman
                             }
                         }
 
-                        ghost.EnableTimer();
+                        //ghost.EnableTimer();
+                        proxyGhost.EnableTimer();
+
                         playersList = players.GetPlayers().ToList();
                         pacmansList = pacmans.GetPacmans();
 
@@ -269,7 +277,8 @@ namespace Pacman
             megaFood.CreateFoodImages(this);
 
             // Create Ghosts
-            ghost.CreateGhostImage(this);
+            //ghost.CreateGhostImage(this);
+            proxyGhost.CreateGhostImage(this);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)

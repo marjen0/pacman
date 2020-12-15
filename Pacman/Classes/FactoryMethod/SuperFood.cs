@@ -72,6 +72,7 @@ namespace Pacman.Classes.FactoryMethod
             Form1.gameboard.Matrix[x, y] = 0;
             Form1.player.UpdateScore(SuperFoodScore);
             Form1.ghost.ChangeGhostState();
+            Form1.ghost.Killable();
         }
 
         //public override void EatSuperFood(int x, int y)
